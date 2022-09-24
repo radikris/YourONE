@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:yourone/auto_router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_primary_button.dart';
@@ -16,9 +18,11 @@ class SignInPage extends StatelessWidget {
       body: SafeArea(
           child: Column(
         children: [
-          AppButton.primary(text: 'Register', onTap: () {}),
-          AppButton.secondary(text: 'Register', onTap: () {}),
-          AppMultipleChoice(),
+          AppButton.primary(
+              text: 'Register',
+              onTap: () {
+                context.pushRoute(SignUpRoute());
+              }),
         ],
       )),
     );

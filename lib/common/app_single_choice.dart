@@ -4,8 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:yourone/common/app_primary_button.dart';
 
-class AppMultipleChoice<T extends Enum> extends HookWidget {
-  AppMultipleChoice({
+class AppSingleChoice<T extends Enum> extends HookWidget {
+  AppSingleChoice({
     super.key,
     required this.onSave,
     required this.formName,
@@ -18,24 +18,12 @@ class AppMultipleChoice<T extends Enum> extends HookWidget {
   final List<T> enumChoice;
   final String formName;
   final String formLabel;
-  final Function(List<T>?) onSave;
+  final Function(T?) onSave;
   final String buttonText;
   final bool isRequired;
 
   void _onChanged(dynamic val) => print(val.toString());
   final _formKey = GlobalKey<FormBuilderState>();
-
-/*   T mapToEnum<T>(List<T> values, int value) {
-    return values[value];
-  }
-
-  dynamic enumToMap<T>(List<T> values, T value) {
-    if (value == null) {
-      return null;
-    }
-
-    return values.firstWhere((v) => v == value);
-  } */
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +57,7 @@ class AppMultipleChoice<T extends Enum> extends HookWidget {
               physics: AlwaysScrollableScrollPhysics(),
               child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.6,
-                child: FormBuilderCheckboxGroup<T>(
+                child: FormBuilderRadioGroup<T>(
                   orientation: OptionsOrientation.vertical,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
@@ -88,10 +76,8 @@ class AppMultipleChoice<T extends Enum> extends HookWidget {
                       .toList(),
                   onChanged: _onChanged,
 
-                  validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.minLength(1, allowEmpty: !isRequired),
-                    FormBuilderValidators.maxLength(3),
-                  ]),
+                  validator: FormBuilderValidators.compose(
+                      [if (isRequired) FormBuilderValidators.required()]),
                 ),
               ),
             ),

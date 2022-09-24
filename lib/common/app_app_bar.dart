@@ -11,6 +11,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? right;
   final double height;
   final VoidCallback? rightAction;
+  final VoidCallback? backAction;
   String title;
   String subTitle;
 
@@ -21,16 +22,21 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     required this.subTitle,
     this.rightAction,
+    this.backAction,
   });
 
   factory AppAppBar.withSkip(
-      {VoidCallback? rightAction, String? title, String? subTitle}) {
+      {VoidCallback? rightAction,
+      VoidCallback? backAction,
+      String? title,
+      String? subTitle}) {
     return AppAppBar(
       right: Text('Skip',
           style: TextStyles.bold16.copyWith(color: AppColor.primary)),
       title: title ?? '',
       subTitle: subTitle ?? '',
       rightAction: rightAction,
+      backAction: backAction,
     );
   }
 
@@ -51,9 +57,12 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             if (Navigator.canPop(context))
               AppIcon(
-                icon: Assets.icons.back.svg(color: theme.primaryColor),
-                onTap: () => context.router.navigateBack(),
-              ),
+                  icon: Assets.icons.back.svg(color: theme.primaryColor),
+                  onTap: () {
+                    backAction != null
+                        ? backAction?.call()
+                        : context.router.navigateBack();
+                  }),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -73,7 +82,8 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                   rightAction?.call();
                 },
                 child: right ?? const SizedBox(),
-              )
+              ),
+            if (right == null || rightAction == null) const SizedBox(),
           ],
         ),
       ),
