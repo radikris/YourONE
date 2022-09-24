@@ -5,21 +5,20 @@ import 'package:yourone/features/search/presentation/components/card_overlay.dar
 import 'package:yourone/features/search/presentation/components/profile_card.dart';
 
 const _images = [
-  "https://unsplash.com/photos/a0EQFTH4ZfA",
-  "https://unsplash.com/photos/BYGLQ32Wjx8",
-  "https://unsplash.com/photos/5yDMnf720R4",
-  "https://unsplash.com/photos/Z72YujnOrlY",
-  "https://unsplash.com/photos/FeIxTBB1Iww"
+  "https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg",
+  "https://i.insider.com/57db03588a4565a36039483b?width=750&format=jpeg",
+  "https://i.insider.com/593aed9cc4adee3a008b4ce1?width=750&format=jpeg",
+  "https://i.pinimg.com/236x/3e/c3/4d/3ec34dfd7694806445b1d0292f9c059a--russian-womens-russian-girls.jpg"
 ];
 
-class HomeSwipeCard extends StatefulWidget {
-  const HomeSwipeCard({super.key});
+class HomeSwipePage extends StatefulWidget {
+  const HomeSwipePage({super.key});
 
   @override
-  _HomeSwipeCardState createState() => _HomeSwipeCardState();
+  State<HomeSwipePage> createState() => _HomeSwipePageState();
 }
 
-class _HomeSwipeCardState extends State<HomeSwipeCard> {
+class _HomeSwipePageState extends State<HomeSwipePage> {
   late final SwipableStackController _controller;
 
   void _listenController() => setState(() {});

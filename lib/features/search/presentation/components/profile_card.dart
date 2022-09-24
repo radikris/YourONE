@@ -20,16 +20,15 @@ class ProfileCard extends StatelessWidget {
           Positioned.fill(
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(14),
-                boxShadow: [
-                  BoxShadow(
-                    offset: const Offset(0, 2),
-                    blurRadius: 26,
-                    color: Colors.black.withOpacity(0.08),
-                  ),
-                ],
-              ),
-              child: Image.network(image),
+                  borderRadius: BorderRadius.circular(14),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(0, 2),
+                      blurRadius: 26,
+                      color: Colors.black.withOpacity(0.08),
+                    ),
+                  ]),
+              child: Image.network(image, fit: BoxFit.fill),
             ),
           ),
           Align(
