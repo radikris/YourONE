@@ -79,51 +79,51 @@ class AppMultipleChoice<T extends Enum> extends HookWidget {
               hintText: 'Enter a search term',
             ),
           ),
-          FormBuilder(
-            key: _formKey,
-            autovalidateMode: AutovalidateMode.disabled,
-            onChanged: () {
-              _formKey.currentState!.save();
-              debugPrint(_formKey.currentState!.value.toString());
-            },
-            child: SingleChildScrollView(
-              physics: AlwaysScrollableScrollPhysics(),
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.5,
-                child: FormBuilderCheckboxGroup<T>(
-                  orientation: OptionsOrientation.vertical,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: InputDecoration(
-                    labelText: formName.capitalize(),
-                    border: InputBorder.none,
-                  ),
-                  name: formName,
-                  // initialValue: const ['Dart'],
-                  options: (filteredList.value)
-                      .map(
-                        (e) => FormBuilderFieldOption(
-                          value: e,
-                          child: renderChild != null
-                              ? renderChild?.call(e)
-                              : Text(
-                                  e.name,
-                                  style: TextStyles.bold14,
-                                ),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: _onChanged,
+          Expanded(
+            child: FormBuilder(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.disabled,
+              onChanged: () {
+                _formKey.currentState!.save();
+                debugPrint(_formKey.currentState!.value.toString());
+              },
+              child: SingleChildScrollView(
+                physics: AlwaysScrollableScrollPhysics(),
+                child: SizedBox(
+                  child: FormBuilderCheckboxGroup<T>(
+                    orientation: OptionsOrientation.vertical,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: InputDecoration(
+                      labelText: formName.capitalize(),
+                      border: InputBorder.none,
+                    ),
+                    name: formName,
+                    // initialValue: const ['Dart'],
+                    options: (filteredList.value)
+                        .map(
+                          (e) => FormBuilderFieldOption(
+                            value: e,
+                            child: renderChild != null
+                                ? renderChild?.call(e)
+                                : Text(
+                                    e.name,
+                                    style: TextStyles.bold14,
+                                  ),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: _onChanged,
 
-                  validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.minLength(mininimumChoice,
-                        allowEmpty: !isRequired),
-                    FormBuilderValidators.maxLength(maximumChoice),
-                  ]),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.minLength(mininimumChoice,
+                          allowEmpty: !isRequired),
+                      FormBuilderValidators.maxLength(maximumChoice),
+                    ]),
+                  ),
                 ),
               ),
             ),
           ),
-          const Spacer(),
           AppButton.primary(
             text: buttonText,
             onTap: () {

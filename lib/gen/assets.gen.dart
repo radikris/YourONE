@@ -11,6 +11,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
+class $AssetsAnimationsGen {
+  const $AssetsAnimationsGen();
+
+  /// File path: assets/animations/heart.json
+  String get heart => 'assets/animations/heart.json';
+}
+
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
@@ -30,6 +37,7 @@ class $AssetsIconsGen {
 class Assets {
   Assets._();
 
+  static const $AssetsAnimationsGen animations = $AssetsAnimationsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
 }
 

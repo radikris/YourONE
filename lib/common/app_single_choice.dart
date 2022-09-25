@@ -65,48 +65,48 @@ class AppSingleChoice<T extends Enum> extends HookWidget {
               hintText: 'Enter a search term',
             ),
           ),
-          FormBuilder(
-            key: _formKey,
-            autovalidateMode: AutovalidateMode.disabled,
-            onChanged: () {
-              _formKey.currentState!.save();
-              debugPrint(_formKey.currentState!.value.toString());
-            },
-            child: SingleChildScrollView(
-              physics: const ClampingScrollPhysics(),
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.5,
-                child: FormBuilderRadioGroup<T>(
-                  orientation: OptionsOrientation.vertical,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: InputDecoration(
-                    labelText: formName.capitalize(),
-                    border: InputBorder.none,
-                  ),
-                  name: formName,
-                  // initialValue: const ['Dart'],
-                  options: (filteredList.value)
-                      .map(
-                        (e) => FormBuilderFieldOption(
-                          value: e,
-                          child: renderChild != null
-                              ? renderChild?.call(e)
-                              : Text(
-                                  e.name,
-                                  style: TextStyles.bold14,
-                                ),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: _onChanged,
+          Expanded(
+            child: FormBuilder(
+              key: _formKey,
+              autovalidateMode: AutovalidateMode.disabled,
+              onChanged: () {
+                _formKey.currentState!.save();
+                debugPrint(_formKey.currentState!.value.toString());
+              },
+              child: SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
+                child: SizedBox(
+                  child: FormBuilderRadioGroup<T>(
+                    orientation: OptionsOrientation.vertical,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    decoration: InputDecoration(
+                      labelText: formName.capitalize(),
+                      border: InputBorder.none,
+                    ),
+                    name: formName,
+                    // initialValue: const ['Dart'],
+                    options: (filteredList.value)
+                        .map(
+                          (e) => FormBuilderFieldOption(
+                            value: e,
+                            child: renderChild != null
+                                ? renderChild?.call(e)
+                                : Text(
+                                    e.name,
+                                    style: TextStyles.bold14,
+                                  ),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: _onChanged,
 
-                  validator: FormBuilderValidators.compose(
-                      [if (isRequired) FormBuilderValidators.required()]),
+                    validator: FormBuilderValidators.compose(
+                        [if (isRequired) FormBuilderValidators.required()]),
+                  ),
                 ),
               ),
             ),
           ),
-          const Spacer(),
           AppButton.primary(
             text: buttonText,
             onTap: () {

@@ -8,6 +8,8 @@ import 'package:yourone/features/authentication/steps/sign_up_step_2.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_3.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_age.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_name.dart';
+import 'package:yourone/features/authentication/steps/sign_up_step_place.dart';
+import 'package:yourone/features/authentication/steps/sign_up_switch_role_step.dart';
 import 'package:yourone/theme/app_dimen.dart';
 
 abstract class StepIsRequired {
@@ -20,9 +22,10 @@ class SignUpPage extends StatelessWidget {
   static final steps = [
     SignUpStepName(),
     SignUpStepAge(),
+    SignUpStepPlace(),
     SignUpStep1(),
     SignUpStep2(),
-    SignUpStep3()
+    SignUpSwitchRoleStep()
   ];
 
   @override
