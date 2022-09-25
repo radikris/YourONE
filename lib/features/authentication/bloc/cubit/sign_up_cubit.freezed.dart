@@ -20,6 +20,8 @@ mixin _$SignUpState {
   String get firstName => throw _privateConstructorUsedError;
   List<String> get test1 => throw _privateConstructorUsedError;
   List<int> get age => throw _privateConstructorUsedError;
+  List<FileOrUrl>? get images => throw _privateConstructorUsedError;
+  String get bio => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignUpStateCopyWith<SignUpState> get copyWith =>
@@ -32,7 +34,12 @@ abstract class $SignUpStateCopyWith<$Res> {
           SignUpState value, $Res Function(SignUpState) then) =
       _$SignUpStateCopyWithImpl<$Res>;
   $Res call(
-      {int currentStep, String firstName, List<String> test1, List<int> age});
+      {int currentStep,
+      String firstName,
+      List<String> test1,
+      List<int> age,
+      List<FileOrUrl>? images,
+      String bio});
 }
 
 /// @nodoc
@@ -49,6 +56,8 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
     Object? firstName = freezed,
     Object? test1 = freezed,
     Object? age = freezed,
+    Object? images = freezed,
+    Object? bio = freezed,
   }) {
     return _then(_value.copyWith(
       currentStep: currentStep == freezed
@@ -67,6 +76,14 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      images: images == freezed
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<FileOrUrl>?,
+      bio: bio == freezed
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -79,7 +96,12 @@ abstract class _$$_SignUpStateCopyWith<$Res>
       __$$_SignUpStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int currentStep, String firstName, List<String> test1, List<int> age});
+      {int currentStep,
+      String firstName,
+      List<String> test1,
+      List<int> age,
+      List<FileOrUrl>? images,
+      String bio});
 }
 
 /// @nodoc
@@ -98,6 +120,8 @@ class __$$_SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
     Object? firstName = freezed,
     Object? test1 = freezed,
     Object? age = freezed,
+    Object? images = freezed,
+    Object? bio = freezed,
   }) {
     return _then(_$_SignUpState(
       currentStep: currentStep == freezed
@@ -116,6 +140,14 @@ class __$$_SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
           ? _value._age
           : age // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      images: images == freezed
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<FileOrUrl>?,
+      bio: bio == freezed
+          ? _value.bio
+          : bio // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -127,9 +159,12 @@ class _$_SignUpState implements _SignUpState {
       {required this.currentStep,
       required this.firstName,
       required final List<String> test1,
-      required final List<int> age})
+      required final List<int> age,
+      final List<FileOrUrl>? images,
+      required this.bio})
       : _test1 = test1,
-        _age = age;
+        _age = age,
+        _images = images;
 
   @override
   final int currentStep;
@@ -149,9 +184,21 @@ class _$_SignUpState implements _SignUpState {
     return EqualUnmodifiableListView(_age);
   }
 
+  final List<FileOrUrl>? _images;
+  @override
+  List<FileOrUrl>? get images {
+    final value = _images;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final String bio;
+
   @override
   String toString() {
-    return 'SignUpState(currentStep: $currentStep, firstName: $firstName, test1: $test1, age: $age)';
+    return 'SignUpState(currentStep: $currentStep, firstName: $firstName, test1: $test1, age: $age, images: $images, bio: $bio)';
   }
 
   @override
@@ -163,7 +210,9 @@ class _$_SignUpState implements _SignUpState {
                 .equals(other.currentStep, currentStep) &&
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other._test1, _test1) &&
-            const DeepCollectionEquality().equals(other._age, _age));
+            const DeepCollectionEquality().equals(other._age, _age) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
+            const DeepCollectionEquality().equals(other.bio, bio));
   }
 
   @override
@@ -172,7 +221,9 @@ class _$_SignUpState implements _SignUpState {
       const DeepCollectionEquality().hash(currentStep),
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(_test1),
-      const DeepCollectionEquality().hash(_age));
+      const DeepCollectionEquality().hash(_age),
+      const DeepCollectionEquality().hash(_images),
+      const DeepCollectionEquality().hash(bio));
 
   @JsonKey(ignore: true)
   @override
@@ -185,7 +236,9 @@ abstract class _SignUpState implements SignUpState {
       {required final int currentStep,
       required final String firstName,
       required final List<String> test1,
-      required final List<int> age}) = _$_SignUpState;
+      required final List<int> age,
+      final List<FileOrUrl>? images,
+      required final String bio}) = _$_SignUpState;
 
   @override
   int get currentStep;
@@ -195,6 +248,10 @@ abstract class _SignUpState implements SignUpState {
   List<String> get test1;
   @override
   List<int> get age;
+  @override
+  List<FileOrUrl>? get images;
+  @override
+  String get bio;
   @override
   @JsonKey(ignore: true)
   _$$_SignUpStateCopyWith<_$_SignUpState> get copyWith =>

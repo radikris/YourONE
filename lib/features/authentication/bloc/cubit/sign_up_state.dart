@@ -7,5 +7,7 @@ abstract class SignUpState with _$SignUpState {
     required String firstName,
     required List<String> test1,
     required List<int> age,
+    List<FileOrUrl>? images,
+    required String bio,
   }) = _SignUpState;
 }
