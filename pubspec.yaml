@@ -52,6 +52,7 @@ dependencies:
   form_builder_validators: ^8.3.0
   intl: ^0.17.0
   flutter_hooks: ^0.18.5+1
+  firebase_core: ^1.23.0
 
 dependency_overrides:
   analyzer: ">=4.2.0 <5.0.0"
