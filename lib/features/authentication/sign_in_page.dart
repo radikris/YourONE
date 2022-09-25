@@ -21,7 +21,7 @@ class SignInPage extends StatelessWidget {
           AppButton.primary(
               text: 'Register',
               onTap: () {
-                context.pushRoute(SignUpRoute());
+                context.replaceRoute(SignUpRoute());
               }),
         ],
       )),

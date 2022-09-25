@@ -20,4 +20,6 @@ class SignUpCubit extends Cubit<SignUpState> {
   void backStep() {
     emit(state.copyWith(currentStep: state.currentStep - 1));
   }
+
+  void handleName() {}
 }

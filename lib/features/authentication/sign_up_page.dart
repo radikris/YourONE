@@ -6,6 +6,8 @@ import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_1.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_2.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_3.dart';
+import 'package:yourone/features/authentication/steps/sign_up_step_age.dart';
+import 'package:yourone/features/authentication/steps/sign_up_step_name.dart';
 import 'package:yourone/theme/app_dimen.dart';
 
 abstract class StepIsRequired {
@@ -15,38 +17,40 @@ abstract class StepIsRequired {
 class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
-  static final steps = [SignUpStep1(), SignUpStep2(), SignUpStep3()];
+  static final steps = [
+    SignUpStepName(),
+    SignUpStepAge(),
+    SignUpStep1(),
+    SignUpStep2(),
+    SignUpStep3()
+  ];
 
   @override
   Widget build(BuildContext context) {
     final step = context.watch<SignUpCubit>().state.currentStep;
     final isStepRequired = (steps[step] as StepIsRequired).isRequired();
 
-    return BlocListener<SignUpCubit, SignUpState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
-        child: Scaffold(
-          appBar: AppAppBar.withSkip(
-            title: 'Rólad',
-            subTitle: '${SignUpPage.steps.length}/${step + 1}',
-            backAction: () {
-              if (step >= 1) {
+    return Scaffold(
+      appBar: AppAppBar.withSkip(
+        title: 'Rólad',
+        subTitle: '${SignUpPage.steps.length}/${step + 1}',
+        backAction: step >= 1
+            ? () {
                 context.read<SignUpCubit>().backStep();
               }
-            },
-            rightAction: isStepRequired
-                ? null
-                : () {
-                    context.read<SignUpCubit>().nextStep();
-                  },
-          ),
-          body: Padding(
-            padding: AppDimen.horizontal16Vertical24,
-            child: Column(
-              children: [steps[step]],
-            ),
-          ),
-        ));
+            : null,
+        rightAction: isStepRequired
+            ? null
+            : () {
+                context.read<SignUpCubit>().nextStep();
+              },
+      ),
+      body: Padding(
+        padding: AppDimen.horizontal16Vertical24,
+        child: Column(
+          children: [steps[step]],
+        ),
+      ),
+    );
   }
 }

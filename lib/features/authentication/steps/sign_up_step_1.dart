@@ -4,6 +4,7 @@ import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_multiple_choice.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
 import 'package:yourone/features/authentication/sign_up_page.dart';
+import 'package:yourone/gen/assets.gen.dart';
 import 'package:yourone/theme/app_dimen.dart';
 
 enum TestEnum {
@@ -39,6 +40,11 @@ class SignUpStep1 extends StatelessWidget implements StepIsRequired {
       isRequired: isRequired(),
       onSave: (List<TestEnum>? value) {
         context.read<SignUpCubit>().nextStep();
+      },
+      renderChild: (TestEnum value) {
+        return Row(
+          children: [Text(value.name), Icon(Icons.ac_unit_rounded)],
+        );
       },
     );
   }

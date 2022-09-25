@@ -3,6 +3,9 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:yourone/common/app_primary_button.dart';
+import 'package:yourone/extensions/extensions.dart';
+import 'package:yourone/theme/text_styles.dart';
+import 'package:yourone/util/helper.dart';
 
 class AppSingleChoice<T extends Enum> extends HookWidget {
   AppSingleChoice({
@@ -13,12 +16,15 @@ class AppSingleChoice<T extends Enum> extends HookWidget {
     required this.enumChoice,
     required this.buttonText,
     this.isRequired = false,
+    this.renderChild,
   });
 
   final List<T> enumChoice;
   final String formName;
   final String formLabel;
   final Function(T?) onSave;
+  final WidgetChild<T>? renderChild;
+
   final String buttonText;
   final bool isRequired;
 
@@ -42,9 +48,22 @@ class AppSingleChoice<T extends Enum> extends HookWidget {
     return Expanded(
       child: Column(
         children: [
+          Text(
+            formLabel,
+            style: TextStyles.bold18,
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(
+            height: 32,
+          ),
           TextField(
             controller: searchController,
             keyboardType: TextInputType.text,
+            decoration: InputDecoration(
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+              hintText: 'Enter a search term',
+            ),
           ),
           FormBuilder(
             key: _formKey,
@@ -54,14 +73,14 @@ class AppSingleChoice<T extends Enum> extends HookWidget {
               debugPrint(_formKey.currentState!.value.toString());
             },
             child: SingleChildScrollView(
-              physics: AlwaysScrollableScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.6,
+                height: MediaQuery.of(context).size.height * 0.5,
                 child: FormBuilderRadioGroup<T>(
                   orientation: OptionsOrientation.vertical,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
-                    labelText: formLabel,
+                    labelText: formName.capitalize(),
                     border: InputBorder.none,
                   ),
                   name: formName,
@@ -70,7 +89,12 @@ class AppSingleChoice<T extends Enum> extends HookWidget {
                       .map(
                         (e) => FormBuilderFieldOption(
                           value: e,
-                          child: Text(e.name),
+                          child: renderChild != null
+                              ? renderChild?.call(e)
+                              : Text(
+                                  e.name,
+                                  style: TextStyles.bold14,
+                                ),
                         ),
                       )
                       .toList(),

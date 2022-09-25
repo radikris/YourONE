@@ -48,42 +48,48 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     final theme = Theme.of(context);
     return SafeArea(
       child: Container(
-        padding: AppDimen.horizontal24,
+        padding: AppDimen.all16,
         height: preferredSize.height,
         color: Colors.transparent,
         alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
           children: [
-            if (Navigator.canPop(context))
-              AppIcon(
-                  icon: Assets.icons.back.svg(color: theme.primaryColor),
-                  onTap: () {
-                    backAction != null
-                        ? backAction?.call()
-                        : context.router.navigateBack();
-                  }),
-            Column(
-              mainAxisSize: MainAxisSize.min,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: TextStyles.bold24,
-                ),
-                Text(
-                  subTitle,
-                  style: TextStyles.normal16,
-                ),
+                if (Navigator.canPop(context) || backAction != null)
+                  AppIcon(
+                      icon: Assets.icons.back.svg(color: theme.primaryColor),
+                      onTap: () {
+                        backAction != null
+                            ? backAction?.call()
+                            : context.router.navigateBack();
+                      }),
+                if (right != null && rightAction != null)
+                  GestureDetector(
+                    onTap: () {
+                      rightAction?.call();
+                    },
+                    child: right ?? const SizedBox(),
+                  ),
+                if (right == null || rightAction == null) const SizedBox(),
               ],
             ),
-            if (right != null && rightAction != null)
-              GestureDetector(
-                onTap: () {
-                  rightAction?.call();
-                },
-                child: right ?? const SizedBox(),
+            Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyles.bold24,
+                  ),
+                  Text(
+                    subTitle,
+                    style: TextStyles.normal16,
+                  ),
+                ],
               ),
-            if (right == null || rightAction == null) const SizedBox(),
+            )
           ],
         ),
       ),
