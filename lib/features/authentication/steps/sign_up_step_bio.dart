@@ -35,7 +35,7 @@ class SignUpStepBio extends StatefulWidget implements StepIsRequired {
 class _SignUpStepBioState extends State<SignUpStepBio> {
   var imageList = <FileOrUrl>[];
 
-  List<StaggeredTileExtended> _listStaggeredTileExtended =
+  final List<StaggeredTileExtended> _listStaggeredTileExtended =
       <StaggeredTileExtended>[
     StaggeredTileExtended.count(2, 2),
     StaggeredTileExtended.count(2, 1),
@@ -45,57 +45,57 @@ class _SignUpStepBioState extends State<SignUpStepBio> {
 
   List<Widget> _tiles = [];
 
-  FileOrUrl? getSelectedImageOrNull(int idx) {
-    return imageList!.length > idx ? imageList![idx] : null;
-  }
-
   @override
   void initState() {
     super.initState();
-    widget.onSave ??= context.read<SignUpCubit>().handleBio;
+    widget.onSave ??= (List<FileOrUrl>? images, String? bio) {
+      context.read<SignUpCubit>().handleBio(images, bio);
+      if (bio != null) context.read<SignUpCubit>().nextStep();
+    };
     imageList.addAll(
         widget.initialImages ?? context.read<SignUpCubit>().state.images!);
   }
 
-  int counter = 0;
-
-  @override
+/*   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     print('updated');
     _tiles = updateImageTiles(imageList);
-  }
+  } */
 
   List<Widget> updateImageTiles(List<FileOrUrl> newImages) {
+    final image1 = newImages.firstWhere((i) => i.id == 0);
+    final image2 = newImages.firstWhere((i) => i.id == 1);
+    final image3 = newImages.firstWhere((i) => i.id == 2);
+    final image4 = newImages.firstWhere((i) => i.id == 3);
     return ([
       ImageListTile(
         key: Key("a"),
         onSelectImage: onSelectImage,
-        id: newImages![0].id!,
-        imageFile: newImages![0].file,
-        imageUrl: newImages![0].url,
+        id: image1.id,
+        imageFile: image1.file,
+        imageUrl: image1.url,
       ),
       ImageListTile(
         key: Key("b"),
         onSelectImage: onSelectImage,
-        id: newImages![1].id!,
-        imageFile: newImages![1].file,
-        imageUrl: newImages![1].url,
+        id: image2.id,
+        imageFile: image2.file,
+        imageUrl: image2.url,
       ),
       ImageListTile(
         key: Key("c"),
         onSelectImage: onSelectImage,
-        id: newImages![2].id!,
-        imageFile: newImages![2].file,
-        imageUrl: newImages![2].url,
+        id: image3.id,
+        imageFile: image3.file,
+        imageUrl: image3.url,
       ),
       ImageListTile(
         key: Key("d"),
         onSelectImage: onSelectImage,
-        id: newImages![3].id!,
-        imageFile: newImages![3].file,
-        imageUrl: newImages![3].url,
+        id: image4.id,
+        imageFile: image4.file,
+        imageUrl: image4.url,
       ),
     ]);
   }
@@ -107,6 +107,7 @@ class _SignUpStepBioState extends State<SignUpStepBio> {
     setState(() {
       imageList[firstOffIdx] =
           FileOrUrl(id: imageList[firstOffIdx].id, file: image.toFile);
+      print('$firstOffIdx képet lecseréltem');
       _tiles = updateImageTiles(imageList);
     });
     widget.onSave?.call(imageList, null);
@@ -136,16 +137,14 @@ class _SignUpStepBioState extends State<SignUpStepBio> {
           const SizedBox(
             height: 32,
           ),
-          const SizedBox(
-            height: 32,
-          ),
           Expanded(
             child: ReorderableItemsView(
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
                 onReorder: (int oldIndex, int newIndex) {
                   setState(() {
-                    _tiles.insert(newIndex, _tiles.removeAt(oldIndex));
+                    _tiles.swap(newIndex, oldIndex);
+                    //imageList.swap(newIndex, oldIndex);
                   });
                 },
                 crossAxisCount: 4,
@@ -154,26 +153,31 @@ class _SignUpStepBioState extends State<SignUpStepBio> {
                 longPressToDrag: true,
                 children: _tiles),
           ),
-          Expanded(
-              child: FormBuilder(
-            key: _formKey,
-            child: FormBuilderTextField(
-              autocorrect: true,
-              decoration: InputDecoration(
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-              ),
-              name: 'bio',
-              minLines: 5,
-              maxLines: 5,
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.minLength(
-                  10,
+          SingleChildScrollView(
+            child: FormBuilder(
+              key: _formKey,
+              child: FormBuilderTextField(
+                autocorrect: true,
+                decoration: InputDecoration(
+                  labelText: 'Please, introduce yourself',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16)),
                 ),
-                FormBuilderValidators.maxLength(1000),
-              ]),
+                name: 'bio',
+                minLines: 6,
+                maxLines: 6,
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.minLength(
+                    10,
+                  ),
+                  FormBuilderValidators.maxLength(1000),
+                ]),
+              ),
             ),
-          )),
+          ),
+          const SizedBox(
+            height: 32,
+          ),
           AppButton.primary(
             text: 'Save',
             onTap: () {
@@ -207,12 +211,13 @@ class ImageListTile extends StatelessWidget {
   final ImagePicker imagePicker = ImagePicker();
 
   void selectImage() async {
+    final idToSwitch = imageUrl == null && imageFile == null ? null : id;
+    print('$idToSwitch cserélem most');
     final XFile? selectedImage =
         await imagePicker.pickImage(source: ImageSource.gallery);
 
     if (selectedImage != null) {
-      onSelectImage(
-          selectedImage, imageUrl == null && imageFile == null ? null : id);
+      onSelectImage(selectedImage, idToSwitch);
     }
   }
 
@@ -238,16 +243,27 @@ class ImageListTile extends StatelessWidget {
               ? const Icon(Icons.add_circle_outline_sharp,
                   color: AppColor.primary)
               : imageUrl != null
-                  ? CachedNetworkImage(
-                      fit: BoxFit.cover,
-                      imageUrl: "http://via.placeholder.com/350x150",
-                      progressIndicatorBuilder:
-                          (context, url, downloadProgress) =>
-                              CircularProgressIndicator(
-                                  value: downloadProgress.progress),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.fill,
+                        imageUrl: "http://via.placeholder.com/350x150",
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                CircularProgressIndicator(
+                                    value: downloadProgress.progress),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
                     )
-                  : Image.file(imageFile!, fit: BoxFit.cover),
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.file(
+                        imageFile!,
+                        fit: BoxFit.fill,
+                        width: double.infinity,
+                      ),
+                    ),
         ),
       ),
     );

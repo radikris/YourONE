@@ -9,3 +9,16 @@ Random _rnd = Random();
 
 String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
     length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+
+SizedBox addPaddingWhenKeyboardAppears() {
+  final viewInsets = EdgeInsets.fromWindowPadding(
+    WidgetsBinding.instance.window.viewInsets,
+    WidgetsBinding.instance.window.devicePixelRatio,
+  );
+
+  final bottomOffset = viewInsets.bottom;
+  const hiddenKeyboard = 0.0; // Always 0 if keyboard is not opened
+  final isNeedPadding = bottomOffset != hiddenKeyboard;
+
+  return SizedBox(height: isNeedPadding ? bottomOffset : hiddenKeyboard);
+}

@@ -17,7 +17,7 @@ class SignUpCubit extends Cubit<SignUpState> {
           test1: [],
           age: [],
           bio: '',
-          images: [1, 2, 3, 4].map((key) => FileOrUrl(id: key)).toList(),
+          images: [0, 1, 2, 3].map((key) => FileOrUrl(id: key)).toList(),
         ));
 
   void handleTest() {
