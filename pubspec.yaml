@@ -56,6 +56,7 @@ dependencies:
   uuid: ^3.0.6
   lottie: ^1.4.3
   reorderableitemsview: ^2.0.1
+  flutter_swiper_null_safety: ^1.0.2
 
 dependency_overrides:
   analyzer: ">=4.2.0 <5.0.0"

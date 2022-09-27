@@ -6,12 +6,17 @@ mixin AppColor {
   static const primary = Color(0xffE94057);
   static final primary10 = Color.fromARGB(197, 255, 197, 197);
   static const secondary = Color(0xff535F70);
+  static const border = Color(0xffE8E6EA);
   static const white = Color(0xffFFFFFF);
   static const gray = Color(0xffF3F3F3);
   static final MaterialColor colorSwatch =
       MaterialColor(0xffE94057, _primaryMap);
   static const like = Color.fromARGB(255, 86, 173, 125);
-  static const dislike = Color.fromARGB(255, 235, 96, 27);
+  static const dislike = Color.fromARGB(255, 249, 99, 69);
+
+  static final matchRateHigh = Color.fromARGB(213, 98, 216, 110);
+  static final matchRateMedium = Color.fromARGB(255, 251, 173, 85);
+  static final matchRateLow = Color.fromARGB(244, 172, 74, 55);
 }
 
 Map<int, Color> _primaryMap = {

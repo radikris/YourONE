@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:yourone/models/file_or_url.dart';
+import 'package:yourone/theme/app_color.dart';
 
 extension StringExtension on String {
   String capitalize() {
@@ -27,5 +29,15 @@ extension SwapIdFileOrUrlListX on List<FileOrUrl> {
     final secondId = this[second].id;
     this[second].id = firstId;
     this[first].id = secondId;
+  }
+}
+
+extension MatchRateDoubleX on double {
+  Color toMatchingColor() {
+    return this > 0.8
+        ? AppColor.matchRateHigh
+        : this > 0.5
+            ? AppColor.matchRateMedium
+            : AppColor.matchRateLow;
   }
 }

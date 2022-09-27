@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
+import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/features/search/presentation/components/bottom_buttons_row.dart';
 import 'package:yourone/features/search/presentation/components/card_overlay.dart';
 import 'package:yourone/features/search/presentation/components/profile_card.dart';
@@ -67,9 +69,14 @@ class _HomeSwipePageState extends State<HomeSwipePage> {
 
                     return Stack(
                       children: [
-                        ProfileCard(
-                          name: 'Sample No.${itemIndex + 1}',
-                          image: _images[itemIndex],
+                        GestureDetector(
+                          onTap: () {
+                            context.pushRoute(SwipeDetailRoute());
+                          },
+                          child: ProfileCard(
+                            name: 'Sample No.${itemIndex + 1}',
+                            image: _images[itemIndex],
+                          ),
                         ),
                         // more custom overlay possible than with overlayBuilder
                         if (properties.stackIndex == 0 &&

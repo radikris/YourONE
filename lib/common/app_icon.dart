@@ -13,7 +13,7 @@ class AppIcon extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: AppDimen.all16,
+        padding: AppDimen.all12,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -22,7 +22,7 @@ class AppIcon extends StatelessWidget {
                 blurRadius: 2.0,
                 offset: const Offset(0.0, 4))
           ],
-          border: Border.all(width: 1, color: AppColor.gray),
+          border: Border.all(width: 1, color: AppColor.border),
           borderRadius: BorderRadius.circular(12),
         ),
         child: icon,

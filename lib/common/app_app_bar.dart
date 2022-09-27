@@ -48,7 +48,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     final theme = Theme.of(context);
     return SafeArea(
       child: Container(
-        padding: AppDimen.all16,
+        padding: AppDimen.all12,
         height: preferredSize.height,
         color: Colors.transparent,
         alignment: Alignment.center,

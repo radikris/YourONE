@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_multiple_choice.dart';
 import 'package:yourone/common/app_primary_button.dart';
@@ -184,6 +186,9 @@ class SignUpStepAccount extends StatelessWidget implements StepIsRequired {
           AppButton.primary(
             text: 'Next',
             onTap: () {
+              //TODO VALIDATION
+              context.replaceRoute(HomeSwipeRoute());
+
               if (_formKey.currentState?.saveAndValidate() ?? false) {
                 debugPrint(_formKey.currentState?.value.toString());
                 context.read<SignUpCubit>().handleTest();
