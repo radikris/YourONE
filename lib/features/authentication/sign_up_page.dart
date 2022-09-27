@@ -9,6 +9,8 @@ import 'package:yourone/features/authentication/steps/sign_up_step_3.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_age.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_bio.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_name.dart';
+import 'package:yourone/features/authentication/steps/sign_up_step_other_age.dart';
+import 'package:yourone/features/authentication/steps/sign_up_step_other_chemistry.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_place.dart';
 import 'package:yourone/features/authentication/steps/sign_up_switch_role_step.dart';
 import 'package:yourone/theme/app_dimen.dart';
@@ -24,6 +26,8 @@ class SignUpPage extends StatelessWidget {
     SignUpStepName(),
     SignUpStepAge(),
     SignUpStepBio(),
+    SignUpStepOtherAge(),
+    SignUpStepOtherChemistry(),
     SignUpStepPlace(),
     SignUpStep1(),
     SignUpStep2(),
