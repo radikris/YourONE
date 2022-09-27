@@ -6,6 +6,7 @@ import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_1.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_2.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_3.dart';
+import 'package:yourone/features/authentication/steps/sign_up_step_account.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_age.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_bio.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_name.dart';
@@ -25,6 +26,7 @@ class SignUpPage extends StatelessWidget {
   static final steps = [
     SignUpStepName(),
     SignUpStepAge(),
+    SignUpStepAccount(),
     SignUpStepBio(),
     SignUpStepOtherAge(),
     SignUpStepOtherChemistry(),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:yourone/common/app_simple_slider.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
 import 'package:yourone/features/authentication/sign_up_page.dart';
+import 'package:yourone/gen/assets.gen.dart';
 
 class SignUpStepOtherChemistry extends StatelessWidget
     implements StepIsRequired {
@@ -10,14 +12,25 @@ class SignUpStepOtherChemistry extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return AppSimpleSlider(
-      formName: 'chemistry',
-      formLabel: 'Töltsd ki tesóm',
-      buttonText: 'Next',
-      onSave: (int? value) {
-        context.read<SignUpCubit>().nextStep();
-      },
-    );
+    return Column(children: [
+      AppSimpleSlider(
+        formName: 'chemistry',
+        formLabel:
+            'Above what matching percentage would you like to see people all around the world?',
+        buttonText: 'Lets find Your One',
+        onSave: (int? value) {
+          context.read<SignUpCubit>().nextStep();
+        },
+      ),
+      SizedBox(
+        height: 16,
+      ),
+      Center(
+        child: Lottie.file(
+          Assets.animations.search,
+        ),
+      ),
+    ]);
   }
 
   @override

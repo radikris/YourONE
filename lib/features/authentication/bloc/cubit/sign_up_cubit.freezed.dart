@@ -154,7 +154,7 @@ class __$$_SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SignUpState implements _SignUpState {
+class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
   const _$_SignUpState(
       {required this.currentStep,
       required this.firstName,
@@ -197,8 +197,21 @@ class _$_SignUpState implements _SignUpState {
   final String bio;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SignUpState(currentStep: $currentStep, firstName: $firstName, test1: $test1, age: $age, images: $images, bio: $bio)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SignUpState'))
+      ..add(DiagnosticsProperty('currentStep', currentStep))
+      ..add(DiagnosticsProperty('firstName', firstName))
+      ..add(DiagnosticsProperty('test1', test1))
+      ..add(DiagnosticsProperty('age', age))
+      ..add(DiagnosticsProperty('images', images))
+      ..add(DiagnosticsProperty('bio', bio));
   }
 
   @override

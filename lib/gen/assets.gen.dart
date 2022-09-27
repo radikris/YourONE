@@ -16,6 +16,9 @@ class $AssetsAnimationsGen {
 
   /// File path: assets/animations/heart.json
   String get heart => 'assets/animations/heart.json';
+
+  /// File path: assets/animations/search.json
+  String get search => 'assets/animations/search.json';
 }
 
 class $AssetsIconsGen {
@@ -34,11 +37,21 @@ class $AssetsIconsGen {
   SvgGenImage get film => const SvgGenImage('assets/icons/film.svg');
 }
 
+class $AssetsIllustrationsGen {
+  const $AssetsIllustrationsGen();
+
+  /// File path: assets/illustrations/register.jpg
+  AssetGenImage get register =>
+      const AssetGenImage('assets/illustrations/register.jpg');
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsAnimationsGen animations = $AssetsAnimationsGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsIllustrationsGen illustrations =
+      $AssetsIllustrationsGen();
 }
 
 class AssetGenImage {
