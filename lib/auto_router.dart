@@ -4,6 +4,9 @@
 import 'package:auto_route/annotations.dart';
 import 'package:yourone/features/authentication/sign_in_page.dart';
 import 'package:yourone/features/authentication/sign_up_page.dart';
+import 'package:yourone/features/chat/chat_detail_page.dart';
+import 'package:yourone/features/chat/chat_list_page.dart';
+import 'package:yourone/features/profile/profile_page.dart';
 import 'package:yourone/features/search/presentation/home_swipe_page.dart';
 import 'package:yourone/features/search/presentation/swipe_detail_page.dart';
 
@@ -14,6 +17,9 @@ import 'package:yourone/features/search/presentation/swipe_detail_page.dart';
     AutoRoute(page: SignUpPage),
     AutoRoute(page: HomeSwipePage),
     AutoRoute(page: SwipeDetailPage),
+    AutoRoute(page: ChatListPage),
+    AutoRoute(page: ChatDetailPage),
+    AutoRoute(page: ProfilePage),
   ],
 )
 class $AppRouter {}

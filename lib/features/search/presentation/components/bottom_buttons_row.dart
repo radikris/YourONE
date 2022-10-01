@@ -21,7 +21,7 @@ class BottomButtonsRow extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 4),
         child: SizedBox(
           height: height,
           child: Row(

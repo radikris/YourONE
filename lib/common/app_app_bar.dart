@@ -9,6 +9,7 @@ import 'package:yourone/theme/text_styles.dart';
 
 class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? right;
+  final Widget? left;
   final double height;
   final VoidCallback? rightAction;
   final VoidCallback? backAction;
@@ -23,6 +24,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.subTitle,
     this.rightAction,
     this.backAction,
+    this.left,
   });
 
   factory AppAppBar.withSkip(
@@ -57,14 +59,18 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (Navigator.canPop(context) || backAction != null)
-                  AppIcon(
-                      icon: Assets.icons.back.svg(color: theme.primaryColor),
-                      onTap: () {
-                        backAction != null
-                            ? backAction?.call()
-                            : context.router.navigateBack();
-                      }),
+                (Navigator.canPop(context) || backAction != null)
+                    ? left != null
+                        ? GestureDetector(onTap: backAction, child: left!)
+                        : AppIcon(
+                            icon: Assets.icons.back
+                                .svg(color: theme.primaryColor),
+                            onTap: () {
+                              backAction != null
+                                  ? backAction?.call()
+                                  : context.router.navigateBack();
+                            })
+                    : const SizedBox(),
                 if (right != null && rightAction != null)
                   GestureDetector(
                     onTap: () {

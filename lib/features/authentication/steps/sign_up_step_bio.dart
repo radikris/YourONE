@@ -54,6 +54,7 @@ class _SignUpStepBioState extends State<SignUpStepBio> {
     };
     imageList.addAll(
         widget.initialImages ?? context.read<SignUpCubit>().state.images!);
+    _tiles = updateImageTiles(imageList);
   }
 
 /*   @override
@@ -153,26 +154,24 @@ class _SignUpStepBioState extends State<SignUpStepBio> {
                 longPressToDrag: true,
                 children: _tiles),
           ),
-          SingleChildScrollView(
-            child: FormBuilder(
-              key: _formKey,
-              child: FormBuilderTextField(
-                autocorrect: true,
-                decoration: InputDecoration(
-                  labelText: 'Please, introduce yourself',
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16)),
-                ),
-                name: 'bio',
-                minLines: 6,
-                maxLines: 6,
-                validator: FormBuilderValidators.compose([
-                  FormBuilderValidators.minLength(
-                    10,
-                  ),
-                  FormBuilderValidators.maxLength(1000),
-                ]),
+          FormBuilder(
+            key: _formKey,
+            child: FormBuilderTextField(
+              autocorrect: true,
+              decoration: InputDecoration(
+                labelText: 'Please, introduce yourself',
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
               ),
+              name: 'bio',
+              minLines: 6,
+              maxLines: 6,
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.minLength(
+                  10,
+                ),
+                FormBuilderValidators.maxLength(1000),
+              ]),
             ),
           ),
           const SizedBox(

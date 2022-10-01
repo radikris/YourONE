@@ -12,25 +12,27 @@ class SignUpStepOtherChemistry extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      AppSimpleSlider(
-        formName: 'chemistry',
-        formLabel:
-            'Above what matching percentage would you like to see people all around the world?',
-        buttonText: 'Lets find Your One',
-        onSave: (int? value) {
-          context.read<SignUpCubit>().nextStep();
-        },
-      ),
-      SizedBox(
-        height: 16,
-      ),
-      Center(
-        child: Lottie.file(
-          Assets.animations.search,
+    return Expanded(
+      child: Column(children: [
+        AppSimpleSlider(
+          formName: 'chemistry',
+          formLabel:
+              'Above what matching percentage would you like to see people all around the world?',
+          buttonText: 'Lets find Your One',
+          onSave: (int? value) {
+            context.read<SignUpCubit>().nextStep();
+          },
         ),
-      ),
-    ]);
+        SizedBox(
+          height: 16,
+        ),
+        Center(
+          child: Lottie.asset(
+            Assets.animations.search,
+          ),
+        ),
+      ]),
+    );
   }
 
   @override

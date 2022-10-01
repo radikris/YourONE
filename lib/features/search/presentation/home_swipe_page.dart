@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 import 'package:yourone/auto_router.gr.dart';
+import 'package:yourone/common/app_app_bar.dart';
+import 'package:yourone/common/app_icon.dart';
 import 'package:yourone/features/search/presentation/components/bottom_buttons_row.dart';
 import 'package:yourone/features/search/presentation/components/card_overlay.dart';
 import 'package:yourone/features/search/presentation/components/profile_card.dart';
@@ -42,62 +44,68 @@ class _HomeSwipePageState extends State<HomeSwipePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BasicExample'),
+      appBar: AppAppBar(
+        title: 'YourOne',
+        subTitle: 'You amazed 15 people!',
+        left: AppIcon(icon: Icon(Icons.manage_accounts)),
+        backAction: () {
+          //context.pushRoute(route)
+        },
+        right: AppIcon(icon: Icon(Icons.chat)),
+        rightAction: () {
+          context.pushRoute(ChatListRoute());
+        },
       ),
       body: SafeArea(
         top: false,
         child: Stack(
           children: [
             Positioned.fill(
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: SwipableStack(
-                  detectableSwipeDirections: const {
-                    SwipeDirection.right,
-                    SwipeDirection.left,
-                  },
-                  controller: _controller,
-                  stackClipBehaviour: Clip.none,
-                  onSwipeCompleted: (index, direction) {
-                    print('$index, $direction');
-                  },
-                  horizontalSwipeThreshold: 0.8,
-                  verticalSwipeThreshold: 0.8,
-                  builder: (context, properties) {
-                    final itemIndex = properties.index % _images.length;
+              child: SwipableStack(
+                detectableSwipeDirections: const {
+                  SwipeDirection.right,
+                  SwipeDirection.left,
+                },
+                controller: _controller,
+                stackClipBehaviour: Clip.none,
+                onSwipeCompleted: (index, direction) {
+                  print('$index, $direction');
+                },
+                horizontalSwipeThreshold: 0.8,
+                verticalSwipeThreshold: 0.8,
+                builder: (context, properties) {
+                  final itemIndex = properties.index % _images.length;
 
-                    return Stack(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            context.pushRoute(SwipeDetailRoute());
-                          },
-                          child: ProfileCard(
-                            name: 'Sample No.${itemIndex + 1}',
-                            image: _images[itemIndex],
-                          ),
+                  return Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          context.pushRoute(SwipeDetailRoute());
+                        },
+                        child: ProfileCard(
+                          name: 'Sample No.${itemIndex + 1}',
+                          image: _images[itemIndex],
                         ),
-                        // more custom overlay possible than with overlayBuilder
-                        if (properties.stackIndex == 0 &&
-                            properties.direction != null)
-                          CardOverlay(
-                            swipeProgress: properties.swipeProgress,
-                            direction: properties.direction!,
-                          )
-                      ],
-                    );
-                  },
-                ),
+                      ),
+                      // more custom overlay possible than with overlayBuilder
+                      if (properties.stackIndex == 0 &&
+                          properties.direction != null)
+                        CardOverlay(
+                          swipeProgress: properties.swipeProgress,
+                          direction: properties.direction!,
+                        )
+                    ],
+                  );
+                },
               ),
             ),
             BottomButtonsRow(
               onSwipe: (direction) {
                 _controller.next(swipeDirection: direction);
               },
-              onRewindTap: _controller.rewind,
-              canRewind: _controller.canRewind,
-            ),
+              canRewind: false,
+              onRewindTap: () {},
+            )
           ],
         ),
       ),
