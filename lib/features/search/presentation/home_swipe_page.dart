@@ -7,6 +7,7 @@ import 'package:yourone/common/app_icon.dart';
 import 'package:yourone/features/search/presentation/components/bottom_buttons_row.dart';
 import 'package:yourone/features/search/presentation/components/card_overlay.dart';
 import 'package:yourone/features/search/presentation/components/profile_card.dart';
+import 'package:yourone/features/search/presentation/components/success_match.dart';
 
 const _images = [
   "https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg",
@@ -69,6 +70,9 @@ class _HomeSwipePageState extends State<HomeSwipePage> {
                 controller: _controller,
                 stackClipBehaviour: Clip.none,
                 onSwipeCompleted: (index, direction) {
+                  if (direction == SwipeDirection.right) {
+                    SuccessMatch.showCustomDialog(context);
+                  }
                   print('$index, $direction');
                 },
                 horizontalSwipeThreshold: 0.8,
