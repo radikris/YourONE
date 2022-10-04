@@ -24,7 +24,6 @@ class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
   static final steps = [
-    SignUpStepAccount(),
     SignUpStepOtherChemistry(),
     SignUpStepName(),
     SignUpStepBio(),
@@ -34,6 +33,7 @@ class SignUpPage extends StatelessWidget {
     SignUpSwitchRoleStep(),
     SignUpStep1(),
     SignUpStep2(),
+    SignUpStepAccount(),
   ];
 
   @override

@@ -25,45 +25,103 @@ class SuccessMatch {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.7,
+                  height: MediaQuery.of(context).size.height * 0.65,
                   width: double.infinity,
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
                       Positioned(
                         top: 75,
-                        right: 0,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Transform.rotate(
-                            angle: 5,
-                            child: Container(
-                              width: 220,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Image.network(
-                                  'https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg'),
+                        right: -5,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              //box-shadow: 0px 25px 25px 0px #00000026;
+
+                              BoxShadow(
+                                color: Color.fromARGB(25, 0, 0, 0),
+                                spreadRadius: 0,
+                                blurRadius: 25.0,
+                                offset: Offset(0, 25),
+                              ),
+                            ],
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Transform.rotate(
+                              angle: 5,
+                              child: Container(
+                                width: 220,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Image.network(
+                                          'https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg'),
+                                    ),
+                                    Positioned(
+                                        bottom: 0,
+                                        right: 0,
+                                        child: RotatedBox(
+                                          quarterTurns: 1,
+                                          child: Lottie.asset(
+                                              Assets.animations.heart,
+                                              width: 60),
+                                        ))
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                         ),
                       ),
                       Positioned(
                         top: 225,
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Transform.rotate(
-                            angle: -5,
-                            child: Stack(
-                              children: [
-                                Container(
-                                  width: 220,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: Image.network(
-                                      'https://i.insider.com/57db03588a4565a36039483b?width=750&format=jpeg'),
+                        left: -5,
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              //box-shadow: 0px 25px 25px 0px #00000026;
+
+                              BoxShadow(
+                                color: Color.fromARGB(25, 0, 0, 0),
+                                spreadRadius: 0,
+                                blurRadius: 25.0,
+                                offset: Offset(0, 25),
+                              ),
+                            ],
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Transform.rotate(
+                              angle: -5,
+                              child: Container(
+                                width: 220,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: Image.network(
+                                          'https://i.insider.com/57db03588a4565a36039483b?width=750&format=jpeg'),
+                                    ),
+                                    Positioned(
+                                        bottom: 0,
+                                        right: 0,
+                                        child: RotatedBox(
+                                          quarterTurns: -1,
+                                          child: Lottie.asset(
+                                              Assets.animations.heart,
+                                              width: 60),
+                                        ))
+                                  ],
                                 ),
-                                //  Lottie.asset(Assets.animations.heart)
-                              ],
+                              ),
                             ),
                           ),
                         ),

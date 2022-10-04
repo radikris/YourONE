@@ -50,7 +50,7 @@ class _HomeSwipePageState extends State<HomeSwipePage> {
         subTitle: 'You amazed 15 people!',
         left: AppIcon(icon: Icon(Icons.manage_accounts)),
         backAction: () {
-          //context.pushRoute(route)
+          context.pushRoute(ProfileRoute());
         },
         right: AppIcon(icon: Icon(Icons.chat)),
         rightAction: () {

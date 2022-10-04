@@ -56,7 +56,8 @@ class AppSimpleSlider extends StatelessWidget {
               if (_formKey.currentState?.saveAndValidate() ?? false) {
                 debugPrint(_formKey.currentState?.value.toString());
 
-                onSave(_formKey.currentState?.value[formName]);
+                onSave(((_formKey.currentState?.value[formName] as double)
+                    .floor()));
               } else {
                 debugPrint(_formKey.currentState?.value.toString());
                 debugPrint('validation failed');

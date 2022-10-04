@@ -53,7 +53,7 @@ class _AppPlacePickerState extends State<AppPlacePicker> {
     currentPlace = widget.currentPlace;
   }
 
-  String kPLACES_API_KEY = "API_KEY";
+  String kPLACES_API_KEY = "";
   void getSuggestion(String input) async {
     String baseURL =
         'https://maps.googleapis.com/maps/api/place/autocomplete/json';
