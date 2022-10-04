@@ -65,9 +65,11 @@ class AppRouter extends _i8.RootStackRouter {
       );
     },
     ProfileRoute.name: (routeData) {
+      final args = routeData.argsAs<ProfileRouteArgs>(
+          orElse: () => const ProfileRouteArgs());
       return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i7.ProfilePage(),
+        child: _i7.ProfilePage(key: args.key),
       );
     },
   };
@@ -179,12 +181,24 @@ class ChatDetailRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i7.ProfilePage]
-class ProfileRoute extends _i8.PageRouteInfo<void> {
-  const ProfileRoute()
+class ProfileRoute extends _i8.PageRouteInfo<ProfileRouteArgs> {
+  ProfileRoute({_i9.Key? key})
       : super(
           ProfileRoute.name,
           path: '/profile-page',
+          args: ProfileRouteArgs(key: key),
         );
 
   static const String name = 'ProfileRoute';
+}
+
+class ProfileRouteArgs {
+  const ProfileRouteArgs({this.key});
+
+  final _i9.Key? key;
+
+  @override
+  String toString() {
+    return 'ProfileRouteArgs{key: $key}';
+  }
 }
