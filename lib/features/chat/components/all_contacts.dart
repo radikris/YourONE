@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/app_dimen.dart';
 import 'package:yourone/theme/text_styles.dart';
@@ -52,33 +54,36 @@ class AllContacts extends StatelessWidget {
                 );
               },
               itemBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  width: 80,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CircleAvatar(
-                        radius: 31,
-                        backgroundColor: AppColor.primary,
-                        child: CircleAvatar(
-                          radius: 30.0,
-                          child: ClipOval(
-                              child: Image.network(
-                            width: 60,
-                            height: 60,
-                            _images[index],
-                            fit: BoxFit.fill,
-                          )),
-                          backgroundColor: Colors.transparent,
+                return GestureDetector(
+                  onTap: () => context.pushRoute(ChatDetailRoute()),
+                  child: SizedBox(
+                    width: 80,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircleAvatar(
+                          radius: 31,
+                          backgroundColor: AppColor.primary,
+                          child: CircleAvatar(
+                            radius: 30.0,
+                            child: ClipOval(
+                                child: Image.network(
+                              width: 60,
+                              height: 60,
+                              _images[index],
+                              fit: BoxFit.fill,
+                            )),
+                            backgroundColor: Colors.transparent,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Nikolettaaasdd',
-                        style: TextStyles.normal14,
-                        overflow: TextOverflow.fade,
-                        softWrap: false,
-                      )
-                    ],
+                        Text(
+                          'Nikolettaaasdd',
+                          style: TextStyles.normal14,
+                          overflow: TextOverflow.fade,
+                          softWrap: false,
+                        )
+                      ],
+                    ),
                   ),
                 );
               },
