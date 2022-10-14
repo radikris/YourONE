@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
 import 'package:yourone/features/authentication/steps/sign_up_step_1.dart';
@@ -24,7 +26,7 @@ class SignUpPage extends StatelessWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
   static final steps = [
-    SignUpStepOtherChemistry(),
+    SignUpStepAccount(),
     SignUpStepName(),
     SignUpStepBio(),
     SignUpStepAge(),
@@ -33,13 +35,15 @@ class SignUpPage extends StatelessWidget {
     SignUpSwitchRoleStep(),
     SignUpStep1(),
     SignUpStep2(),
-    SignUpStepAccount(),
+    SignUpStepOtherChemistry(),
   ];
 
   @override
   Widget build(BuildContext context) {
     final step = context.watch<SignUpCubit>().state.currentStep;
-    final isStepRequired = (steps[step] as StepIsRequired).isRequired();
+    final isStepRequired = steps.length > step
+        ? (steps[step] as StepIsRequired).isRequired()
+        : false;
 
     return Scaffold(
       appBar: AppAppBar.withSkip(
@@ -56,10 +60,24 @@ class SignUpPage extends StatelessWidget {
                 context.read<SignUpCubit>().nextStep();
               },
       ),
-      body: Padding(
-        padding: AppDimen.horizontal16Vertical24,
-        child: Column(
-          children: [steps[step]],
+      body: BlocListener<SignUpCubit, SignUpState>(
+        listener: (context, state) {
+          // do stuff here based on CubitA's state
+          if (state.currentStep == steps.length) {
+            context.replaceRoute(HomeSwipeRoute());
+          }
+        },
+        child: Padding(
+          padding: AppDimen.horizontal16Vertical24,
+          child: Column(
+            children: [
+              if (kDebugMode)
+                GestureDetector(
+                    onTap: () => context.replaceRoute(HomeSwipeRoute()),
+                    child: Text('Gotoswipe')),
+              if (steps.length > step) steps[step]
+            ],
+          ),
         ),
       ),
     );

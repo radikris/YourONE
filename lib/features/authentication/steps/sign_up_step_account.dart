@@ -111,7 +111,6 @@ class SignUpStepAccount extends StatelessWidget implements StepIsRequired {
                     textInputAction: TextInputAction.next,
                     validator: FormBuilderValidators.compose([
                       FormBuilderValidators.required(),
-                      FormBuilderValidators.email()
                     ]),
                     keyboardType: TextInputType.phone),
                 FormBuilderTextField(
@@ -187,11 +186,9 @@ class SignUpStepAccount extends StatelessWidget implements StepIsRequired {
             text: 'Next',
             onTap: () {
               //TODO VALIDATION
-              context.replaceRoute(HomeSwipeRoute());
-
               if (_formKey.currentState?.saveAndValidate() ?? false) {
                 debugPrint(_formKey.currentState?.value.toString());
-                context.read<SignUpCubit>().handleTest();
+                context.read<SignUpCubit>().nextStep();
               } else {
                 debugPrint(_formKey.currentState?.value.toString());
                 debugPrint('validation failed');
@@ -201,17 +198,24 @@ class SignUpStepAccount extends StatelessWidget implements StepIsRequired {
           SizedBox(
             height: 16,
           ),
-          RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
-              children: <TextSpan>[
-                TextSpan(
-                    text: 'Already have an account?', style: TextStyles.bold12),
-                TextSpan(
-                    text: ' Sign in here',
-                    style: TextStyles.bold12.copyWith(color: AppColor.primary)),
-              ],
+          GestureDetector(
+            onTap: () {
+              context.replaceRoute(SignInRoute());
+            },
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: DefaultTextStyle.of(context).style,
+                children: <TextSpan>[
+                  TextSpan(
+                      text: 'Already have an account?',
+                      style: TextStyles.bold12),
+                  TextSpan(
+                      text: ' Sign in here',
+                      style:
+                          TextStyles.bold12.copyWith(color: AppColor.primary)),
+                ],
+              ),
             ),
           ),
           SizedBox(

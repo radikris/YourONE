@@ -25,6 +25,6 @@ class SignUpStepPlace extends StatelessWidget implements StepIsRequired {
 
   @override
   bool isRequired() {
-    return true;
+    return false;
   }
 }
