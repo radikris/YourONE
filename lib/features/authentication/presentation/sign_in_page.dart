@@ -12,8 +12,6 @@ import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/app_dimen.dart';
 import 'package:yourone/theme/text_styles.dart';
 
-import '../../common/app_multiple_choice.dart';
-
 class SignInPage extends StatelessWidget {
   SignInPage({Key? key}) : super(key: key);
   final _formKey = GlobalKey<FormBuilderState>();

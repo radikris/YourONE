@@ -8,7 +8,7 @@ import 'package:reorderableitemsview/reorderableitemsview.dart';
 import 'package:yourone/common/app_primary_button.dart';
 import 'package:yourone/extensions/extensions.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
-import 'package:yourone/features/authentication/sign_up_page.dart';
+import 'package:yourone/features/authentication/presentation/sign_up_page.dart';
 import 'package:yourone/models/file_or_url.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/text_styles.dart';

@@ -14,11 +14,11 @@
 import 'package:auto_route/auto_route.dart' as _i8;
 import 'package:flutter/material.dart' as _i9;
 
-import 'features/authentication/sign_in_page.dart' as _i1;
-import 'features/authentication/sign_up_page.dart' as _i2;
+import 'features/authentication/presentation/sign_in_page.dart' as _i1;
+import 'features/authentication/presentation/sign_up_page.dart' as _i2;
 import 'features/chat/chat_detail_page.dart' as _i6;
 import 'features/chat/chat_list_page.dart' as _i5;
-import 'features/profile/profile_page.dart' as _i7;
+import 'features/profile/presentation/profile_page.dart' as _i7;
 import 'features/search/presentation/home_swipe_page.dart' as _i3;
 import 'features/search/presentation/swipe_detail_page.dart' as _i4;
 
@@ -29,9 +29,11 @@ class AppRouter extends _i8.RootStackRouter {
   @override
   final Map<String, _i8.PageFactory> pagesMap = {
     SignInRoute.name: (routeData) {
+      final args = routeData.argsAs<SignInRouteArgs>(
+          orElse: () => const SignInRouteArgs());
       return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i1.SignInPage(),
+        child: _i1.SignInPage(key: args.key),
       );
     },
     SignUpRoute.name: (routeData) {
@@ -109,14 +111,26 @@ class AppRouter extends _i8.RootStackRouter {
 
 /// generated route for
 /// [_i1.SignInPage]
-class SignInRoute extends _i8.PageRouteInfo<void> {
-  const SignInRoute()
+class SignInRoute extends _i8.PageRouteInfo<SignInRouteArgs> {
+  SignInRoute({_i9.Key? key})
       : super(
           SignInRoute.name,
           path: '/',
+          args: SignInRouteArgs(key: key),
         );
 
   static const String name = 'SignInRoute';
+}
+
+class SignInRouteArgs {
+  const SignInRouteArgs({this.key});
+
+  final _i9.Key? key;
+
+  @override
+  String toString() {
+    return 'SignInRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

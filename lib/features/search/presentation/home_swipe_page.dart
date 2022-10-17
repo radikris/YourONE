@@ -4,10 +4,10 @@ import 'package:swipable_stack/swipable_stack.dart';
 import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_icon.dart';
-import 'package:yourone/features/search/presentation/components/bottom_buttons_row.dart';
-import 'package:yourone/features/search/presentation/components/card_overlay.dart';
-import 'package:yourone/features/search/presentation/components/profile_card.dart';
-import 'package:yourone/features/search/presentation/components/success_match.dart';
+import 'package:yourone/features/search/presentation/widgets/bottom_buttons_row.dart';
+import 'package:yourone/features/search/presentation/widgets/card_overlay.dart';
+import 'package:yourone/features/search/presentation/widgets/profile_card.dart';
+import 'package:yourone/features/search/presentation/widgets/success_match.dart';
 
 const _images = [
   "https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg",

@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:yourone/common/app_input_form.dart';
 import 'package:yourone/common/app_place_picker.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
-import 'package:yourone/features/authentication/sign_up_page.dart';
+import 'package:yourone/features/authentication/presentation/sign_up_page.dart';
 
 class SignUpStepPlace extends StatelessWidget implements StepIsRequired {
   const SignUpStepPlace({Key? key}) : super(key: key);

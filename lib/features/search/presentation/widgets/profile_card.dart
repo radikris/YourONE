@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:yourone/features/search/presentation/components/bottom_buttons_row.dart';
+import 'package:yourone/features/search/presentation/widgets/bottom_buttons_row.dart';
 import 'package:yourone/theme/app_color.dart';
 
 class ProfileCard extends StatelessWidget {

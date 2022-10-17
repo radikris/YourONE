@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_primary_button.dart';
-import 'package:yourone/features/authentication/steps/sign_up_step_age.dart';
-import 'package:yourone/features/authentication/steps/sign_up_step_bio.dart';
-import 'package:yourone/features/authentication/steps/sign_up_step_name.dart';
-import 'package:yourone/features/authentication/steps/sign_up_step_other_age.dart';
-import 'package:yourone/features/authentication/steps/sign_up_step_other_chemistry.dart';
-import 'package:yourone/features/profile/profile_edit_tile.dart';
+import 'package:yourone/features/authentication/presentation/steps/sign_up_step_age.dart';
+import 'package:yourone/features/authentication/presentation/steps/sign_up_step_bio.dart';
+import 'package:yourone/features/authentication/presentation/steps/sign_up_step_name.dart';
+import 'package:yourone/features/authentication/presentation/steps/sign_up_step_other_age.dart';
+import 'package:yourone/features/authentication/presentation/steps/sign_up_step_other_chemistry.dart';
+import 'package:yourone/features/profile/presentation/widgets/profile_edit_tile.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/app_dimen.dart';
 

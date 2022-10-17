@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_multiple_choice.dart';
-import 'package:yourone/features/authentication/sign_up_page.dart';
+import 'package:yourone/features/authentication/presentation/sign_up_page.dart';
 
 class SignUpStep3 extends StatelessWidget implements StepIsRequired {
   const SignUpStep3({Key? key}) : super(key: key);

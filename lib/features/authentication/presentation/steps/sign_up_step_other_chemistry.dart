@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:yourone/common/app_simple_slider.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
-import 'package:yourone/features/authentication/sign_up_page.dart';
+import 'package:yourone/features/authentication/presentation/sign_up_page.dart';
 import 'package:yourone/gen/assets.gen.dart';
 
 class SignUpStepOtherChemistry extends StatelessWidget

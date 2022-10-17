@@ -8,7 +8,7 @@ import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_multiple_choice.dart';
 import 'package:yourone/common/app_primary_button.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
-import 'package:yourone/features/authentication/sign_up_page.dart';
+import 'package:yourone/features/authentication/presentation/sign_up_page.dart';
 import 'package:yourone/gen/assets.gen.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/app_dimen.dart';

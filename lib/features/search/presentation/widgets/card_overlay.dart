@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:swipable_stack/swipable_stack.dart';
-import 'package:yourone/features/search/presentation/components/card_label.dart';
+import 'package:yourone/features/search/presentation/widgets/card_label.dart';
 
 class CardOverlay extends StatelessWidget {
   const CardOverlay({

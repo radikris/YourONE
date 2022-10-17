@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yourone/features/search/presentation/components/profile_detail_section_attribute.dart';
+import 'package:yourone/features/search/presentation/widgets/profile_detail_section_attribute.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/text_styles.dart';
 
