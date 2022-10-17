@@ -2,20 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yourone/auto_router.gr.dart';
+import 'package:yourone/common/network/header_interceptor.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
+import 'package:yourone/features/authentication/data/auth_store.dart';
+import 'package:yourone/injection.dart';
 import 'package:yourone/swagger_generated_code/client_index.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/text_styles.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+  await configureDependencies(null);
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-  final asd = YourOneService.create();
 
   final _appRouter = AppRouter();
 
