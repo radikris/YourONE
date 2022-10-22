@@ -28,51 +28,49 @@ class AppDoubleSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Text(
-            formLabel,
-            style: TextStyles.bold18,
-            textAlign: TextAlign.center,
+    return Column(
+      children: [
+        Text(
+          formLabel,
+          style: TextStyles.bold18,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(
+          height: 32,
+        ),
+        FormBuilder(
+          key: _formKey,
+          child: FormBuilderRangeSlider(
+            name: formName,
+            min: minimumValue,
+            max: maximumValue,
+            initialValue: RangeValues(minimumValue, maximumValue),
+            /*   validator: FormBuilderValidators.compose([
+              FormBuilderValidators.min(6),
+              FormBuilderValidators.max(maximumValue),
+            ]), */
+            divisions: 84,
+            activeColor: AppColor.primary,
+            inactiveColor: AppColor.primary10,
+            decoration:
+                InputDecoration(labelText: formLabel, border: InputBorder.none),
           ),
-          const SizedBox(
-            height: 32,
-          ),
-          FormBuilder(
-            key: _formKey,
-            child: FormBuilderRangeSlider(
-              name: formName,
-              min: minimumValue,
-              max: maximumValue,
-              initialValue: RangeValues(minimumValue, maximumValue),
-              /*   validator: FormBuilderValidators.compose([
-                FormBuilderValidators.min(6),
-                FormBuilderValidators.max(maximumValue),
-              ]), */
-              divisions: 84,
-              activeColor: AppColor.primary,
-              inactiveColor: AppColor.primary10,
-              decoration: InputDecoration(
-                  labelText: formLabel, border: InputBorder.none),
-            ),
-          ),
-          const Spacer(),
-          AppButton.primary(
-            text: buttonText,
-            onTap: () {
-              if (_formKey.currentState?.saveAndValidate() ?? false) {
-                debugPrint(_formKey.currentState?.value.toString());
+        ),
+        const Spacer(),
+        AppButton.primary(
+          text: buttonText,
+          onTap: () {
+            if (_formKey.currentState?.saveAndValidate() ?? false) {
+              debugPrint(_formKey.currentState?.value.toString());
 
-                onSave(_formKey.currentState?.value[formName]);
-              } else {
-                debugPrint(_formKey.currentState?.value.toString());
-                debugPrint('validation failed');
-              }
-            },
-          )
-        ],
-      ),
+              onSave(_formKey.currentState?.value[formName]);
+            } else {
+              debugPrint(_formKey.currentState?.value.toString());
+              debugPrint('validation failed');
+            }
+          },
+        )
+      ],
     );
   }
 }

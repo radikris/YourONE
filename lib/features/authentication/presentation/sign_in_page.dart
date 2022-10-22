@@ -27,15 +27,11 @@ class SignInPage extends StatelessWidget {
         child: AppButton.primary(
           text: 'Sign in',
           onTap: () {
-            //TODO VALIDATION
             context.replaceRoute(HomeSwipeRoute());
-
             if (_formKey.currentState?.saveAndValidate() ?? false) {
-              debugPrint(_formKey.currentState?.value.toString());
-              context.read<SignUpCubit>().handleTest();
-            } else {
-              debugPrint(_formKey.currentState?.value.toString());
-              debugPrint('validation failed');
+              final email = _formKey.currentState?.value['email'];
+              final password = _formKey.currentState?.value['password'];
+              context.read<SignUpCubit>().handleLogin(email, password);
             }
           },
         ),
@@ -78,6 +74,7 @@ class SignInPage extends StatelessWidget {
                 child: Column(
                   children: [
                     FormBuilderTextField(
+                        initialValue: context.read<SignUpCubit>().state.email,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         name: 'email',
                         decoration: const InputDecoration(labelText: 'Email'),
@@ -88,6 +85,8 @@ class SignInPage extends StatelessWidget {
                         ]),
                         keyboardType: TextInputType.emailAddress),
                     FormBuilderTextField(
+                        initialValue:
+                            context.read<SignUpCubit>().state.password,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         name: 'password',
                         obscureText: true,

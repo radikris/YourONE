@@ -16,14 +16,21 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SignUpStepBio extends StatefulWidget implements StepIsRequired {
+  @override
+  bool get wantKeepAlive => true;
   SignUpStepBio(
-      {super.key, this.buttonText = '', this.onSave, this.initialImages});
+      {super.key,
+      this.buttonText = '',
+      this.onSave,
+      this.initialImages,
+      this.initialBio});
 
   @override
   State<SignUpStepBio> createState() => _SignUpStepBioState();
 
   String buttonText;
   List<FileOrUrl>? initialImages;
+  String? initialBio;
   Function(List<FileOrUrl>?, String?)? onSave;
 
   @override
@@ -57,8 +64,9 @@ class _SignUpStepBioState extends State<SignUpStepBio> {
       context.read<SignUpCubit>().handleBio(images, bio);
       if (bio != null) context.read<SignUpCubit>().nextStep();
     };
-    imageList.addAll(
-        widget.initialImages ?? context.read<SignUpCubit>().state.images!);
+    imageList.addAll(widget.initialImages ??
+        context.read<SignUpCubit>().state.yourSelf.images ??
+        []);
     _tiles = updateImageTiles(imageList);
   }
 
@@ -123,78 +131,78 @@ class _SignUpStepBioState extends State<SignUpStepBio> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          RichText(
-            textAlign: TextAlign.center,
-            text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
-              children: <TextSpan>[
-                TextSpan(
-                    text: 'Upload your best images, and write your bio:',
-                    style: TextStyles.bold18),
-                TextSpan(
-                    text: ' show your vibe!',
-                    style: TextStyles.bold18.copyWith(color: AppColor.primary)),
-              ],
+    return Column(
+      children: [
+        RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+            style: DefaultTextStyle.of(context).style,
+            children: <TextSpan>[
+              TextSpan(
+                  text: 'Upload your best images, and write your bio:',
+                  style: TextStyles.bold18),
+              TextSpan(
+                  text: ' show your vibe!',
+                  style: TextStyles.bold18.copyWith(color: AppColor.primary)),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 32,
+        ),
+        Expanded(
+          child: ReorderableItemsView(
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              onReorder: (int oldIndex, int newIndex) {
+                setState(() {
+                  _tiles.swap(newIndex, oldIndex);
+                  //imageList.swap(newIndex, oldIndex);
+                });
+              },
+              crossAxisCount: 4,
+              isGrid: true,
+              staggeredTiles: _listStaggeredTileExtended,
+              longPressToDrag: true,
+              children: _tiles),
+        ),
+        FormBuilder(
+          key: _formKey,
+          child: FormBuilderTextField(
+            initialValue: widget.initialBio ??
+                context.read<SignUpCubit>().state.yourSelf.bio,
+            autocorrect: true,
+            decoration: InputDecoration(
+              labelText: 'Please, introduce yourself',
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
             ),
-          ),
-          const SizedBox(
-            height: 32,
-          ),
-          Expanded(
-            child: ReorderableItemsView(
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                onReorder: (int oldIndex, int newIndex) {
-                  setState(() {
-                    _tiles.swap(newIndex, oldIndex);
-                    //imageList.swap(newIndex, oldIndex);
-                  });
-                },
-                crossAxisCount: 4,
-                isGrid: true,
-                staggeredTiles: _listStaggeredTileExtended,
-                longPressToDrag: true,
-                children: _tiles),
-          ),
-          FormBuilder(
-            key: _formKey,
-            child: FormBuilderTextField(
-              autocorrect: true,
-              decoration: InputDecoration(
-                labelText: 'Please, introduce yourself',
-                border:
-                    OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+            name: 'bio',
+            minLines: 6,
+            maxLines: 6,
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.minLength(
+                10,
               ),
-              name: 'bio',
-              minLines: 6,
-              maxLines: 6,
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.minLength(
-                  10,
-                ),
-                FormBuilderValidators.maxLength(1000),
-              ]),
-            ),
+              FormBuilderValidators.maxLength(1000),
+            ]),
           ),
-          const SizedBox(
-            height: 32,
-          ),
-          AppButton.primary(
-            text: 'Save',
-            onTap: () {
-              if (_formKey.currentState?.saveAndValidate() ?? false) {
-                debugPrint(_formKey.currentState?.value.toString());
+        ),
+        const SizedBox(
+          height: 32,
+        ),
+        AppButton.primary(
+          text: 'Save',
+          onTap: () {
+            if (_formKey.currentState?.saveAndValidate() ?? false) {
+              debugPrint(_formKey.currentState?.value.toString());
 
-                widget.onSave
-                    ?.call(imageList, _formKey.currentState?.value['bio']);
-              }
-            },
-          )
-        ],
-      ),
+              widget.onSave
+                  ?.call(imageList, _formKey.currentState?.value['bio']);
+            }
+          },
+        )
+      ],
     );
   }
 }

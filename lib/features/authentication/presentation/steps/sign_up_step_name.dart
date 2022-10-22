@@ -15,7 +15,7 @@ class SignUpStepName extends StatelessWidget implements StepIsRequired {
         formName: 'name',
         isNumeric: false,
         onSave: (String? value) {
-          context.read<SignUpCubit>().handleName();
+          context.read<SignUpCubit>().handleName(value!);
           context.read<SignUpCubit>().nextStep();
         },
         maxValue: 20,

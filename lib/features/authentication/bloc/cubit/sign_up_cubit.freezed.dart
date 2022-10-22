@@ -17,11 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SignUpState {
   int get currentStep => throw _privateConstructorUsedError;
-  String get firstName => throw _privateConstructorUsedError;
-  List<String> get test1 => throw _privateConstructorUsedError;
-  List<int> get age => throw _privateConstructorUsedError;
-  List<FileOrUrl>? get images => throw _privateConstructorUsedError;
-  String get bio => throw _privateConstructorUsedError;
+  UserProfile get yourSelf => throw _privateConstructorUsedError;
+  UserProfile get yourOne => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
+  String? get password => throw _privateConstructorUsedError;
+  String? get phoneNumber => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignUpStateCopyWith<SignUpState> get copyWith =>
@@ -35,11 +35,14 @@ abstract class $SignUpStateCopyWith<$Res> {
       _$SignUpStateCopyWithImpl<$Res>;
   $Res call(
       {int currentStep,
-      String firstName,
-      List<String> test1,
-      List<int> age,
-      List<FileOrUrl>? images,
-      String bio});
+      UserProfile yourSelf,
+      UserProfile yourOne,
+      String? email,
+      String? password,
+      String? phoneNumber});
+
+  $UserProfileCopyWith<$Res> get yourSelf;
+  $UserProfileCopyWith<$Res> get yourOne;
 }
 
 /// @nodoc
@@ -53,38 +56,52 @@ class _$SignUpStateCopyWithImpl<$Res> implements $SignUpStateCopyWith<$Res> {
   @override
   $Res call({
     Object? currentStep = freezed,
-    Object? firstName = freezed,
-    Object? test1 = freezed,
-    Object? age = freezed,
-    Object? images = freezed,
-    Object? bio = freezed,
+    Object? yourSelf = freezed,
+    Object? yourOne = freezed,
+    Object? email = freezed,
+    Object? password = freezed,
+    Object? phoneNumber = freezed,
   }) {
     return _then(_value.copyWith(
       currentStep: currentStep == freezed
           ? _value.currentStep
           : currentStep // ignore: cast_nullable_to_non_nullable
               as int,
-      firstName: firstName == freezed
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      test1: test1 == freezed
-          ? _value.test1
-          : test1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      age: age == freezed
-          ? _value.age
-          : age // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      images: images == freezed
-          ? _value.images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<FileOrUrl>?,
-      bio: bio == freezed
-          ? _value.bio
-          : bio // ignore: cast_nullable_to_non_nullable
-              as String,
+      yourSelf: yourSelf == freezed
+          ? _value.yourSelf
+          : yourSelf // ignore: cast_nullable_to_non_nullable
+              as UserProfile,
+      yourOne: yourOne == freezed
+          ? _value.yourOne
+          : yourOne // ignore: cast_nullable_to_non_nullable
+              as UserProfile,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: phoneNumber == freezed
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
+  }
+
+  @override
+  $UserProfileCopyWith<$Res> get yourSelf {
+    return $UserProfileCopyWith<$Res>(_value.yourSelf, (value) {
+      return _then(_value.copyWith(yourSelf: value));
+    });
+  }
+
+  @override
+  $UserProfileCopyWith<$Res> get yourOne {
+    return $UserProfileCopyWith<$Res>(_value.yourOne, (value) {
+      return _then(_value.copyWith(yourOne: value));
+    });
   }
 }
 
@@ -97,11 +114,16 @@ abstract class _$$_SignUpStateCopyWith<$Res>
   @override
   $Res call(
       {int currentStep,
-      String firstName,
-      List<String> test1,
-      List<int> age,
-      List<FileOrUrl>? images,
-      String bio});
+      UserProfile yourSelf,
+      UserProfile yourOne,
+      String? email,
+      String? password,
+      String? phoneNumber});
+
+  @override
+  $UserProfileCopyWith<$Res> get yourSelf;
+  @override
+  $UserProfileCopyWith<$Res> get yourOne;
 }
 
 /// @nodoc
@@ -117,37 +139,37 @@ class __$$_SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentStep = freezed,
-    Object? firstName = freezed,
-    Object? test1 = freezed,
-    Object? age = freezed,
-    Object? images = freezed,
-    Object? bio = freezed,
+    Object? yourSelf = freezed,
+    Object? yourOne = freezed,
+    Object? email = freezed,
+    Object? password = freezed,
+    Object? phoneNumber = freezed,
   }) {
     return _then(_$_SignUpState(
       currentStep: currentStep == freezed
           ? _value.currentStep
           : currentStep // ignore: cast_nullable_to_non_nullable
               as int,
-      firstName: firstName == freezed
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      test1: test1 == freezed
-          ? _value._test1
-          : test1 // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      age: age == freezed
-          ? _value._age
-          : age // ignore: cast_nullable_to_non_nullable
-              as List<int>,
-      images: images == freezed
-          ? _value._images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<FileOrUrl>?,
-      bio: bio == freezed
-          ? _value.bio
-          : bio // ignore: cast_nullable_to_non_nullable
-              as String,
+      yourSelf: yourSelf == freezed
+          ? _value.yourSelf
+          : yourSelf // ignore: cast_nullable_to_non_nullable
+              as UserProfile,
+      yourOne: yourOne == freezed
+          ? _value.yourOne
+          : yourOne // ignore: cast_nullable_to_non_nullable
+              as UserProfile,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: password == freezed
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      phoneNumber: phoneNumber == freezed
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -157,48 +179,28 @@ class __$$_SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
 class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
   const _$_SignUpState(
       {required this.currentStep,
-      required this.firstName,
-      required final List<String> test1,
-      required final List<int> age,
-      final List<FileOrUrl>? images,
-      required this.bio})
-      : _test1 = test1,
-        _age = age,
-        _images = images;
+      required this.yourSelf,
+      required this.yourOne,
+      this.email,
+      this.password,
+      this.phoneNumber});
 
   @override
   final int currentStep;
   @override
-  final String firstName;
-  final List<String> _test1;
+  final UserProfile yourSelf;
   @override
-  List<String> get test1 {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_test1);
-  }
-
-  final List<int> _age;
+  final UserProfile yourOne;
   @override
-  List<int> get age {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_age);
-  }
-
-  final List<FileOrUrl>? _images;
+  final String? email;
   @override
-  List<FileOrUrl>? get images {
-    final value = _images;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
+  final String? password;
   @override
-  final String bio;
+  final String? phoneNumber;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SignUpState(currentStep: $currentStep, firstName: $firstName, test1: $test1, age: $age, images: $images, bio: $bio)';
+    return 'SignUpState(currentStep: $currentStep, yourSelf: $yourSelf, yourOne: $yourOne, email: $email, password: $password, phoneNumber: $phoneNumber)';
   }
 
   @override
@@ -207,11 +209,11 @@ class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
     properties
       ..add(DiagnosticsProperty('type', 'SignUpState'))
       ..add(DiagnosticsProperty('currentStep', currentStep))
-      ..add(DiagnosticsProperty('firstName', firstName))
-      ..add(DiagnosticsProperty('test1', test1))
-      ..add(DiagnosticsProperty('age', age))
-      ..add(DiagnosticsProperty('images', images))
-      ..add(DiagnosticsProperty('bio', bio));
+      ..add(DiagnosticsProperty('yourSelf', yourSelf))
+      ..add(DiagnosticsProperty('yourOne', yourOne))
+      ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('password', password))
+      ..add(DiagnosticsProperty('phoneNumber', phoneNumber));
   }
 
   @override
@@ -221,22 +223,23 @@ class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
             other is _$_SignUpState &&
             const DeepCollectionEquality()
                 .equals(other.currentStep, currentStep) &&
-            const DeepCollectionEquality().equals(other.firstName, firstName) &&
-            const DeepCollectionEquality().equals(other._test1, _test1) &&
-            const DeepCollectionEquality().equals(other._age, _age) &&
-            const DeepCollectionEquality().equals(other._images, _images) &&
-            const DeepCollectionEquality().equals(other.bio, bio));
+            const DeepCollectionEquality().equals(other.yourSelf, yourSelf) &&
+            const DeepCollectionEquality().equals(other.yourOne, yourOne) &&
+            const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.password, password) &&
+            const DeepCollectionEquality()
+                .equals(other.phoneNumber, phoneNumber));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(currentStep),
-      const DeepCollectionEquality().hash(firstName),
-      const DeepCollectionEquality().hash(_test1),
-      const DeepCollectionEquality().hash(_age),
-      const DeepCollectionEquality().hash(_images),
-      const DeepCollectionEquality().hash(bio));
+      const DeepCollectionEquality().hash(yourSelf),
+      const DeepCollectionEquality().hash(yourOne),
+      const DeepCollectionEquality().hash(email),
+      const DeepCollectionEquality().hash(password),
+      const DeepCollectionEquality().hash(phoneNumber));
 
   @JsonKey(ignore: true)
   @override
@@ -247,24 +250,24 @@ class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
 abstract class _SignUpState implements SignUpState {
   const factory _SignUpState(
       {required final int currentStep,
-      required final String firstName,
-      required final List<String> test1,
-      required final List<int> age,
-      final List<FileOrUrl>? images,
-      required final String bio}) = _$_SignUpState;
+      required final UserProfile yourSelf,
+      required final UserProfile yourOne,
+      final String? email,
+      final String? password,
+      final String? phoneNumber}) = _$_SignUpState;
 
   @override
   int get currentStep;
   @override
-  String get firstName;
+  UserProfile get yourSelf;
   @override
-  List<String> get test1;
+  UserProfile get yourOne;
   @override
-  List<int> get age;
+  String? get email;
   @override
-  List<FileOrUrl>? get images;
+  String? get password;
   @override
-  String get bio;
+  String? get phoneNumber;
   @override
   @JsonKey(ignore: true)
   _$$_SignUpStateCopyWith<_$_SignUpState> get copyWith =>

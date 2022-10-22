@@ -1,17 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_primary_button.dart';
+import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_step_age.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_step_bio.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_step_name.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_step_other_age.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_step_other_chemistry.dart';
+import 'package:yourone/features/profile/cubit/profile_cubit.dart';
 import 'package:yourone/features/profile/presentation/widgets/profile_edit_tile.dart';
+import 'package:yourone/features/profile/presentation/widgets/yourself_and_yourone_attributes.dart';
+import 'package:yourone/injection.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/app_dimen.dart';
 
 class ProfilePage extends StatelessWidget {
-  ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<ProfileCubit>(
+      create: (context) => getIt<ProfileCubit>(),
+      child: ProfileView(),
+    );
+  }
+}
+
+class ProfileView extends StatelessWidget {
+  ProfileView({Key? key}) : super(key: key);
 
   void onSave(BuildContext context, Widget child) {
     showGeneralDialog(
@@ -35,6 +52,9 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<SignUpCubit>().state.yourSelf;
+    print(state);
+
     return Scaffold(
       appBar: AppAppBar(title: 'Kristof', subTitle: 'Profile'),
       body: Stack(
@@ -60,10 +80,12 @@ class ProfilePage extends StatelessWidget {
                     ProfileEditTile(
                       title: 'YOUR BIO AND PHOTOS',
                       child: SignUpStepBio(),
+                      initialValue: state.bio,
                     ),
                     ProfileEditTile(
                       title: 'Age',
                       child: SignUpStepAge(),
+                      initialValue: state.age?.toString(),
                     ),
                     ProfileEditTile(
                       title: 'Name',
@@ -77,6 +99,10 @@ class ProfilePage extends StatelessWidget {
                       title: 'Chemistry',
                       child: SignUpStepOtherChemistry(),
                     ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    YourSelfAndYourOneAttributes(),
                     SizedBox(
                       height: 64,
                     ),

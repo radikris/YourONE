@@ -17,6 +17,7 @@ class AppPlacePicker extends StatefulHookWidget {
   const AppPlacePicker(
       {this.currentPlace,
       this.currentAddress,
+      this.initialValue,
       required this.buttonText,
       required this.formName,
       required this.formLabel,
@@ -29,6 +30,7 @@ class AppPlacePicker extends StatefulHookWidget {
   final String formName;
   final bool isRequired;
   final String formLabel;
+  final String? initialValue;
   final LatLng? currentPlace;
   final String? currentAddress;
   final Function(String?, LatLng?) onSave;
@@ -100,8 +102,7 @@ class _AppPlacePickerState extends State<AppPlacePicker> {
       onChanged(_controller.text);
     });
 
-    return Expanded(
-        child: Column(
+    return Column(
       children: [
         Text(
           widget.formLabel,
@@ -114,6 +115,7 @@ class _AppPlacePickerState extends State<AppPlacePicker> {
         FormBuilder(
           key: _formKey,
           child: FormBuilderTextField(
+            initialValue: widget.initialValue,
             name: widget.formName,
             controller: _controller,
             validator: FormBuilderValidators.compose([
@@ -160,6 +162,6 @@ class _AppPlacePickerState extends State<AppPlacePicker> {
           },
         )
       ],
-    ));
+    );
   }
 }

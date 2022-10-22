@@ -7,15 +7,16 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class SignUpStepOtherAge extends StatelessWidget implements StepIsRequired {
   const SignUpStepOtherAge({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return AppDoubleSlider(
-      formName: 'chemistry',
+      formName: 'age',
       formLabel: 'Töltsd ki tesóm',
       buttonText: 'Next',
-      minimumValue: 16,
-      maximumValue: 100,
+      minimumValue:
+          context.read<SignUpCubit>().state.yourSelf.minAge.toDouble(),
+      maximumValue:
+          context.read<SignUpCubit>().state.yourSelf.maxAge.toDouble(),
       onSave: (RangeValues? value) {
         context.read<SignUpCubit>().nextStep();
       },

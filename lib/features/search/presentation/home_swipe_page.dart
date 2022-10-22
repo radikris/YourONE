@@ -1,13 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:swipable_stack/swipable_stack.dart';
 import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_icon.dart';
+import 'package:yourone/features/profile/cubit/profile_cubit.dart';
 import 'package:yourone/features/search/presentation/widgets/bottom_buttons_row.dart';
 import 'package:yourone/features/search/presentation/widgets/card_overlay.dart';
 import 'package:yourone/features/search/presentation/widgets/profile_card.dart';
 import 'package:yourone/features/search/presentation/widgets/success_match.dart';
+import 'package:yourone/injection.dart';
 
 const _images = [
   "https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg",
@@ -16,14 +19,26 @@ const _images = [
   "https://i.pinimg.com/236x/3e/c3/4d/3ec34dfd7694806445b1d0292f9c059a--russian-womens-russian-girls.jpg"
 ];
 
-class HomeSwipePage extends StatefulWidget {
-  const HomeSwipePage({super.key});
+class HomeSwipePage extends StatelessWidget {
+  const HomeSwipePage({Key? key}) : super(key: key);
 
   @override
-  State<HomeSwipePage> createState() => _HomeSwipePageState();
+  Widget build(BuildContext context) {
+    return BlocProvider<ProfileCubit>(
+      create: (context) => getIt<ProfileCubit>(),
+      child: const HomeSwipeView(),
+    );
+  }
 }
 
-class _HomeSwipePageState extends State<HomeSwipePage> {
+class HomeSwipeView extends StatefulWidget {
+  const HomeSwipeView({super.key});
+
+  @override
+  State<HomeSwipeView> createState() => _HomeSwipeViewState();
+}
+
+class _HomeSwipeViewState extends State<HomeSwipeView> {
   late final SwipableStackController _controller;
 
   void _listenController() => setState(() {});

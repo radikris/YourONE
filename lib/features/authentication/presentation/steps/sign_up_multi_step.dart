@@ -18,10 +18,12 @@ class SignUpStepMulti<T extends Enum> extends StatelessWidget
       required this.onSave,
       required this.required,
       this.renderChild,
-      required this.aboutYourself})
+      required this.aboutYourself,
+      this.initialValue})
       : super(key: key);
 
   final List<T> options;
+  final List<T>? initialValue;
   final String formName;
   final String formLabel;
   final Function(List<T>?) onSave;
@@ -32,6 +34,7 @@ class SignUpStepMulti<T extends Enum> extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppMultipleChoice<T>(
+      initialValue: initialValue,
       enumChoice: options,
       formName: formName,
       formLabel: formLabel,

@@ -13,41 +13,39 @@ class SignUpSwitchRoleStep extends StatelessWidget implements StepIsRequired {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Text(
-            'Your profile looks absolutely magnificent',
-            style: TextStyles.bold18,
-            textAlign: TextAlign.center,
+    return Column(
+      children: [
+        Text(
+          'Your profile looks absolutely magnificent',
+          style: TextStyles.bold18,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        RichText(
+          text: TextSpan(
+            style: DefaultTextStyle.of(context).style,
+            children: <TextSpan>[
+              TextSpan(text: 'Now lets see who is', style: TextStyles.bold16),
+              TextSpan(
+                  text: ' Your One!',
+                  style: TextStyles.bold16.copyWith(color: AppColor.primary)),
+            ],
           ),
-          const SizedBox(
-            height: 8,
-          ),
-          RichText(
-            text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
-              children: <TextSpan>[
-                TextSpan(text: 'Now lets see who is', style: TextStyles.bold16),
-                TextSpan(
-                    text: ' Your One!',
-                    style: TextStyles.bold16.copyWith(color: AppColor.primary)),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 32,
-          ),
-          Lottie.asset(Assets.animations.heart),
-          const Spacer(),
-          AppButton.primary(
-            text: 'Next',
-            onTap: () {
-              context.read<SignUpCubit>().nextStep();
-            },
-          )
-        ],
-      ),
+        ),
+        const SizedBox(
+          height: 32,
+        ),
+        Lottie.asset(Assets.animations.heart),
+        const Spacer(),
+        AppButton.primary(
+          text: 'Next',
+          onTap: () {
+            context.read<SignUpCubit>().nextStep();
+          },
+        )
+      ],
     );
   }
 

@@ -15,6 +15,7 @@ class AppMultipleChoice<T extends Enum> extends HookWidget {
     required this.formLabel,
     required this.enumChoice,
     required this.buttonText,
+    this.initialValue,
     this.isRequired = false,
     this.mininimumChoice = 1,
     this.maximumChoice = 3,
@@ -22,6 +23,7 @@ class AppMultipleChoice<T extends Enum> extends HookWidget {
   });
 
   final List<T> enumChoice;
+  final List<T>? initialValue;
   final String formName;
   final String formLabel;
   final Function(List<T>?) onSave;
@@ -31,7 +33,6 @@ class AppMultipleChoice<T extends Enum> extends HookWidget {
   int mininimumChoice;
   int maximumChoice;
 
-  void _onChanged(dynamic val) => print(val.toString());
   final _formKey = GlobalKey<FormBuilderState>();
 
 /*   T mapToEnum<T>(List<T> values, int value) {
@@ -60,85 +61,82 @@ class AppMultipleChoice<T extends Enum> extends HookWidget {
           .toList();
     });
 
-    return Expanded(
-      child: Column(
-        children: [
-          Text(
-            formLabel,
-            style: TextStyles.bold18,
-            textAlign: TextAlign.center,
+    return Column(
+      children: [
+        Text(
+          formLabel,
+          style: TextStyles.bold18,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(
+          height: 32,
+        ),
+        TextField(
+          controller: searchController,
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            hintText: 'Enter a search term',
           ),
-          const SizedBox(
-            height: 32,
-          ),
-          TextField(
-            controller: searchController,
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter a search term',
-            ),
-          ),
-          Expanded(
-            child: FormBuilder(
-              key: _formKey,
-              autovalidateMode: AutovalidateMode.disabled,
-              onChanged: () {
-                _formKey.currentState!.save();
-                debugPrint(_formKey.currentState!.value.toString());
-              },
-              child: SingleChildScrollView(
-                physics: AlwaysScrollableScrollPhysics(),
-                child: SizedBox(
-                  child: FormBuilderCheckboxGroup<T>(
-                    orientation: OptionsOrientation.vertical,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: InputDecoration(
-                      labelText: formName.capitalize(),
-                      border: InputBorder.none,
-                    ),
-                    name: formName,
-                    // initialValue: const ['Dart'],
-                    options: (filteredList.value)
-                        .map(
-                          (e) => FormBuilderFieldOption(
-                            value: e,
-                            child: renderChild != null
-                                ? renderChild?.call(e)
-                                : Text(
-                                    e.name,
-                                    style: TextStyles.bold14,
-                                  ),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: _onChanged,
-
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.minLength(mininimumChoice,
-                          allowEmpty: !isRequired),
-                      FormBuilderValidators.maxLength(maximumChoice),
-                    ]),
+        ),
+        Expanded(
+          child: FormBuilder(
+            key: _formKey,
+            autovalidateMode: AutovalidateMode.disabled,
+            onChanged: () {
+              _formKey.currentState!.save();
+              debugPrint(_formKey.currentState!.value.toString());
+            },
+            child: SingleChildScrollView(
+              physics: AlwaysScrollableScrollPhysics(),
+              child: SizedBox(
+                child: FormBuilderCheckboxGroup<T>(
+                  initialValue: initialValue,
+                  orientation: OptionsOrientation.vertical,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: InputDecoration(
+                    labelText: formName.capitalize(),
+                    border: InputBorder.none,
                   ),
+                  name: formName,
+                  // initialValue: const ['Dart'],
+                  options: (filteredList.value)
+                      .map(
+                        (e) => FormBuilderFieldOption(
+                          value: e,
+                          child: renderChild != null
+                              ? renderChild?.call(e)
+                              : Text(
+                                  e.name,
+                                  style: TextStyles.bold14,
+                                ),
+                        ),
+                      )
+                      .toList(),
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.minLength(mininimumChoice,
+                        allowEmpty: !isRequired),
+                    FormBuilderValidators.maxLength(maximumChoice),
+                  ]),
                 ),
               ),
             ),
           ),
-          AppButton.primary(
-            text: buttonText,
-            onTap: () {
-              if (_formKey.currentState?.saveAndValidate() ?? false) {
-                debugPrint(_formKey.currentState?.value.toString());
+        ),
+        AppButton.primary(
+          text: buttonText,
+          onTap: () {
+            if (_formKey.currentState?.saveAndValidate() ?? false) {
+              debugPrint(_formKey.currentState?.value.toString());
 
-                onSave(_formKey.currentState?.value[formName]);
-              } else {
-                debugPrint(_formKey.currentState?.value.toString());
-                debugPrint('validation failed');
-              }
-            },
-          )
-        ],
-      ),
+              onSave(_formKey.currentState?.value[formName]);
+            } else {
+              debugPrint(_formKey.currentState?.value.toString());
+              debugPrint('validation failed');
+            }
+          },
+        )
+      ],
     );
   }
 }

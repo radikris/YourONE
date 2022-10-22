@@ -16,10 +16,12 @@ class AppSingleChoice<T extends Enum> extends HookWidget {
     required this.enumChoice,
     required this.buttonText,
     this.isRequired = false,
+    this.initialValue,
     this.renderChild,
   });
 
   final List<T> enumChoice;
+  final T? initialValue;
   final String formName;
   final String formLabel;
   final Function(T?) onSave;
@@ -45,83 +47,81 @@ class AppSingleChoice<T extends Enum> extends HookWidget {
           .toList();
     });
 
-    return Expanded(
-      child: Column(
-        children: [
-          Text(
-            formLabel,
-            style: TextStyles.bold18,
-            textAlign: TextAlign.center,
+    return Column(
+      children: [
+        Text(
+          formLabel,
+          style: TextStyles.bold18,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(
+          height: 32,
+        ),
+        TextField(
+          controller: searchController,
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
+            hintText: 'Enter a search term',
           ),
-          const SizedBox(
-            height: 32,
-          ),
-          TextField(
-            controller: searchController,
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
-              hintText: 'Enter a search term',
-            ),
-          ),
-          Expanded(
-            child: FormBuilder(
-              key: _formKey,
-              autovalidateMode: AutovalidateMode.disabled,
-              onChanged: () {
-                _formKey.currentState!.save();
-                debugPrint(_formKey.currentState!.value.toString());
-              },
-              child: SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: SizedBox(
-                  child: FormBuilderRadioGroup<T>(
-                    orientation: OptionsOrientation.vertical,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    decoration: InputDecoration(
-                      labelText: formName.capitalize(),
-                      border: InputBorder.none,
-                    ),
-                    name: formName,
-                    // initialValue: const ['Dart'],
-                    options: (filteredList.value)
-                        .map(
-                          (e) => FormBuilderFieldOption(
-                            value: e,
-                            child: renderChild != null
-                                ? renderChild?.call(e)
-                                : Text(
-                                    e.name,
-                                    style: TextStyles.bold14,
-                                  ),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: _onChanged,
-
-                    validator: FormBuilderValidators.compose(
-                        [if (isRequired) FormBuilderValidators.required()]),
+        ),
+        Expanded(
+          child: FormBuilder(
+            key: _formKey,
+            autovalidateMode: AutovalidateMode.disabled,
+            onChanged: () {
+              _formKey.currentState!.save();
+              debugPrint(_formKey.currentState!.value.toString());
+            },
+            child: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: SizedBox(
+                child: FormBuilderRadioGroup<T>(
+                  initialValue: initialValue,
+                  orientation: OptionsOrientation.vertical,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: InputDecoration(
+                    labelText: formName.capitalize(),
+                    border: InputBorder.none,
                   ),
+                  name: formName,
+                  // initialValue: const ['Dart'],
+                  options: (filteredList.value)
+                      .map(
+                        (e) => FormBuilderFieldOption(
+                          value: e,
+                          child: renderChild != null
+                              ? renderChild?.call(e)
+                              : Text(
+                                  e.name,
+                                  style: TextStyles.bold14,
+                                ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: _onChanged,
+
+                  validator: FormBuilderValidators.compose(
+                      [if (isRequired) FormBuilderValidators.required()]),
                 ),
               ),
             ),
           ),
-          AppButton.primary(
-            text: buttonText,
-            onTap: () {
-              if (_formKey.currentState?.saveAndValidate() ?? false) {
-                debugPrint(_formKey.currentState?.value.toString());
+        ),
+        AppButton.primary(
+          text: buttonText,
+          onTap: () {
+            if (_formKey.currentState?.saveAndValidate() ?? false) {
+              debugPrint(_formKey.currentState?.value.toString());
 
-                onSave(_formKey.currentState?.value[formName]);
-              } else {
-                debugPrint(_formKey.currentState?.value.toString());
-                debugPrint('validation failed');
-              }
-            },
-          )
-        ],
-      ),
+              onSave(_formKey.currentState?.value[formName]);
+            } else {
+              debugPrint(_formKey.currentState?.value.toString());
+              debugPrint('validation failed');
+            }
+          },
+        )
+      ],
     );
   }
 }

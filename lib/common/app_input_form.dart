@@ -14,12 +14,14 @@ class AppInputForm extends StatelessWidget {
       required this.isNumeric,
       required this.onSave,
       required this.maxValue,
-      required this.isRequired})
+      required this.isRequired,
+      this.initialValue})
       : super(key: key);
 
   final String buttonText;
   final String formName;
   final String formLabel;
+  final String? initialValue;
   final bool isNumeric;
   final bool isRequired;
   final int maxValue;
@@ -29,54 +31,52 @@ class AppInputForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Text(
-            formLabel,
-            style: TextStyles.bold18,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(
-            height: 32,
-          ),
-          FormBuilder(
-            key: _formKey,
-            child: FormBuilderTextField(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              name: formName,
-              decoration: InputDecoration(
-                labelText: formName.capitalize(),
-              ),
-
-              validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
-                if (isNumeric) FormBuilderValidators.numeric(),
-                isNumeric && isRequired
-                    ? FormBuilderValidators.max(maxValue)
-                    : FormBuilderValidators.maxLength(maxValue)
-              ]),
-              // initialValue: '12',
-              keyboardType:
-                  isNumeric ? TextInputType.number : TextInputType.text,
+    return Column(
+      children: [
+        Text(
+          formLabel,
+          style: TextStyles.bold18,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(
+          height: 32,
+        ),
+        FormBuilder(
+          key: _formKey,
+          child: FormBuilderTextField(
+            initialValue: initialValue,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            name: formName,
+            decoration: InputDecoration(
+              labelText: formName.capitalize(),
             ),
-          ),
-          const Spacer(),
-          AppButton.primary(
-            text: buttonText,
-            onTap: () {
-              if (_formKey.currentState?.saveAndValidate() ?? false) {
-                debugPrint(_formKey.currentState?.value.toString());
 
-                onSave(_formKey.currentState?.value[formName]?.toString());
-              } else {
-                debugPrint(_formKey.currentState?.value.toString());
-                debugPrint('validation failed');
-              }
-            },
-          )
-        ],
-      ),
+            validator: FormBuilderValidators.compose([
+              FormBuilderValidators.required(),
+              if (isNumeric) FormBuilderValidators.numeric(),
+              isNumeric && isRequired
+                  ? FormBuilderValidators.max(maxValue)
+                  : FormBuilderValidators.maxLength(maxValue)
+            ]),
+            // initialValue: '12',
+            keyboardType: isNumeric ? TextInputType.number : TextInputType.text,
+          ),
+        ),
+        const Spacer(),
+        AppButton.primary(
+          text: buttonText,
+          onTap: () {
+            if (_formKey.currentState?.saveAndValidate() ?? false) {
+              debugPrint(_formKey.currentState?.value.toString());
+
+              onSave(_formKey.currentState?.value[formName]?.toString());
+            } else {
+              debugPrint(_formKey.currentState?.value.toString());
+              debugPrint('validation failed');
+            }
+          },
+        )
+      ],
     );
   }
 }

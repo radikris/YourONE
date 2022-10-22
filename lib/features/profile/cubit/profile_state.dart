@@ -1,6 +1,9 @@
 part of 'profile_cubit.dart';
 
-@immutable
-abstract class ProfileState {}
-
-class ProfileInitial extends ProfileState {}
+@freezed
+class ProfileState with _$ProfileState {
+  const factory ProfileState({
+    required UserProfile yourSelf,
+    required UserProfile yourOne,
+  }) = _ProfileState;
+}

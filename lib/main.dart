@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/common/network/header_interceptor.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<SignUpCubit>(
-          create: (BuildContext context) => SignUpCubit(),
+          create: (BuildContext context) => getIt<SignUpCubit>(),
         ),
       ],
       child: MaterialApp.router(

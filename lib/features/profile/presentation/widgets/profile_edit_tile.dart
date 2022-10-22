@@ -8,10 +8,12 @@ class ProfileEditTile extends StatelessWidget {
     Key? key,
     required this.title,
     required this.child,
+    this.initialValue,
   }) : super(key: key);
 
   final String title;
   final Widget child;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class ProfileEditTile extends StatelessWidget {
                       padding: AppDimen.horizontal16Vertical24,
                       child: Column(
                         children: <Widget>[
-                          child,
+                          Expanded(child: child),
                         ],
                       ),
                     ),
@@ -55,7 +57,7 @@ class ProfileEditTile extends StatelessWidget {
                 },
               );
             },
-            initialValue: 'Your value',
+            initialValue: initialValue ?? '',
             style: TextStyle(overflow: TextOverflow.ellipsis),
             readOnly: true,
             decoration: InputDecoration(

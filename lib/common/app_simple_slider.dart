@@ -13,11 +13,14 @@ class AppSimpleSlider extends StatelessWidget {
     required this.formName,
     required this.formLabel,
     required this.onSave,
+    this.initialValue,
   }) : super(key: key);
 
   final String buttonText;
   final String formName;
   final String formLabel;
+  final double? initialValue;
+
   final Function(int?) onSave;
 
   final _formKey = GlobalKey<FormBuilderState>();

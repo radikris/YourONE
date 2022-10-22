@@ -15,7 +15,7 @@ class SignUpStepAge extends StatelessWidget implements StepIsRequired {
         formName: 'age',
         isNumeric: true,
         onSave: (String? value) {
-          context.read<SignUpCubit>().handleName();
+          context.read<SignUpCubit>().handleAge(int.parse(value!));
           context.read<SignUpCubit>().nextStep();
         },
         maxValue: 100,
