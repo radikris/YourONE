@@ -39,4 +39,9 @@ class SignUpStepOtherChemistry extends StatelessWidget
   bool isRequired() {
     return true;
   }
+
+  @override
+  bool isAboutYourself() {
+    return true;
+  }
 }

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:yourone/models/file_or_url.dart';
+import 'package:yourone/entities/file_or_url.dart';
 import 'package:yourone/theme/app_color.dart';
 
 extension StringExtension on String {

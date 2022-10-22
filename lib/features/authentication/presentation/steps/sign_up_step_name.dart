@@ -26,4 +26,9 @@ class SignUpStepName extends StatelessWidget implements StepIsRequired {
   bool isRequired() {
     return true;
   }
+
+  @override
+  bool isAboutYourself() {
+    return true;
+  }
 }

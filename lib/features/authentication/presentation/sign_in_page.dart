@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_primary_button.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
-import 'package:yourone/models/enum_types/job_type.dart';
+import 'package:yourone/entities/enum_types/job_type.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/app_dimen.dart';
 import 'package:yourone/theme/text_styles.dart';

@@ -185,7 +185,7 @@ enum Glasses { no, yes, nearSighted, farSighted }
 
 enum Sportiness { never, sometimes, timesAWeek13, everyDay, professionaly }
 
-enum Shape { chubby, fat, normal, muscular, athletic }
+enum Shape { chubby, fat, skinny, normal, muscular, athletic }
 
 enum FacialHair {
   none,

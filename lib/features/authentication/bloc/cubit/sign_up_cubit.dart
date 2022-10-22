@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:yourone/models/file_or_url.dart';
+import 'package:yourone/entities/file_or_url.dart';
 
 part 'sign_up_state.dart';
 part 'sign_up_cubit.freezed.dart';
