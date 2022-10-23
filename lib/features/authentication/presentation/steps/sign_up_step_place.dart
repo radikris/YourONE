@@ -16,6 +16,7 @@ class SignUpStepPlace extends StatelessWidget implements StepIsRequired {
       formLabel: 'Please choose your location',
       formName: 'location',
       isRequired: isRequired(),
+      initialValue: context.read<SignUpCubit>().state.yourSelf.address,
       onSave: (String? value, LatLng? place) {
         context.read<SignUpCubit>().handleLocation(value!);
         context.read<SignUpCubit>().nextStep();

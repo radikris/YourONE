@@ -21,6 +21,7 @@ class SignUpStepOtherChemistry extends StatelessWidget
         initialValue:
             context.read<SignUpCubit>().state.yourSelf.chemistry?.toDouble(),
         onSave: (int? value) {
+          context.read<SignUpCubit>().handleChemistry(value!);
           context.read<SignUpCubit>().nextStep();
         },
       ),

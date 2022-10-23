@@ -4,16 +4,21 @@ import 'package:yourone/theme/app_dimen.dart';
 import 'package:yourone/theme/text_styles.dart';
 
 class ProfileEditTile extends StatelessWidget {
-  const ProfileEditTile({
+  ProfileEditTile({
     Key? key,
     required this.title,
     required this.child,
     this.initialValue,
-  }) : super(key: key);
+  }) : super(key: key) {
+    controller =
+        TextEditingController(text: initialValue == 'null' ? '' : initialValue);
+  }
 
   final String title;
   final Widget child;
   final String? initialValue;
+
+  TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +62,7 @@ class ProfileEditTile extends StatelessWidget {
                 },
               );
             },
-            initialValue: initialValue ?? '',
+            controller: controller,
             style: TextStyle(overflow: TextOverflow.ellipsis),
             readOnly: true,
             decoration: InputDecoration(

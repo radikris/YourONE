@@ -1,7 +1,9 @@
 part of 'sign_up_cubit.dart';
 
 @freezed
-abstract class SignUpState with _$SignUpState {
+class SignUpState with _$SignUpState {
+  const SignUpState._();
+
   const factory SignUpState({
     required int currentStep,
     required UserProfile yourSelf,

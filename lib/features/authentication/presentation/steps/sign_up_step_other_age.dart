@@ -18,6 +18,9 @@ class SignUpStepOtherAge extends StatelessWidget implements StepIsRequired {
       maximumValue:
           context.read<SignUpCubit>().state.yourSelf.maxAge.toDouble(),
       onSave: (RangeValues? value) {
+        context
+            .read<SignUpCubit>()
+            .handleAgeRange(value!.start.toInt(), value.end.toInt());
         context.read<SignUpCubit>().nextStep();
       },
     );

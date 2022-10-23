@@ -176,14 +176,15 @@ class __$$_SignUpStateCopyWithImpl<$Res> extends _$SignUpStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
+class _$_SignUpState extends _SignUpState with DiagnosticableTreeMixin {
   const _$_SignUpState(
       {required this.currentStep,
       required this.yourSelf,
       required this.yourOne,
       this.email,
       this.password,
-      this.phoneNumber});
+      this.phoneNumber})
+      : super._();
 
   @override
   final int currentStep;
@@ -247,7 +248,7 @@ class _$_SignUpState with DiagnosticableTreeMixin implements _SignUpState {
       __$$_SignUpStateCopyWithImpl<_$_SignUpState>(this, _$identity);
 }
 
-abstract class _SignUpState implements SignUpState {
+abstract class _SignUpState extends SignUpState {
   const factory _SignUpState(
       {required final int currentStep,
       required final UserProfile yourSelf,
@@ -255,6 +256,7 @@ abstract class _SignUpState implements SignUpState {
       final String? email,
       final String? password,
       final String? phoneNumber}) = _$_SignUpState;
+  const _SignUpState._() : super._();
 
   @override
   int get currentStep;

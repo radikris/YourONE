@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yourone/common/app_app_bar.dart';
@@ -30,29 +32,9 @@ class ProfilePage extends StatelessWidget {
 class ProfileView extends StatelessWidget {
   ProfileView({Key? key}) : super(key: key);
 
-  void onSave(BuildContext context, Widget child) {
-    showGeneralDialog(
-      context: context,
-      barrierColor: Colors.white.withOpacity(0.9), // Background color
-      barrierDismissible: false,
-      barrierLabel: 'Dialog',
-      transitionDuration: Duration(milliseconds: 400),
-      pageBuilder: (_, __, ___) {
-        return Column(
-          children: <Widget>[
-            AppAppBar.withSkip(),
-            Expanded(
-              child: child,
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<SignUpCubit>().state.yourSelf;
+    final state = context.watch<SignUpCubit>().state;
     print(state);
 
     return Scaffold(
@@ -78,25 +60,29 @@ class ProfileView extends StatelessWidget {
                       height: 32,
                     ),
                     ProfileEditTile(
-                      title: 'YOUR BIO AND PHOTOS',
-                      child: SignUpStepBio(),
-                      initialValue: state.bio,
-                    ),
-                    ProfileEditTile(
-                      title: 'Age',
-                      child: SignUpStepAge(),
-                      initialValue: state.age?.toString(),
-                    ),
-                    ProfileEditTile(
                       title: 'Name',
+                      initialValue: state.yourSelf.name,
                       child: SignUpStepName(),
                     ),
                     ProfileEditTile(
+                      title: 'YOUR BIO AND PHOTOS',
+                      initialValue: state.yourSelf.bio,
+                      child: SignUpStepBio(),
+                    ),
+                    ProfileEditTile(
+                      title: 'Age',
+                      initialValue: state.yourSelf.age?.toString(),
+                      child: SignUpStepAge(),
+                    ),
+                    ProfileEditTile(
                       title: 'Other age',
+                      initialValue:
+                          '${state.yourSelf.minAge} - ${state.yourSelf.maxAge}',
                       child: SignUpStepOtherAge(),
                     ),
                     ProfileEditTile(
                       title: 'Chemistry',
+                      initialValue: '${state.yourSelf.chemistry?.toString()} %',
                       child: SignUpStepOtherChemistry(),
                     ),
                     SizedBox(
@@ -117,7 +103,12 @@ class ProfileView extends StatelessWidget {
               right: 0,
               child: Padding(
                 padding: AppDimen.all16,
-                child: AppButton.primary(text: 'SAVE', onTap: () {}),
+                child: AppButton.primary(
+                    text: 'SAVE',
+                    onTap: () {
+                      int num = Random().nextInt(50);
+                      context.read<SignUpCubit>().handleAge(num);
+                    }),
               ))
         ],
       ),

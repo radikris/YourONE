@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
@@ -45,21 +46,25 @@ class SignUpCubit extends Cubit<SignUpState> {
   void handleName(String name, {bool isAboutYourself = true}) {
     isAboutYourself
         ? emit(state.copyWith(yourSelf: state.yourSelf.copyWith(name: name)))
-        : emit(state.copyWith(yourSelf: state.yourOne.copyWith(name: name)));
+        : emit(state.copyWith(yourOne: state.yourOne.copyWith(name: name)));
+  }
+
+  void handleAgeRange(int min, int max, {bool isAboutYourself = true}) {
+    emit(state.copyWith(
+        yourSelf: state.yourSelf.copyWith(minAge: min, maxAge: max)));
   }
 
   void handleAge(int age, {bool isAboutYourself = true}) {
     isAboutYourself
         ? emit(state.copyWith(yourSelf: state.yourSelf.copyWith(age: age)))
-        : emit(state.copyWith(yourSelf: state.yourOne.copyWith(age: age)));
+        : emit(state.copyWith(yourOne: state.yourOne.copyWith(age: age)));
   }
 
   void handleGender(Gender? gender, {bool isAboutYourself = true}) {
     isAboutYourself
         ? emit(
             state.copyWith(yourSelf: state.yourSelf.copyWith(gender: gender)))
-        : emit(
-            state.copyWith(yourSelf: state.yourOne.copyWith(gender: gender)));
+        : emit(state.copyWith(yourOne: state.yourOne.copyWith(gender: gender)));
   }
 
   void handleJobType(JobType? jobType, {bool isAboutYourself = true}) {
@@ -67,7 +72,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(
             state.copyWith(yourSelf: state.yourSelf.copyWith(jobType: jobType)))
         : emit(
-            state.copyWith(yourSelf: state.yourOne.copyWith(jobType: jobType)));
+            state.copyWith(yourOne: state.yourOne.copyWith(jobType: jobType)));
   }
 
   void handleEducationLevel(EducationLevel? educationLevel,
@@ -76,7 +81,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(educationLevel: educationLevel)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(educationLevel: educationLevel)));
+            yourOne: state.yourOne.copyWith(educationLevel: educationLevel)));
   }
 
   void handleCigarettes(Cigarettes? cigarettes, {bool isAboutYourself = true}) {
@@ -84,7 +89,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(cigarettes: cigarettes)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(cigarettes: cigarettes)));
+            yourOne: state.yourOne.copyWith(cigarettes: cigarettes)));
   }
 
   void handleAlcohol(Alcohol? alcohol, {bool isAboutYourself = true}) {
@@ -92,7 +97,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(
             state.copyWith(yourSelf: state.yourSelf.copyWith(alcohol: alcohol)))
         : emit(
-            state.copyWith(yourSelf: state.yourOne.copyWith(alcohol: alcohol)));
+            state.copyWith(yourOne: state.yourOne.copyWith(alcohol: alcohol)));
   }
 
   void handleChildren(Children? children, {bool isAboutYourself = true}) {
@@ -100,7 +105,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(children: children)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(children: children)));
+            yourOne: state.yourOne.copyWith(children: children)));
   }
 
   void handleMarriage(Marriage? marriage, {bool isAboutYourself = true}) {
@@ -108,7 +113,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(marriage: marriage)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(marriage: marriage)));
+            yourOne: state.yourOne.copyWith(marriage: marriage)));
   }
 
   void handleMusicTaste(List<MusicTaste>? musicTaste,
@@ -117,7 +122,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(musicTaste: musicTaste)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(musicTaste: musicTaste)));
+            yourOne: state.yourOne.copyWith(musicTaste: musicTaste)));
   }
 
   void handleMovieGenre(List<MovieGenre>? movieGenre,
@@ -126,7 +131,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(movieGenre: movieGenre)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(movieGenre: movieGenre)));
+            yourOne: state.yourOne.copyWith(movieGenre: movieGenre)));
   }
 
   void handleLanguages(List<Languages>? languages,
@@ -135,7 +140,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(languages: languages)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(languages: languages)));
+            yourOne: state.yourOne.copyWith(languages: languages)));
   }
 
   void handleHobbies(List<Hobbies>? hobbies, {bool isAboutYourself = true}) {
@@ -143,7 +148,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(
             state.copyWith(yourSelf: state.yourSelf.copyWith(hobbies: hobbies)))
         : emit(
-            state.copyWith(yourSelf: state.yourOne.copyWith(hobbies: hobbies)));
+            state.copyWith(yourOne: state.yourOne.copyWith(hobbies: hobbies)));
   }
 
   void handleReligion(Religion? religion, {bool isAboutYourself = true}) {
@@ -151,7 +156,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(religion: religion)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(religion: religion)));
+            yourOne: state.yourOne.copyWith(religion: religion)));
   }
 
   void handleHoroscope(Horoscope? horoscope, {bool isAboutYourself = true}) {
@@ -159,15 +164,14 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(horoscope: horoscope)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(horoscope: horoscope)));
+            yourOne: state.yourOne.copyWith(horoscope: horoscope)));
   }
 
   void handleTattoo(Tattoo? tattoo, {bool isAboutYourself = true}) {
     isAboutYourself
         ? emit(
             state.copyWith(yourSelf: state.yourSelf.copyWith(tattoo: tattoo)))
-        : emit(
-            state.copyWith(yourSelf: state.yourOne.copyWith(tattoo: tattoo)));
+        : emit(state.copyWith(yourOne: state.yourOne.copyWith(tattoo: tattoo)));
   }
 
   void handlePiercing(Piercing? piercing, {bool isAboutYourself = true}) {
@@ -175,7 +179,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(piercing: piercing)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(piercing: piercing)));
+            yourOne: state.yourOne.copyWith(piercing: piercing)));
   }
 
   void handleHairColor(HairColor? hairColor, {bool isAboutYourself = true}) {
@@ -183,7 +187,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(hairColor: hairColor)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(hairColor: hairColor)));
+            yourOne: state.yourOne.copyWith(hairColor: hairColor)));
   }
 
   void handleEyeColor(EyeColor? eyeColor, {bool isAboutYourself = true}) {
@@ -191,7 +195,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(eyeColor: eyeColor)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(eyeColor: eyeColor)));
+            yourOne: state.yourOne.copyWith(eyeColor: eyeColor)));
   }
 
   void handleGlasses(Glasses? glasses, {bool isAboutYourself = true}) {
@@ -199,7 +203,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(
             state.copyWith(yourSelf: state.yourSelf.copyWith(glasses: glasses)))
         : emit(
-            state.copyWith(yourSelf: state.yourOne.copyWith(glasses: glasses)));
+            state.copyWith(yourOne: state.yourOne.copyWith(glasses: glasses)));
   }
 
   void handleSportiness(Sportiness? sportiness, {bool isAboutYourself = true}) {
@@ -207,13 +211,13 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(sportiness: sportiness)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(sportiness: sportiness)));
+            yourOne: state.yourOne.copyWith(sportiness: sportiness)));
   }
 
   void handleShape(Shape? shape, {bool isAboutYourself = true}) {
     isAboutYourself
         ? emit(state.copyWith(yourSelf: state.yourSelf.copyWith(shape: shape)))
-        : emit(state.copyWith(yourSelf: state.yourOne.copyWith(shape: shape)));
+        : emit(state.copyWith(yourOne: state.yourOne.copyWith(shape: shape)));
   }
 
   void handleFacialHair(FacialHair? facialHair, {bool isAboutYourself = true}) {
@@ -221,7 +225,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(facialHair: facialHair)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(facialHair: facialHair)));
+            yourOne: state.yourOne.copyWith(facialHair: facialHair)));
   }
 
   void handleBreastSize(BreastSize? breastSize, {bool isAboutYourself = true}) {
@@ -229,7 +233,7 @@ class SignUpCubit extends Cubit<SignUpState> {
         ? emit(state.copyWith(
             yourSelf: state.yourSelf.copyWith(breastSize: breastSize)))
         : emit(state.copyWith(
-            yourSelf: state.yourOne.copyWith(breastSize: breastSize)));
+            yourOne: state.yourOne.copyWith(breastSize: breastSize)));
   }
 
   void handleChemistry(

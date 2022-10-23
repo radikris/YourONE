@@ -47,8 +47,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Gender.values,
           formName: 'gender',
           formLabel: '',
-          onSave: (Gender? value) =>
-              cubit.handleGender(value), //isAboutYourself: aboutYourself
+          onSave: (Gender? value) => cubit.handleGender(value,
+              isAboutYourself: aboutYourself), //isAboutYourself: aboutYourself
           required: true,
           aboutYourself: aboutYourself,
           initialValue: state.gender,
@@ -57,7 +57,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: JobType.values,
           formName: 'jobType',
           formLabel: '',
-          onSave: (JobType? value) => cubit.handleJobType(value),
+          onSave: (JobType? value) =>
+              cubit.handleJobType(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.jobType,
@@ -66,7 +67,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: EducationLevel.values,
           formName: 'educationLevel',
           formLabel: '',
-          onSave: (EducationLevel? value) => cubit.handleEducationLevel(value),
+          onSave: (EducationLevel? value) =>
+              cubit.handleEducationLevel(value, isAboutYourself: aboutYourself),
           required: true,
           aboutYourself: aboutYourself,
           initialValue: state.educationLevel,
@@ -75,7 +77,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Cigarettes.values,
           formName: 'cigarette',
           formLabel: '',
-          onSave: (Cigarettes? value) => cubit.handleCigarettes(value),
+          onSave: (Cigarettes? value) =>
+              cubit.handleCigarettes(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.cigarettes,
@@ -84,7 +87,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Alcohol.values,
           formName: 'alcohol',
           formLabel: '',
-          onSave: (Alcohol? value) => cubit.handleAlcohol(value),
+          onSave: (Alcohol? value) =>
+              cubit.handleAlcohol(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.alcohol,
@@ -93,7 +97,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Children.values,
           formName: 'children',
           formLabel: '',
-          onSave: (Children? value) => cubit.handleChildren(value),
+          onSave: (Children? value) =>
+              cubit.handleChildren(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.children,
@@ -102,7 +107,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Marriage.values,
           formName: 'alcohol',
           formLabel: '',
-          onSave: (Marriage? value) => cubit.handleMarriage(value),
+          onSave: (Marriage? value) =>
+              cubit.handleMarriage(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.marriage,
@@ -111,7 +117,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: MusicTaste.values,
           formName: 'music',
           formLabel: '',
-          onSave: (List<MusicTaste>? value) => cubit.handleMusicTaste(value),
+          onSave: (List<MusicTaste>? value) =>
+              cubit.handleMusicTaste(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.musicTaste,
@@ -120,7 +127,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: MovieGenre.values,
           formName: 'movie',
           formLabel: '',
-          onSave: (List<MovieGenre>? value) => cubit.handleMovieGenre(value),
+          onSave: (List<MovieGenre>? value) =>
+              cubit.handleMovieGenre(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.movieGenre,
@@ -129,7 +137,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Religion.values,
           formName: 'religion',
           formLabel: '',
-          onSave: (Religion? value) => cubit.handleReligion(value),
+          onSave: (Religion? value) =>
+              cubit.handleReligion(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.religion,
@@ -138,7 +147,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Horoscope.values,
           formName: 'horoscope',
           formLabel: '',
-          onSave: (Horoscope? value) => cubit.handleHoroscope(value),
+          onSave: (Horoscope? value) =>
+              cubit.handleHoroscope(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.horoscope,
@@ -147,7 +157,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Languages.values,
           formName: 'languages',
           formLabel: '',
-          onSave: (List<Languages>? value) => cubit.handleLanguages(value),
+          onSave: (List<Languages>? value) =>
+              cubit.handleLanguages(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.languages,
@@ -156,7 +167,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Hobbies.values,
           formName: 'hobbies',
           formLabel: '',
-          onSave: (List<Hobbies>? value) => cubit.handleHobbies(value),
+          onSave: (List<Hobbies>? value) =>
+              cubit.handleHobbies(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.hobbies,
@@ -165,7 +177,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Tattoo.values,
           formName: 'tattoo',
           formLabel: '',
-          onSave: (Tattoo? value) => cubit.handleTattoo(value),
+          onSave: (Tattoo? value) =>
+              cubit.handleTattoo(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.tattoo,
@@ -174,7 +187,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Piercing.values,
           formName: 'piercing',
           formLabel: '',
-          onSave: (Piercing? value) => cubit.handlePiercing(value),
+          onSave: (Piercing? value) =>
+              cubit.handlePiercing(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.piercing,
@@ -183,7 +197,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: HairColor.values,
           formName: 'hairColor',
           formLabel: '',
-          onSave: (HairColor? value) => cubit.handleHairColor(value),
+          onSave: (HairColor? value) =>
+              cubit.handleHairColor(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.hairColor,
@@ -192,7 +207,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: EyeColor.values,
           formName: 'eyeColor',
           formLabel: '',
-          onSave: (EyeColor? value) => cubit.handleEyeColor(value),
+          onSave: (EyeColor? value) =>
+              cubit.handleEyeColor(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.eyeColor,
@@ -201,7 +217,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Glasses.values,
           formName: 'glasses',
           formLabel: '',
-          onSave: (Glasses? value) => cubit.handleGlasses(value),
+          onSave: (Glasses? value) =>
+              cubit.handleGlasses(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.glasses,
@@ -210,7 +227,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Sportiness.values,
           formName: 'sportiness',
           formLabel: '',
-          onSave: (Sportiness? value) => cubit.handleSportiness(value),
+          onSave: (Sportiness? value) =>
+              cubit.handleSportiness(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.sportiness,
@@ -219,7 +237,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: Shape.values,
           formName: 'shape',
           formLabel: '',
-          onSave: (Shape? value) => cubit.handleShape(value),
+          onSave: (Shape? value) =>
+              cubit.handleShape(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.shape,
@@ -228,7 +247,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: FacialHair.values,
           formName: 'facialHair',
           formLabel: '',
-          onSave: (FacialHair? value) => cubit.handleFacialHair(value),
+          onSave: (FacialHair? value) =>
+              cubit.handleFacialHair(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.facialHair,
@@ -237,7 +257,8 @@ class _SignUpPageState extends State<SignUpPage> {
           options: BreastSize.values,
           formName: 'breastSize',
           formLabel: '',
-          onSave: (BreastSize? value) => cubit.handleBreastSize(value),
+          onSave: (BreastSize? value) =>
+              cubit.handleBreastSize(value, isAboutYourself: aboutYourself),
           required: false,
           aboutYourself: aboutYourself,
           initialValue: state.breastSize,
@@ -246,16 +267,18 @@ class _SignUpPageState extends State<SignUpPage> {
     }
 
     steps = [
-      SignUpStepAccount(),
+      //SignUpStepAccount(),
       SignUpStepName(),
-      SignUpStepBio(),
+      SignUpStepAge(),
+
+/*       SignUpStepBio(),
       SignUpStepAge(),
       SignUpStepPlace(),
       ...generateEnumForm(true),
       SignUpStepOtherAge(),
       SignUpSwitchRoleStep(),
       SignUpStepOtherChemistry(),
-      ...generateEnumForm(false),
+      ...generateEnumForm(false), */
     ];
   }
 
