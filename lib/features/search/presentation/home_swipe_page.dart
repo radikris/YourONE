@@ -109,6 +109,7 @@ class _HomeSwipeViewState extends State<HomeSwipeView> {
                 itemCount: _items.length,
                 builder: (context, properties) {
                   final itemIndex = properties.index;
+                  final item = _items[itemIndex];
 
                   return Stack(
                     children: [
@@ -117,9 +118,9 @@ class _HomeSwipeViewState extends State<HomeSwipeView> {
                           context.pushRoute(SwipeDetailRoute());
                         },
                         child: ProfileCard(
-                          name:
-                              '${_items[itemIndex].name}, ${_items[itemIndex].age}',
+                          name: '${item.name}, ${item.age}',
                           image: "https://loremflickr.com/640/480/abstract",
+                          matchPercentage: item.matchPct ?? 0,
                         ),
                       ),
                       // more custom overlay possible than with overlayBuilder

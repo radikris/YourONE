@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:yourone/entities/enum_types/job_type.dart';
+import 'package:yourone/entities/enum_types/enums.dart';
 import 'package:yourone/entities/file_or_url.dart';
 import 'package:yourone/entities/user_profile.dart';
 import 'package:yourone/features/authentication/data/auth_repository.dart';

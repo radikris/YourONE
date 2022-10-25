@@ -14,8 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
+  return _UserProfile.fromJson(json);
+}
+
 /// @nodoc
 mixin _$UserProfile {
+  @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
   List<FileOrUrl>? get images => throw _privateConstructorUsedError;
   int get minAge => throw _privateConstructorUsedError;
@@ -47,6 +52,7 @@ mixin _$UserProfile {
   FacialHair? get facialHair => throw _privateConstructorUsedError;
   BreastSize? get breastSize => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $UserProfileCopyWith<UserProfile> get copyWith =>
       throw _privateConstructorUsedError;
@@ -58,7 +64,7 @@ abstract class $UserProfileCopyWith<$Res> {
           UserProfile value, $Res Function(UserProfile) then) =
       _$UserProfileCopyWithImpl<$Res>;
   $Res call(
-      {String? name,
+      {@JsonKey(name: 'name') String? name,
       List<FileOrUrl>? images,
       int minAge,
       int maxAge,
@@ -264,7 +270,7 @@ abstract class _$$_UserProfileCopyWith<$Res>
       __$$_UserProfileCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? name,
+      {@JsonKey(name: 'name') String? name,
       List<FileOrUrl>? images,
       int minAge,
       int maxAge,
@@ -465,10 +471,10 @@ class __$$_UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   const _$_UserProfile(
-      {this.name,
+      {@JsonKey(name: 'name') this.name,
       final List<FileOrUrl>? images,
       this.minAge = 16,
       this.maxAge = 100,
@@ -504,7 +510,11 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
         _languages = languages,
         _hobbies = hobbies;
 
+  factory _$_UserProfile.fromJson(Map<String, dynamic> json) =>
+      _$$_UserProfileFromJson(json);
+
   @override
+  @JsonKey(name: 'name')
   final String? name;
   final List<FileOrUrl>? _images;
   @override
@@ -689,6 +699,7 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
                 .equals(other.breastSize, breastSize));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -728,11 +739,16 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   @override
   _$$_UserProfileCopyWith<_$_UserProfile> get copyWith =>
       __$$_UserProfileCopyWithImpl<_$_UserProfile>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_UserProfileToJson(this);
+  }
 }
 
 abstract class _UserProfile implements UserProfile {
   const factory _UserProfile(
-      {final String? name,
+      {@JsonKey(name: 'name') final String? name,
       final List<FileOrUrl>? images,
       final int minAge,
       final int maxAge,
@@ -763,7 +779,11 @@ abstract class _UserProfile implements UserProfile {
       final FacialHair? facialHair,
       final BreastSize? breastSize}) = _$_UserProfile;
 
+  factory _UserProfile.fromJson(Map<String, dynamic> json) =
+      _$_UserProfile.fromJson;
+
   @override
+  @JsonKey(name: 'name')
   String? get name;
   @override
   List<FileOrUrl>? get images;

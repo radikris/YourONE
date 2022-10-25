@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:yourone/features/search/presentation/widgets/bottom_buttons_row.dart';
+import 'package:yourone/features/search/presentation/widgets/matching_rate.dart';
 import 'package:yourone/theme/app_color.dart';
 
 class ProfileCard extends StatelessWidget {
@@ -9,10 +10,12 @@ class ProfileCard extends StatelessWidget {
     required this.name,
     required this.image,
     super.key,
+    required this.matchPercentage,
   });
 
   final String name;
   final String image;
+  final int matchPercentage;
 
   @override
   Widget build(BuildContext context) {
@@ -79,11 +82,17 @@ class ProfileCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  name,
-                  style: theme.textTheme.headline6!.copyWith(
-                    color: Colors.white,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      name,
+                      style: theme.textTheme.headline6!.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
+                    MatchingRate(calculatedMatch: matchPercentage.toDouble()),
+                  ],
                 ),
                 const SizedBox(height: BottomButtonsRow.height)
               ],

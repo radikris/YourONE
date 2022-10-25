@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:yourone/common/app_icon.dart';
 import 'package:yourone/extensions/extensions.dart';
+import 'package:yourone/features/search/presentation/widgets/matching_rate.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/text_styles.dart';
 
@@ -39,13 +40,7 @@ class ProfileDetailSectionAccount extends StatelessWidget {
               name + ", " + age.toString(),
               style: TextStyles.bold24,
             ),
-            AppIcon(
-                icon: Text(
-              '${(calculatedMatch * 100).ceil()}%',
-              style: TextStyles.bold16.copyWith(
-                color: calculatedMatch.toMatchingColor(),
-              ),
-            )),
+            MatchingRate(calculatedMatch: calculatedMatch)
           ],
         ),
         Text(

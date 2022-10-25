@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/common/app_app_bar.dart';
+import 'package:yourone/entities/user_profile.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_multi_step.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_single_step.dart';
@@ -16,7 +17,7 @@ import 'package:yourone/features/authentication/presentation/steps/sign_up_step_
 import 'package:yourone/features/authentication/presentation/steps/sign_up_step_place.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_success_step.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_switch_role_step.dart';
-import 'package:yourone/entities/enum_types/job_type.dart';
+import 'package:yourone/entities/enum_types/enums.dart';
 import 'package:yourone/theme/app_dimen.dart';
 import 'package:yourone/theme/text_styles.dart';
 
@@ -333,7 +334,11 @@ class _SignUpPageState extends State<SignUpPage> {
             children: [
               if (kDebugMode)
                 GestureDetector(
-                    onTap: () => context.replaceRoute(HomeSwipeRoute()),
+                    onTap: () => {
+                          print(Alcohol.values[0]),
+                          print(UserProfile.fromJson({"alcohol": 0}).alcohol),
+                          if (false) context.replaceRoute(HomeSwipeRoute())
+                        },
                     child: Text('Gotoswipe')),
               steps.length > step
                   ? Expanded(child: IndexedStack(index: step, children: steps))

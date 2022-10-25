@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yourone/entities/enum_types/job_type.dart';
+import 'package:yourone/entities/enum_types/enums.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_multi_step.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_single_step.dart';
