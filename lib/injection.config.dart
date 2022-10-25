@@ -8,16 +8,19 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'common/network/api.dart' as _i11;
-import 'features/authentication/bloc/cubit/sign_up_cubit.dart' as _i6;
-import 'features/authentication/data/auth_repository.dart' as _i3;
-import 'features/authentication/data/auth_repository_impl.dart' as _i4;
-import 'features/authentication/data/auth_store.dart' as _i5;
-import 'features/profile/cubit/profile_cubit.dart' as _i10;
-import 'features/profile/data/profile_repository.dart' as _i8;
-import 'features/profile/data/profile_repository_impl.dart' as _i9;
+import 'common/network/api.dart' as _i14;
+import 'features/authentication/bloc/cubit/sign_up_cubit.dart' as _i11;
+import 'features/authentication/data/auth_repository.dart' as _i5;
+import 'features/authentication/data/auth_repository_impl.dart' as _i6;
+import 'features/authentication/data/auth_store.dart' as _i3;
+import 'features/profile/cubit/profile_cubit.dart' as _i12;
+import 'features/profile/data/profile_repository.dart' as _i7;
+import 'features/profile/data/profile_repository_impl.dart' as _i8;
+import 'features/search/cubit/search_cubit.dart' as _i13;
+import 'features/search/data/search_repository.dart' as _i9;
+import 'features/search/data/search_repository_impl.dart' as _i10;
 import 'swagger_generated_code/your_one_service.swagger.dart'
-    as _i7; // ignore_for_file: unnecessary_lambdas
+    as _i4; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -32,16 +35,24 @@ _i1.GetIt $initGetIt(
     environmentFilter,
   );
   final apiInjectableModule = _$ApiInjectableModule();
-  gh.lazySingleton<_i3.AuthRepository>(() => _i4.AuthRepositoryImpl());
-  gh.singleton<_i5.AuthStore>(_i5.AuthStore());
-  gh.factory<_i6.SignUpCubit>(() => _i6.SignUpCubit(get<_i3.AuthRepository>()));
-  gh.factory<_i7.YourOneService>(
-      () => apiInjectableModule.getDio(get<_i5.AuthStore>()));
-  gh.lazySingleton<_i8.ProfileRepository>(
-      () => _i9.ProfileRepositoryImpl(api: get<_i7.YourOneService>()));
-  gh.factory<_i10.ProfileCubit>(
-      () => _i10.ProfileCubit(get<_i8.ProfileRepository>()));
+  gh.singleton<_i3.AuthStore>(_i3.AuthStore());
+  gh.factory<_i4.YourOneService>(
+      () => apiInjectableModule.getDio(get<_i3.AuthStore>()));
+  gh.lazySingleton<_i5.AuthRepository>(
+      () => _i6.AuthRepositoryImpl(api: get<_i4.YourOneService>()));
+  gh.lazySingleton<_i7.ProfileRepository>(
+      () => _i8.ProfileRepositoryImpl(api: get<_i4.YourOneService>()));
+  gh.lazySingleton<_i9.SearchRepository>(
+      () => _i10.SearchRepositoryImpl(api: get<_i4.YourOneService>()));
+  gh.factory<_i11.SignUpCubit>(() => _i11.SignUpCubit(
+        get<_i5.AuthRepository>(),
+        get<_i3.AuthStore>(),
+      ));
+  gh.factory<_i12.ProfileCubit>(
+      () => _i12.ProfileCubit(get<_i7.ProfileRepository>()));
+  gh.factory<_i13.SearchCubit>(
+      () => _i13.SearchCubit(get<_i9.SearchRepository>()));
   return get;
 }
 
-class _$ApiInjectableModule extends _i11.ApiInjectableModule {}
+class _$ApiInjectableModule extends _i14.ApiInjectableModule {}

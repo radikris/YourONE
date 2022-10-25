@@ -12,14 +12,17 @@ import 'package:yourone/entities/file_or_url.dart';
 import 'package:yourone/entities/user_profile.dart';
 import 'package:yourone/features/authentication/data/auth_repository.dart';
 
+import 'package:yourone/features/authentication/data/auth_store.dart';
+
 part 'sign_up_state.dart';
 part 'sign_up_cubit.freezed.dart';
 
 @injectable
 class SignUpCubit extends Cubit<SignUpState> {
   final AuthRepository authRepository;
+  final AuthStore store;
 
-  SignUpCubit(this.authRepository)
+  SignUpCubit(this.authRepository, this.store)
       : super(SignUpState(
             currentStep: 0,
             yourOne: UserProfile(),
@@ -27,20 +30,25 @@ class SignUpCubit extends Cubit<SignUpState> {
               images: [0, 1, 2, 3].map((key) => FileOrUrl(id: key)).toList(),
             )));
 
-  void handleLogin(
+  Future<void> handleLogin(
     String email,
     String password,
-  ) {
+  ) async {
     emit(state.copyWith(email: email, password: password));
+    final token = await authRepository.login();
+    print(token);
+    store.login(token);
   }
 
   void handleRegister(
     String email,
     String password,
     String phoneNumber,
-  ) {
+  ) async {
     emit(state.copyWith(
         email: email, password: password, phoneNumber: phoneNumber));
+    final token = await authRepository.register();
+    store.login(token);
   }
 
   void handleName(String name, {bool isAboutYourself = true}) {

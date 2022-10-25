@@ -267,7 +267,7 @@ class _SignUpPageState extends State<SignUpPage> {
     }
 
     steps = [
-      //SignUpStepAccount(),
+      SignUpStepAccount(),
       SignUpStepName(),
       SignUpStepAge(),
 

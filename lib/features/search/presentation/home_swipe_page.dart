@@ -6,26 +6,21 @@ import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_icon.dart';
 import 'package:yourone/features/profile/cubit/profile_cubit.dart';
+import 'package:yourone/features/search/cubit/search_cubit.dart';
 import 'package:yourone/features/search/presentation/widgets/bottom_buttons_row.dart';
 import 'package:yourone/features/search/presentation/widgets/card_overlay.dart';
 import 'package:yourone/features/search/presentation/widgets/profile_card.dart';
 import 'package:yourone/features/search/presentation/widgets/success_match.dart';
 import 'package:yourone/injection.dart';
-
-const _images = [
-  "https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg",
-  "https://i.insider.com/57db03588a4565a36039483b?width=750&format=jpeg",
-  "https://i.insider.com/593aed9cc4adee3a008b4ce1?width=750&format=jpeg",
-  "https://i.pinimg.com/236x/3e/c3/4d/3ec34dfd7694806445b1d0292f9c059a--russian-womens-russian-girls.jpg"
-];
+import 'package:yourone/swagger_generated_code/your_one_service.swagger.dart';
 
 class HomeSwipePage extends StatelessWidget {
   const HomeSwipePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ProfileCubit>(
-      create: (context) => getIt<ProfileCubit>(),
+    return BlocProvider<SearchCubit>(
+      create: (context) => getIt<SearchCubit>(),
       child: const HomeSwipeView(),
     );
   }
@@ -41,24 +36,39 @@ class HomeSwipeView extends StatefulWidget {
 class _HomeSwipeViewState extends State<HomeSwipeView> {
   late final SwipableStackController _controller;
 
-  void _listenController() => setState(() {});
+  final _items = <PersonAllDTO>[];
 
   @override
   void initState() {
     super.initState();
-    _controller = SwipableStackController()..addListener(_listenController);
+    context.read<SearchCubit>().fetchPartners(receivedPartners);
+    _controller = SwipableStackController()
+      ..addListener(() {
+        if (_items.length - 5 <= _controller.currentIndex) {
+          //_items.addAll(_images);
+          print('load again'); //TODO CALL REPOSITORY
+          context.read<SearchCubit>().fetchPartners(receivedPartners);
+        }
+        setState(() {});
+      });
   }
 
   @override
   void dispose() {
     super.dispose();
-    _controller
-      ..removeListener(_listenController)
-      ..dispose();
+    _controller.dispose();
+  }
+
+  void receivedPartners(List<PersonAllDTO> list) {
+    setState(() {
+      _items.addAll(list);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<SearchCubit>().state;
+
     return Scaffold(
       appBar: AppAppBar(
         title: 'YourOne',
@@ -74,10 +84,14 @@ class _HomeSwipeViewState extends State<HomeSwipeView> {
       ),
       body: SafeArea(
         top: false,
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: SwipableStack(
+        child: state.when(
+          error: (_) => SizedBox(),
+          initial: () => SizedBox(),
+          loading: () => SizedBox(),
+          success: (data) => Stack(
+            children: [
+              Positioned.fill(
+                  child: SwipableStack(
                 detectableSwipeDirections: const {
                   SwipeDirection.right,
                   SwipeDirection.left,
@@ -92,8 +106,9 @@ class _HomeSwipeViewState extends State<HomeSwipeView> {
                 },
                 horizontalSwipeThreshold: 0.8,
                 verticalSwipeThreshold: 0.8,
+                itemCount: _items.length,
                 builder: (context, properties) {
-                  final itemIndex = properties.index % _images.length;
+                  final itemIndex = properties.index;
 
                   return Stack(
                     children: [
@@ -102,8 +117,9 @@ class _HomeSwipeViewState extends State<HomeSwipeView> {
                           context.pushRoute(SwipeDetailRoute());
                         },
                         child: ProfileCard(
-                          name: 'Sample No.${itemIndex + 1}',
-                          image: _images[itemIndex],
+                          name:
+                              '${_items[itemIndex].name}, ${_items[itemIndex].age}',
+                          image: "https://loremflickr.com/640/480/abstract",
                         ),
                       ),
                       // more custom overlay possible than with overlayBuilder
@@ -116,16 +132,16 @@ class _HomeSwipeViewState extends State<HomeSwipeView> {
                     ],
                   );
                 },
-              ),
-            ),
-            BottomButtonsRow(
-              onSwipe: (direction) {
-                _controller.next(swipeDirection: direction);
-              },
-              canRewind: false,
-              onRewindTap: () {},
-            )
-          ],
+              )),
+              BottomButtonsRow(
+                onSwipe: (direction) {
+                  _controller.next(swipeDirection: direction);
+                },
+                canRewind: false,
+                onRewindTap: () {},
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -26,12 +26,12 @@ class SignInPage extends StatelessWidget {
         height: 56,
         child: AppButton.primary(
           text: 'Sign in',
-          onTap: () {
-            context.replaceRoute(HomeSwipeRoute());
+          onTap: () async {
             if (_formKey.currentState?.saveAndValidate() ?? false) {
               final email = _formKey.currentState?.value['email'];
               final password = _formKey.currentState?.value['password'];
-              context.read<SignUpCubit>().handleLogin(email, password);
+              await context.read<SignUpCubit>().handleLogin(email, password);
+              context.replaceRoute(HomeSwipeRoute());
             }
           },
         ),

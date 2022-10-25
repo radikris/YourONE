@@ -36,9 +36,94 @@ abstract class YourOneService extends ChopperService {
         converter: $JsonSerializableConverter(),
         interceptors: interceptors ?? [],
         authenticator: authenticator,
-        baseUrl: baseUrl ?? 'http://localhost:8040/');
+        baseUrl: baseUrl ?? 'http://194.163.179.31:8040/');
     return _$YourOneService(newClient);
   }
+
+  ///findAllChats
+  ///@param Authorization Authorization
+  Future<chopper.Response<List<Person>>> apiChatGet({String? authorization}) {
+    generatedMapping.putIfAbsent(Person, () => Person.fromJsonFactory);
+
+    return _apiChatGet(authorization: authorization);
+  }
+
+  ///findAllChats
+  ///@param Authorization Authorization
+  @Get(path: '/api/chat/')
+  Future<chopper.Response<List<Person>>> _apiChatGet(
+      {@Header('Authorization') String? authorization});
+
+  ///findChatMessages
+  ///@param Authorization Authorization
+  ///@param addresseeId addresseeId
+  Future<chopper.Response<List<MessageEntity>>> apiChatAddresseeIdGet({
+    String? authorization,
+    required int? addresseeId,
+  }) {
+    generatedMapping.putIfAbsent(
+        MessageEntity, () => MessageEntity.fromJsonFactory);
+
+    return _apiChatAddresseeIdGet(
+        authorization: authorization, addresseeId: addresseeId);
+  }
+
+  ///findChatMessages
+  ///@param Authorization Authorization
+  ///@param addresseeId addresseeId
+  @Get(path: '/api/chat/{addresseeId}')
+  Future<chopper.Response<List<MessageEntity>>> _apiChatAddresseeIdGet({
+    @Header('Authorization') String? authorization,
+    @Path('addresseeId') required int? addresseeId,
+  });
+
+  ///countNewMessages
+  ///@param Authorization Authorization
+  ///@param addresseeId addresseeId
+  Future<chopper.Response<int>> apiChatAddresseeIdCountGet({
+    String? authorization,
+    required int? addresseeId,
+  }) {
+    return _apiChatAddresseeIdCountGet(
+        authorization: authorization, addresseeId: addresseeId);
+  }
+
+  ///countNewMessages
+  ///@param Authorization Authorization
+  ///@param addresseeId addresseeId
+  @Get(path: '/api/chat/{addresseeId}/count')
+  Future<chopper.Response<int>> _apiChatAddresseeIdCountGet({
+    @Header('Authorization') String? authorization,
+    @Path('addresseeId') required int? addresseeId,
+  });
+
+  ///getAll
+  Future<chopper.Response<List<PersonAllDTO>>> apiPersonGet() {
+    generatedMapping.putIfAbsent(
+        PersonAllDTO, () => PersonAllDTO.fromJsonFactory);
+
+    return _apiPersonGet();
+  }
+
+  ///getAll
+  @Get(path: '/api/person/')
+  Future<chopper.Response<List<PersonAllDTO>>> _apiPersonGet();
+
+  ///getAllPartners
+  ///@param Authorization Authorization
+  Future<chopper.Response<List<PersonAllDTO>>> apiPersonAllPartnersGet(
+      {String? authorization}) {
+    generatedMapping.putIfAbsent(
+        PersonAllDTO, () => PersonAllDTO.fromJsonFactory);
+
+    return _apiPersonAllPartnersGet(authorization: authorization);
+  }
+
+  ///getAllPartners
+  ///@param Authorization Authorization
+  @Get(path: '/api/person/all-partners')
+  Future<chopper.Response<List<PersonAllDTO>>> _apiPersonAllPartnersGet(
+      {@Header('Authorization') String? authorization});
 
   ///Login method for users
   ///@param loginData loginData
@@ -58,8 +143,10 @@ abstract class YourOneService extends ChopperService {
 
   ///Gets the person entity of the current user
   ///@param Authorization Authorization
-  Future<chopper.Response<Person>> apiPersonMeGet({String? authorization}) {
-    generatedMapping.putIfAbsent(Person, () => Person.fromJsonFactory);
+  Future<chopper.Response<PersonAllDTO>> apiPersonMeGet(
+      {String? authorization}) {
+    generatedMapping.putIfAbsent(
+        PersonAllDTO, () => PersonAllDTO.fromJsonFactory);
 
     return _apiPersonMeGet(authorization: authorization);
   }
@@ -67,7 +154,63 @@ abstract class YourOneService extends ChopperService {
   ///Gets the person entity of the current user
   ///@param Authorization Authorization
   @Get(path: '/api/person/me')
-  Future<chopper.Response<Person>> _apiPersonMeGet(
+  Future<chopper.Response<PersonAllDTO>> _apiPersonMeGet(
+      {@Header('Authorization') String? authorization});
+
+  ///noMatch
+  ///@param Authorization Authorization
+  ///@param partnerId partnerId
+  Future<chopper.Response<bool>> apiPersonPartnerMatchNoPost({
+    String? authorization,
+    required num? partnerId,
+  }) {
+    return _apiPersonPartnerMatchNoPost(
+        authorization: authorization, partnerId: partnerId);
+  }
+
+  ///noMatch
+  ///@param Authorization Authorization
+  ///@param partnerId partnerId
+  @Post(path: '/api/person/partner-match/no')
+  Future<chopper.Response<bool>> _apiPersonPartnerMatchNoPost({
+    @Header('Authorization') String? authorization,
+    @Body() required num? partnerId,
+  });
+
+  ///yesMatch
+  ///@param Authorization Authorization
+  ///@param partnerId partnerId
+  Future<chopper.Response<bool>> apiPersonPartnerMatchYesPost({
+    String? authorization,
+    required num? partnerId,
+  }) {
+    return _apiPersonPartnerMatchYesPost(
+        authorization: authorization, partnerId: partnerId);
+  }
+
+  ///yesMatch
+  ///@param Authorization Authorization
+  ///@param partnerId partnerId
+  @Post(path: '/api/person/partner-match/yes')
+  Future<chopper.Response<bool>> _apiPersonPartnerMatchYesPost({
+    @Header('Authorization') String? authorization,
+    @Body() required num? partnerId,
+  });
+
+  ///getPotentialPartner
+  ///@param Authorization Authorization
+  Future<chopper.Response<List<PersonAllDTO>>> apiPersonPotentialPartnersGet(
+      {String? authorization}) {
+    generatedMapping.putIfAbsent(
+        PersonAllDTO, () => PersonAllDTO.fromJsonFactory);
+
+    return _apiPersonPotentialPartnersGet(authorization: authorization);
+  }
+
+  ///getPotentialPartner
+  ///@param Authorization Authorization
+  @Get(path: '/api/person/potential-partners')
+  Future<chopper.Response<List<PersonAllDTO>>> _apiPersonPotentialPartnersGet(
       {@Header('Authorization') String? authorization});
 
   ///Sign up method for users
@@ -86,6 +229,28 @@ abstract class YourOneService extends ChopperService {
   @Post(path: '/api/person/sign-up')
   Future<chopper.Response<Tokens>> _apiPersonSignUpPost(
       {@Body() required RegistrationDTO? registerData});
+
+  ///Modifying user data
+  ///@param id id
+  ///@param newData newData
+  Future<chopper.Response<PersonAllDTO>> apiPersonIdPut({
+    required int? id,
+    required PersonAllDTO? newData,
+  }) {
+    generatedMapping.putIfAbsent(
+        PersonAllDTO, () => PersonAllDTO.fromJsonFactory);
+
+    return _apiPersonIdPut(id: id, newData: newData);
+  }
+
+  ///Modifying user data
+  ///@param id id
+  ///@param newData newData
+  @Put(path: '/api/person/{id}')
+  Future<chopper.Response<PersonAllDTO>> _apiPersonIdPut({
+    @Path('id') required int? id,
+    @Body() required PersonAllDTO? newData,
+  });
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -144,37 +309,317 @@ extension $LoginDTOExtension on LoginDTO {
 }
 
 @JsonSerializable(explicitToJson: true)
+class MessageEntity {
+  MessageEntity({
+    required this.addressee,
+    this.id,
+    required this.pair,
+    required this.sender,
+    required this.sentTime,
+    this.state,
+    required this.text,
+  });
+
+  factory MessageEntity.fromJson(Map<String, dynamic> json) =>
+      _$MessageEntityFromJson(json);
+
+  @JsonKey(name: 'addressee')
+  final Person addressee;
+  @JsonKey(name: 'id')
+  final num? id;
+  @JsonKey(name: 'pair')
+  final PairEntity pair;
+  @JsonKey(name: 'sender')
+  final Person sender;
+  @JsonKey(name: 'sentTime')
+  final DateTime sentTime;
+  @JsonKey(
+    name: 'state',
+    toJson: messageEntityStateToJson,
+    fromJson: messageEntityStateFromJson,
+  )
+  final enums.MessageEntityState? state;
+  @JsonKey(name: 'text')
+  final String text;
+  static const fromJsonFactory = _$MessageEntityFromJson;
+  static const toJsonFactory = _$MessageEntityToJson;
+  Map<String, dynamic> toJson() => _$MessageEntityToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is MessageEntity &&
+            (identical(other.addressee, addressee) ||
+                const DeepCollectionEquality()
+                    .equals(other.addressee, addressee)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.pair, pair) ||
+                const DeepCollectionEquality().equals(other.pair, pair)) &&
+            (identical(other.sender, sender) ||
+                const DeepCollectionEquality().equals(other.sender, sender)) &&
+            (identical(other.sentTime, sentTime) ||
+                const DeepCollectionEquality()
+                    .equals(other.sentTime, sentTime)) &&
+            (identical(other.state, state) ||
+                const DeepCollectionEquality().equals(other.state, state)) &&
+            (identical(other.text, text) ||
+                const DeepCollectionEquality().equals(other.text, text)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(addressee) ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(pair) ^
+      const DeepCollectionEquality().hash(sender) ^
+      const DeepCollectionEquality().hash(sentTime) ^
+      const DeepCollectionEquality().hash(state) ^
+      const DeepCollectionEquality().hash(text) ^
+      runtimeType.hashCode;
+}
+
+extension $MessageEntityExtension on MessageEntity {
+  MessageEntity copyWith(
+      {Person? addressee,
+      num? id,
+      PairEntity? pair,
+      Person? sender,
+      DateTime? sentTime,
+      enums.MessageEntityState? state,
+      String? text}) {
+    return MessageEntity(
+        addressee: addressee ?? this.addressee,
+        id: id ?? this.id,
+        pair: pair ?? this.pair,
+        sender: sender ?? this.sender,
+        sentTime: sentTime ?? this.sentTime,
+        state: state ?? this.state,
+        text: text ?? this.text);
+  }
+
+  MessageEntity copyWithWrapped(
+      {Wrapped<Person>? addressee,
+      Wrapped<num?>? id,
+      Wrapped<PairEntity>? pair,
+      Wrapped<Person>? sender,
+      Wrapped<DateTime>? sentTime,
+      Wrapped<enums.MessageEntityState?>? state,
+      Wrapped<String>? text}) {
+    return MessageEntity(
+        addressee: (addressee != null ? addressee.value : this.addressee),
+        id: (id != null ? id.value : this.id),
+        pair: (pair != null ? pair.value : this.pair),
+        sender: (sender != null ? sender.value : this.sender),
+        sentTime: (sentTime != null ? sentTime.value : this.sentTime),
+        state: (state != null ? state.value : this.state),
+        text: (text != null ? text.value : this.text));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class PairEntity {
+  PairEntity({
+    required this.a,
+    required this.b,
+    required this.id,
+    this.responseA,
+    this.responseB,
+    required this.state,
+  });
+
+  factory PairEntity.fromJson(Map<String, dynamic> json) =>
+      _$PairEntityFromJson(json);
+
+  @JsonKey(name: 'a')
+  final Person a;
+  @JsonKey(name: 'b')
+  final Person b;
+  @JsonKey(name: 'id')
+  final num id;
+  @JsonKey(name: 'responseA')
+  final bool? responseA;
+  @JsonKey(name: 'responseB')
+  final bool? responseB;
+  @JsonKey(
+    name: 'state',
+    toJson: pairEntityStateToJson,
+    fromJson: pairEntityStateFromJson,
+  )
+  final enums.PairEntityState state;
+  static const fromJsonFactory = _$PairEntityFromJson;
+  static const toJsonFactory = _$PairEntityToJson;
+  Map<String, dynamic> toJson() => _$PairEntityToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is PairEntity &&
+            (identical(other.a, a) ||
+                const DeepCollectionEquality().equals(other.a, a)) &&
+            (identical(other.b, b) ||
+                const DeepCollectionEquality().equals(other.b, b)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.responseA, responseA) ||
+                const DeepCollectionEquality()
+                    .equals(other.responseA, responseA)) &&
+            (identical(other.responseB, responseB) ||
+                const DeepCollectionEquality()
+                    .equals(other.responseB, responseB)) &&
+            (identical(other.state, state) ||
+                const DeepCollectionEquality().equals(other.state, state)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(a) ^
+      const DeepCollectionEquality().hash(b) ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(responseA) ^
+      const DeepCollectionEquality().hash(responseB) ^
+      const DeepCollectionEquality().hash(state) ^
+      runtimeType.hashCode;
+}
+
+extension $PairEntityExtension on PairEntity {
+  PairEntity copyWith(
+      {Person? a,
+      Person? b,
+      num? id,
+      bool? responseA,
+      bool? responseB,
+      enums.PairEntityState? state}) {
+    return PairEntity(
+        a: a ?? this.a,
+        b: b ?? this.b,
+        id: id ?? this.id,
+        responseA: responseA ?? this.responseA,
+        responseB: responseB ?? this.responseB,
+        state: state ?? this.state);
+  }
+
+  PairEntity copyWithWrapped(
+      {Wrapped<Person>? a,
+      Wrapped<Person>? b,
+      Wrapped<num>? id,
+      Wrapped<bool?>? responseA,
+      Wrapped<bool?>? responseB,
+      Wrapped<enums.PairEntityState>? state}) {
+    return PairEntity(
+        a: (a != null ? a.value : this.a),
+        b: (b != null ? b.value : this.b),
+        id: (id != null ? id.value : this.id),
+        responseA: (responseA != null ? responseA.value : this.responseA),
+        responseB: (responseB != null ? responseB.value : this.responseB),
+        state: (state != null ? state.value : this.state));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class Person {
   Person({
+    this.alcohol,
+    this.bio,
     this.birthDate,
+    this.breastSize,
+    this.childrenNumber,
+    this.cigarettes,
+    this.city,
+    this.eduLevel,
     required this.email,
-    required this.firstName,
+    this.eyeColour,
+    this.facialHair,
+    this.filmTaste,
+    this.gender,
+    this.glasses,
+    this.hairColour,
+    this.height,
+    this.horoscope,
     required this.id,
-    required this.lastName,
+    this.interests,
+    this.jobType,
+    this.languages,
+    this.maritalStatus,
+    this.musicalTaste,
+    required this.name,
     this.photo,
-    required this.roles,
-    required this.uid,
+    this.piercing,
+    this.religion,
+    this.shape,
+    this.sportiness,
+    this.tattoo,
     this.username,
   });
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
 
+  @JsonKey(name: 'alcohol')
+  final int? alcohol;
+  @JsonKey(name: 'bio')
+  final String? bio;
   @JsonKey(name: 'birthDate', toJson: _dateToJson)
   final DateTime? birthDate;
+  @JsonKey(name: 'breastSize')
+  final int? breastSize;
+  @JsonKey(name: 'childrenNumber')
+  final int? childrenNumber;
+  @JsonKey(name: 'cigarettes')
+  final int? cigarettes;
+  @JsonKey(name: 'city')
+  final String? city;
+  @JsonKey(name: 'eduLevel')
+  final int? eduLevel;
   @JsonKey(name: 'email')
   final String email;
-  @JsonKey(name: 'firstName')
-  final String firstName;
+  @JsonKey(name: 'eyeColour')
+  final int? eyeColour;
+  @JsonKey(name: 'facialHair')
+  final int? facialHair;
+  @JsonKey(name: 'filmTaste')
+  final int? filmTaste;
+  @JsonKey(name: 'gender')
+  final int? gender;
+  @JsonKey(name: 'glasses')
+  final int? glasses;
+  @JsonKey(name: 'hairColour')
+  final int? hairColour;
+  @JsonKey(name: 'height')
+  final int? height;
+  @JsonKey(name: 'horoscope')
+  final int? horoscope;
   @JsonKey(name: 'id')
   final num id;
-  @JsonKey(name: 'lastName')
-  final String lastName;
+  @JsonKey(name: 'interests')
+  final int? interests;
+  @JsonKey(name: 'jobType')
+  final int? jobType;
+  @JsonKey(name: 'languages')
+  final int? languages;
+  @JsonKey(name: 'maritalStatus')
+  final int? maritalStatus;
+  @JsonKey(name: 'musicalTaste')
+  final int? musicalTaste;
+  @JsonKey(name: 'name')
+  final String name;
   @JsonKey(name: 'photo')
   final String? photo;
-  @JsonKey(name: 'roles', defaultValue: <Role>[])
-  final List<Role> roles;
-  @JsonKey(name: 'uid')
-  final String uid;
+  @JsonKey(name: 'piercing')
+  final int? piercing;
+  @JsonKey(name: 'religion')
+  final int? religion;
+  @JsonKey(name: 'shape')
+  final int? shape;
+  @JsonKey(name: 'sportiness')
+  final int? sportiness;
+  @JsonKey(name: 'tattoo')
+  final int? tattoo;
   @JsonKey(name: 'username')
   final String? username;
   static const fromJsonFactory = _$PersonFromJson;
@@ -185,28 +630,80 @@ class Person {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is Person &&
+            (identical(other.alcohol, alcohol) ||
+                const DeepCollectionEquality()
+                    .equals(other.alcohol, alcohol)) &&
+            (identical(other.bio, bio) ||
+                const DeepCollectionEquality().equals(other.bio, bio)) &&
             (identical(other.birthDate, birthDate) ||
                 const DeepCollectionEquality()
                     .equals(other.birthDate, birthDate)) &&
+            (identical(other.breastSize, breastSize) ||
+                const DeepCollectionEquality()
+                    .equals(other.breastSize, breastSize)) &&
+            (identical(other.childrenNumber, childrenNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.childrenNumber, childrenNumber)) &&
+            (identical(other.cigarettes, cigarettes) ||
+                const DeepCollectionEquality()
+                    .equals(other.cigarettes, cigarettes)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.eduLevel, eduLevel) ||
+                const DeepCollectionEquality()
+                    .equals(other.eduLevel, eduLevel)) &&
             (identical(other.email, email) ||
                 const DeepCollectionEquality().equals(other.email, email)) &&
-            (identical(other.firstName, firstName) ||
+            (identical(other.eyeColour, eyeColour) ||
                 const DeepCollectionEquality()
-                    .equals(other.firstName, firstName)) &&
+                    .equals(other.eyeColour, eyeColour)) &&
+            (identical(other.facialHair, facialHair) ||
+                const DeepCollectionEquality()
+                    .equals(other.facialHair, facialHair)) &&
+            (identical(other.filmTaste, filmTaste) ||
+                const DeepCollectionEquality()
+                    .equals(other.filmTaste, filmTaste)) &&
+            (identical(other.gender, gender) ||
+                const DeepCollectionEquality().equals(other.gender, gender)) &&
+            (identical(other.glasses, glasses) ||
+                const DeepCollectionEquality()
+                    .equals(other.glasses, glasses)) &&
+            (identical(other.hairColour, hairColour) ||
+                const DeepCollectionEquality()
+                    .equals(other.hairColour, hairColour)) &&
+            (identical(other.height, height) ||
+                const DeepCollectionEquality().equals(other.height, height)) &&
+            (identical(other.horoscope, horoscope) ||
+                const DeepCollectionEquality()
+                    .equals(other.horoscope, horoscope)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.lastName, lastName) ||
+            (identical(other.interests, interests) ||
                 const DeepCollectionEquality()
-                    .equals(other.lastName, lastName)) &&
+                    .equals(other.interests, interests)) &&
+            (identical(other.jobType, jobType) ||
+                const DeepCollectionEquality()
+                    .equals(other.jobType, jobType)) &&
+            (identical(other.languages, languages) ||
+                const DeepCollectionEquality()
+                    .equals(other.languages, languages)) &&
+            (identical(other.maritalStatus, maritalStatus) ||
+                const DeepCollectionEquality()
+                    .equals(other.maritalStatus, maritalStatus)) &&
+            (identical(other.musicalTaste, musicalTaste) ||
+                const DeepCollectionEquality()
+                    .equals(other.musicalTaste, musicalTaste)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.photo, photo) ||
                 const DeepCollectionEquality().equals(other.photo, photo)) &&
-            (identical(other.roles, roles) ||
-                const DeepCollectionEquality().equals(other.roles, roles)) &&
-            (identical(other.uid, uid) ||
-                const DeepCollectionEquality().equals(other.uid, uid)) &&
-            (identical(other.username, username) ||
-                const DeepCollectionEquality()
-                    .equals(other.username, username)));
+            (identical(other.piercing, piercing) ||
+                const DeepCollectionEquality().equals(other.piercing, piercing)) &&
+            (identical(other.religion, religion) || const DeepCollectionEquality().equals(other.religion, religion)) &&
+            (identical(other.shape, shape) || const DeepCollectionEquality().equals(other.shape, shape)) &&
+            (identical(other.sportiness, sportiness) || const DeepCollectionEquality().equals(other.sportiness, sportiness)) &&
+            (identical(other.tattoo, tattoo) || const DeepCollectionEquality().equals(other.tattoo, tattoo)) &&
+            (identical(other.username, username) || const DeepCollectionEquality().equals(other.username, username)));
   }
 
   @override
@@ -214,61 +711,555 @@ class Person {
 
   @override
   int get hashCode =>
+      const DeepCollectionEquality().hash(alcohol) ^
+      const DeepCollectionEquality().hash(bio) ^
       const DeepCollectionEquality().hash(birthDate) ^
+      const DeepCollectionEquality().hash(breastSize) ^
+      const DeepCollectionEquality().hash(childrenNumber) ^
+      const DeepCollectionEquality().hash(cigarettes) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(eduLevel) ^
       const DeepCollectionEquality().hash(email) ^
-      const DeepCollectionEquality().hash(firstName) ^
+      const DeepCollectionEquality().hash(eyeColour) ^
+      const DeepCollectionEquality().hash(facialHair) ^
+      const DeepCollectionEquality().hash(filmTaste) ^
+      const DeepCollectionEquality().hash(gender) ^
+      const DeepCollectionEquality().hash(glasses) ^
+      const DeepCollectionEquality().hash(hairColour) ^
+      const DeepCollectionEquality().hash(height) ^
+      const DeepCollectionEquality().hash(horoscope) ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(lastName) ^
+      const DeepCollectionEquality().hash(interests) ^
+      const DeepCollectionEquality().hash(jobType) ^
+      const DeepCollectionEquality().hash(languages) ^
+      const DeepCollectionEquality().hash(maritalStatus) ^
+      const DeepCollectionEquality().hash(musicalTaste) ^
+      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(photo) ^
-      const DeepCollectionEquality().hash(roles) ^
-      const DeepCollectionEquality().hash(uid) ^
+      const DeepCollectionEquality().hash(piercing) ^
+      const DeepCollectionEquality().hash(religion) ^
+      const DeepCollectionEquality().hash(shape) ^
+      const DeepCollectionEquality().hash(sportiness) ^
+      const DeepCollectionEquality().hash(tattoo) ^
       const DeepCollectionEquality().hash(username) ^
       runtimeType.hashCode;
 }
 
 extension $PersonExtension on Person {
   Person copyWith(
-      {DateTime? birthDate,
+      {int? alcohol,
+      String? bio,
+      DateTime? birthDate,
+      int? breastSize,
+      int? childrenNumber,
+      int? cigarettes,
+      String? city,
+      int? eduLevel,
       String? email,
-      String? firstName,
+      int? eyeColour,
+      int? facialHair,
+      int? filmTaste,
+      int? gender,
+      int? glasses,
+      int? hairColour,
+      int? height,
+      int? horoscope,
       num? id,
-      String? lastName,
+      int? interests,
+      int? jobType,
+      int? languages,
+      int? maritalStatus,
+      int? musicalTaste,
+      String? name,
       String? photo,
-      List<Role>? roles,
-      String? uid,
+      int? piercing,
+      int? religion,
+      int? shape,
+      int? sportiness,
+      int? tattoo,
       String? username}) {
     return Person(
+        alcohol: alcohol ?? this.alcohol,
+        bio: bio ?? this.bio,
         birthDate: birthDate ?? this.birthDate,
+        breastSize: breastSize ?? this.breastSize,
+        childrenNumber: childrenNumber ?? this.childrenNumber,
+        cigarettes: cigarettes ?? this.cigarettes,
+        city: city ?? this.city,
+        eduLevel: eduLevel ?? this.eduLevel,
         email: email ?? this.email,
-        firstName: firstName ?? this.firstName,
+        eyeColour: eyeColour ?? this.eyeColour,
+        facialHair: facialHair ?? this.facialHair,
+        filmTaste: filmTaste ?? this.filmTaste,
+        gender: gender ?? this.gender,
+        glasses: glasses ?? this.glasses,
+        hairColour: hairColour ?? this.hairColour,
+        height: height ?? this.height,
+        horoscope: horoscope ?? this.horoscope,
         id: id ?? this.id,
-        lastName: lastName ?? this.lastName,
+        interests: interests ?? this.interests,
+        jobType: jobType ?? this.jobType,
+        languages: languages ?? this.languages,
+        maritalStatus: maritalStatus ?? this.maritalStatus,
+        musicalTaste: musicalTaste ?? this.musicalTaste,
+        name: name ?? this.name,
         photo: photo ?? this.photo,
-        roles: roles ?? this.roles,
-        uid: uid ?? this.uid,
+        piercing: piercing ?? this.piercing,
+        religion: religion ?? this.religion,
+        shape: shape ?? this.shape,
+        sportiness: sportiness ?? this.sportiness,
+        tattoo: tattoo ?? this.tattoo,
         username: username ?? this.username);
   }
 
   Person copyWithWrapped(
-      {Wrapped<DateTime?>? birthDate,
+      {Wrapped<int?>? alcohol,
+      Wrapped<String?>? bio,
+      Wrapped<DateTime?>? birthDate,
+      Wrapped<int?>? breastSize,
+      Wrapped<int?>? childrenNumber,
+      Wrapped<int?>? cigarettes,
+      Wrapped<String?>? city,
+      Wrapped<int?>? eduLevel,
       Wrapped<String>? email,
-      Wrapped<String>? firstName,
+      Wrapped<int?>? eyeColour,
+      Wrapped<int?>? facialHair,
+      Wrapped<int?>? filmTaste,
+      Wrapped<int?>? gender,
+      Wrapped<int?>? glasses,
+      Wrapped<int?>? hairColour,
+      Wrapped<int?>? height,
+      Wrapped<int?>? horoscope,
       Wrapped<num>? id,
-      Wrapped<String>? lastName,
+      Wrapped<int?>? interests,
+      Wrapped<int?>? jobType,
+      Wrapped<int?>? languages,
+      Wrapped<int?>? maritalStatus,
+      Wrapped<int?>? musicalTaste,
+      Wrapped<String>? name,
       Wrapped<String?>? photo,
-      Wrapped<List<Role>>? roles,
-      Wrapped<String>? uid,
+      Wrapped<int?>? piercing,
+      Wrapped<int?>? religion,
+      Wrapped<int?>? shape,
+      Wrapped<int?>? sportiness,
+      Wrapped<int?>? tattoo,
       Wrapped<String?>? username}) {
     return Person(
+        alcohol: (alcohol != null ? alcohol.value : this.alcohol),
+        bio: (bio != null ? bio.value : this.bio),
         birthDate: (birthDate != null ? birthDate.value : this.birthDate),
+        breastSize: (breastSize != null ? breastSize.value : this.breastSize),
+        childrenNumber: (childrenNumber != null
+            ? childrenNumber.value
+            : this.childrenNumber),
+        cigarettes: (cigarettes != null ? cigarettes.value : this.cigarettes),
+        city: (city != null ? city.value : this.city),
+        eduLevel: (eduLevel != null ? eduLevel.value : this.eduLevel),
         email: (email != null ? email.value : this.email),
-        firstName: (firstName != null ? firstName.value : this.firstName),
+        eyeColour: (eyeColour != null ? eyeColour.value : this.eyeColour),
+        facialHair: (facialHair != null ? facialHair.value : this.facialHair),
+        filmTaste: (filmTaste != null ? filmTaste.value : this.filmTaste),
+        gender: (gender != null ? gender.value : this.gender),
+        glasses: (glasses != null ? glasses.value : this.glasses),
+        hairColour: (hairColour != null ? hairColour.value : this.hairColour),
+        height: (height != null ? height.value : this.height),
+        horoscope: (horoscope != null ? horoscope.value : this.horoscope),
         id: (id != null ? id.value : this.id),
-        lastName: (lastName != null ? lastName.value : this.lastName),
+        interests: (interests != null ? interests.value : this.interests),
+        jobType: (jobType != null ? jobType.value : this.jobType),
+        languages: (languages != null ? languages.value : this.languages),
+        maritalStatus:
+            (maritalStatus != null ? maritalStatus.value : this.maritalStatus),
+        musicalTaste:
+            (musicalTaste != null ? musicalTaste.value : this.musicalTaste),
+        name: (name != null ? name.value : this.name),
         photo: (photo != null ? photo.value : this.photo),
-        roles: (roles != null ? roles.value : this.roles),
-        uid: (uid != null ? uid.value : this.uid),
+        piercing: (piercing != null ? piercing.value : this.piercing),
+        religion: (religion != null ? religion.value : this.religion),
+        shape: (shape != null ? shape.value : this.shape),
+        sportiness: (sportiness != null ? sportiness.value : this.sportiness),
+        tattoo: (tattoo != null ? tattoo.value : this.tattoo),
         username: (username != null ? username.value : this.username));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class PersonAllDTO {
+  PersonAllDTO({
+    this.id,
+    this.username,
+    required this.name,
+    required this.email,
+    required this.photo,
+    required this.birthDate,
+    this.height,
+    this.age,
+    this.gender,
+    this.tattoo,
+    this.eyeColour,
+    this.hairColour,
+    this.piercing,
+    this.glasses,
+    this.sportiness,
+    this.breastSize,
+    this.bio,
+    this.city,
+    this.jobType,
+    this.eduLevel,
+    this.cigarettes,
+    this.alcohol,
+    this.childrenNumber,
+    this.maritalStatus,
+    this.musicalTaste,
+    this.filmTaste,
+    this.religion,
+    this.horoscope,
+    this.languages,
+    this.interests,
+    this.shape,
+    this.facialHair,
+    this.matchPct,
+  });
+
+  factory PersonAllDTO.fromJson(Map<String, dynamic> json) =>
+      _$PersonAllDTOFromJson(json);
+
+  @JsonKey(name: 'id')
+  final num? id;
+  @JsonKey(name: 'username')
+  final String? username;
+  @JsonKey(name: 'name')
+  final String name;
+  @JsonKey(name: 'email')
+  final String email;
+  @JsonKey(name: 'photo')
+  final String photo;
+  @JsonKey(name: 'birthDate', toJson: _dateToJson)
+  final DateTime birthDate;
+  @JsonKey(name: 'height')
+  final int? height;
+  @JsonKey(name: 'age')
+  final int? age;
+  @JsonKey(name: 'gender')
+  final int? gender;
+  @JsonKey(name: 'tattoo')
+  final int? tattoo;
+  @JsonKey(name: 'eyeColour')
+  final int? eyeColour;
+  @JsonKey(name: 'hairColour')
+  final int? hairColour;
+  @JsonKey(name: 'piercing')
+  final int? piercing;
+  @JsonKey(name: 'glasses')
+  final int? glasses;
+  @JsonKey(name: 'sportiness')
+  final int? sportiness;
+  @JsonKey(name: 'breastSize')
+  final int? breastSize;
+  @JsonKey(name: 'bio')
+  final String? bio;
+  @JsonKey(name: 'city')
+  final String? city;
+  @JsonKey(name: 'jobType')
+  final int? jobType;
+  @JsonKey(name: 'eduLevel')
+  final int? eduLevel;
+  @JsonKey(name: 'cigarettes')
+  final int? cigarettes;
+  @JsonKey(name: 'alcohol')
+  final int? alcohol;
+  @JsonKey(name: 'childrenNumber')
+  final int? childrenNumber;
+  @JsonKey(name: 'maritalStatus')
+  final int? maritalStatus;
+  @JsonKey(name: 'musicalTaste')
+  final int? musicalTaste;
+  @JsonKey(name: 'filmTaste')
+  final int? filmTaste;
+  @JsonKey(name: 'religion')
+  final int? religion;
+  @JsonKey(name: 'horoscope')
+  final int? horoscope;
+  @JsonKey(name: 'languages')
+  final int? languages;
+  @JsonKey(name: 'interests')
+  final int? interests;
+  @JsonKey(name: 'shape')
+  final int? shape;
+  @JsonKey(name: 'facialHair')
+  final int? facialHair;
+  @JsonKey(name: 'matchPct')
+  final int? matchPct;
+  static const fromJsonFactory = _$PersonAllDTOFromJson;
+  static const toJsonFactory = _$PersonAllDTOToJson;
+  Map<String, dynamic> toJson() => _$PersonAllDTOToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is PersonAllDTO &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.username, username) ||
+                const DeepCollectionEquality()
+                    .equals(other.username, username)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
+            (identical(other.photo, photo) ||
+                const DeepCollectionEquality().equals(other.photo, photo)) &&
+            (identical(other.birthDate, birthDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.birthDate, birthDate)) &&
+            (identical(other.height, height) ||
+                const DeepCollectionEquality().equals(other.height, height)) &&
+            (identical(other.age, age) ||
+                const DeepCollectionEquality().equals(other.age, age)) &&
+            (identical(other.gender, gender) ||
+                const DeepCollectionEquality().equals(other.gender, gender)) &&
+            (identical(other.tattoo, tattoo) ||
+                const DeepCollectionEquality().equals(other.tattoo, tattoo)) &&
+            (identical(other.eyeColour, eyeColour) ||
+                const DeepCollectionEquality()
+                    .equals(other.eyeColour, eyeColour)) &&
+            (identical(other.hairColour, hairColour) ||
+                const DeepCollectionEquality()
+                    .equals(other.hairColour, hairColour)) &&
+            (identical(other.piercing, piercing) ||
+                const DeepCollectionEquality()
+                    .equals(other.piercing, piercing)) &&
+            (identical(other.glasses, glasses) ||
+                const DeepCollectionEquality()
+                    .equals(other.glasses, glasses)) &&
+            (identical(other.sportiness, sportiness) ||
+                const DeepCollectionEquality()
+                    .equals(other.sportiness, sportiness)) &&
+            (identical(other.breastSize, breastSize) ||
+                const DeepCollectionEquality()
+                    .equals(other.breastSize, breastSize)) &&
+            (identical(other.bio, bio) ||
+                const DeepCollectionEquality().equals(other.bio, bio)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.jobType, jobType) ||
+                const DeepCollectionEquality()
+                    .equals(other.jobType, jobType)) &&
+            (identical(other.eduLevel, eduLevel) ||
+                const DeepCollectionEquality()
+                    .equals(other.eduLevel, eduLevel)) &&
+            (identical(other.cigarettes, cigarettes) ||
+                const DeepCollectionEquality()
+                    .equals(other.cigarettes, cigarettes)) &&
+            (identical(other.alcohol, alcohol) ||
+                const DeepCollectionEquality()
+                    .equals(other.alcohol, alcohol)) &&
+            (identical(other.childrenNumber, childrenNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.childrenNumber, childrenNumber)) &&
+            (identical(other.maritalStatus, maritalStatus) ||
+                const DeepCollectionEquality()
+                    .equals(other.maritalStatus, maritalStatus)) &&
+            (identical(other.musicalTaste, musicalTaste) ||
+                const DeepCollectionEquality()
+                    .equals(other.musicalTaste, musicalTaste)) &&
+            (identical(other.filmTaste, filmTaste) ||
+                const DeepCollectionEquality()
+                    .equals(other.filmTaste, filmTaste)) &&
+            (identical(other.religion, religion) ||
+                const DeepCollectionEquality().equals(other.religion, religion)) &&
+            (identical(other.horoscope, horoscope) || const DeepCollectionEquality().equals(other.horoscope, horoscope)) &&
+            (identical(other.languages, languages) || const DeepCollectionEquality().equals(other.languages, languages)) &&
+            (identical(other.interests, interests) || const DeepCollectionEquality().equals(other.interests, interests)) &&
+            (identical(other.shape, shape) || const DeepCollectionEquality().equals(other.shape, shape)) &&
+            (identical(other.facialHair, facialHair) || const DeepCollectionEquality().equals(other.facialHair, facialHair)) &&
+            (identical(other.matchPct, matchPct) || const DeepCollectionEquality().equals(other.matchPct, matchPct)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(username) ^
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(email) ^
+      const DeepCollectionEquality().hash(photo) ^
+      const DeepCollectionEquality().hash(birthDate) ^
+      const DeepCollectionEquality().hash(height) ^
+      const DeepCollectionEquality().hash(age) ^
+      const DeepCollectionEquality().hash(gender) ^
+      const DeepCollectionEquality().hash(tattoo) ^
+      const DeepCollectionEquality().hash(eyeColour) ^
+      const DeepCollectionEquality().hash(hairColour) ^
+      const DeepCollectionEquality().hash(piercing) ^
+      const DeepCollectionEquality().hash(glasses) ^
+      const DeepCollectionEquality().hash(sportiness) ^
+      const DeepCollectionEquality().hash(breastSize) ^
+      const DeepCollectionEquality().hash(bio) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(jobType) ^
+      const DeepCollectionEquality().hash(eduLevel) ^
+      const DeepCollectionEquality().hash(cigarettes) ^
+      const DeepCollectionEquality().hash(alcohol) ^
+      const DeepCollectionEquality().hash(childrenNumber) ^
+      const DeepCollectionEquality().hash(maritalStatus) ^
+      const DeepCollectionEquality().hash(musicalTaste) ^
+      const DeepCollectionEquality().hash(filmTaste) ^
+      const DeepCollectionEquality().hash(religion) ^
+      const DeepCollectionEquality().hash(horoscope) ^
+      const DeepCollectionEquality().hash(languages) ^
+      const DeepCollectionEquality().hash(interests) ^
+      const DeepCollectionEquality().hash(shape) ^
+      const DeepCollectionEquality().hash(facialHair) ^
+      const DeepCollectionEquality().hash(matchPct) ^
+      runtimeType.hashCode;
+}
+
+extension $PersonAllDTOExtension on PersonAllDTO {
+  PersonAllDTO copyWith(
+      {num? id,
+      String? username,
+      String? name,
+      String? email,
+      String? photo,
+      DateTime? birthDate,
+      int? height,
+      int? age,
+      int? gender,
+      int? tattoo,
+      int? eyeColour,
+      int? hairColour,
+      int? piercing,
+      int? glasses,
+      int? sportiness,
+      int? breastSize,
+      String? bio,
+      String? city,
+      int? jobType,
+      int? eduLevel,
+      int? cigarettes,
+      int? alcohol,
+      int? childrenNumber,
+      int? maritalStatus,
+      int? musicalTaste,
+      int? filmTaste,
+      int? religion,
+      int? horoscope,
+      int? languages,
+      int? interests,
+      int? shape,
+      int? facialHair,
+      int? matchPct}) {
+    return PersonAllDTO(
+        id: id ?? this.id,
+        username: username ?? this.username,
+        name: name ?? this.name,
+        email: email ?? this.email,
+        photo: photo ?? this.photo,
+        birthDate: birthDate ?? this.birthDate,
+        height: height ?? this.height,
+        age: age ?? this.age,
+        gender: gender ?? this.gender,
+        tattoo: tattoo ?? this.tattoo,
+        eyeColour: eyeColour ?? this.eyeColour,
+        hairColour: hairColour ?? this.hairColour,
+        piercing: piercing ?? this.piercing,
+        glasses: glasses ?? this.glasses,
+        sportiness: sportiness ?? this.sportiness,
+        breastSize: breastSize ?? this.breastSize,
+        bio: bio ?? this.bio,
+        city: city ?? this.city,
+        jobType: jobType ?? this.jobType,
+        eduLevel: eduLevel ?? this.eduLevel,
+        cigarettes: cigarettes ?? this.cigarettes,
+        alcohol: alcohol ?? this.alcohol,
+        childrenNumber: childrenNumber ?? this.childrenNumber,
+        maritalStatus: maritalStatus ?? this.maritalStatus,
+        musicalTaste: musicalTaste ?? this.musicalTaste,
+        filmTaste: filmTaste ?? this.filmTaste,
+        religion: religion ?? this.religion,
+        horoscope: horoscope ?? this.horoscope,
+        languages: languages ?? this.languages,
+        interests: interests ?? this.interests,
+        shape: shape ?? this.shape,
+        facialHair: facialHair ?? this.facialHair,
+        matchPct: matchPct ?? this.matchPct);
+  }
+
+  PersonAllDTO copyWithWrapped(
+      {Wrapped<num?>? id,
+      Wrapped<String?>? username,
+      Wrapped<String>? name,
+      Wrapped<String>? email,
+      Wrapped<String>? photo,
+      Wrapped<DateTime>? birthDate,
+      Wrapped<int?>? height,
+      Wrapped<int?>? age,
+      Wrapped<int?>? gender,
+      Wrapped<int?>? tattoo,
+      Wrapped<int?>? eyeColour,
+      Wrapped<int?>? hairColour,
+      Wrapped<int?>? piercing,
+      Wrapped<int?>? glasses,
+      Wrapped<int?>? sportiness,
+      Wrapped<int?>? breastSize,
+      Wrapped<String?>? bio,
+      Wrapped<String?>? city,
+      Wrapped<int?>? jobType,
+      Wrapped<int?>? eduLevel,
+      Wrapped<int?>? cigarettes,
+      Wrapped<int?>? alcohol,
+      Wrapped<int?>? childrenNumber,
+      Wrapped<int?>? maritalStatus,
+      Wrapped<int?>? musicalTaste,
+      Wrapped<int?>? filmTaste,
+      Wrapped<int?>? religion,
+      Wrapped<int?>? horoscope,
+      Wrapped<int?>? languages,
+      Wrapped<int?>? interests,
+      Wrapped<int?>? shape,
+      Wrapped<int?>? facialHair,
+      Wrapped<int?>? matchPct}) {
+    return PersonAllDTO(
+        id: (id != null ? id.value : this.id),
+        username: (username != null ? username.value : this.username),
+        name: (name != null ? name.value : this.name),
+        email: (email != null ? email.value : this.email),
+        photo: (photo != null ? photo.value : this.photo),
+        birthDate: (birthDate != null ? birthDate.value : this.birthDate),
+        height: (height != null ? height.value : this.height),
+        age: (age != null ? age.value : this.age),
+        gender: (gender != null ? gender.value : this.gender),
+        tattoo: (tattoo != null ? tattoo.value : this.tattoo),
+        eyeColour: (eyeColour != null ? eyeColour.value : this.eyeColour),
+        hairColour: (hairColour != null ? hairColour.value : this.hairColour),
+        piercing: (piercing != null ? piercing.value : this.piercing),
+        glasses: (glasses != null ? glasses.value : this.glasses),
+        sportiness: (sportiness != null ? sportiness.value : this.sportiness),
+        breastSize: (breastSize != null ? breastSize.value : this.breastSize),
+        bio: (bio != null ? bio.value : this.bio),
+        city: (city != null ? city.value : this.city),
+        jobType: (jobType != null ? jobType.value : this.jobType),
+        eduLevel: (eduLevel != null ? eduLevel.value : this.eduLevel),
+        cigarettes: (cigarettes != null ? cigarettes.value : this.cigarettes),
+        alcohol: (alcohol != null ? alcohol.value : this.alcohol),
+        childrenNumber: (childrenNumber != null
+            ? childrenNumber.value
+            : this.childrenNumber),
+        maritalStatus:
+            (maritalStatus != null ? maritalStatus.value : this.maritalStatus),
+        musicalTaste:
+            (musicalTaste != null ? musicalTaste.value : this.musicalTaste),
+        filmTaste: (filmTaste != null ? filmTaste.value : this.filmTaste),
+        religion: (religion != null ? religion.value : this.religion),
+        horoscope: (horoscope != null ? horoscope.value : this.horoscope),
+        languages: (languages != null ? languages.value : this.languages),
+        interests: (interests != null ? interests.value : this.interests),
+        shape: (shape != null ? shape.value : this.shape),
+        facialHair: (facialHair != null ? facialHair.value : this.facialHair),
+        matchPct: (matchPct != null ? matchPct.value : this.matchPct));
   }
 }
 
@@ -277,11 +1268,35 @@ class RegistrationDTO {
   RegistrationDTO({
     required this.username,
     required this.password,
-    required this.firstName,
-    required this.lastName,
+    required this.name,
     required this.email,
     required this.photo,
     required this.birthDate,
+    this.height,
+    this.gender,
+    this.tattoo,
+    this.eyeColour,
+    this.hairColour,
+    this.piercing,
+    this.glasses,
+    this.sportiness,
+    this.breastSize,
+    this.bio,
+    this.city,
+    this.jobType,
+    this.eduLevel,
+    this.cigarettes,
+    this.alcohol,
+    this.childrenNumber,
+    this.maritalStatus,
+    this.musicalTaste,
+    this.filmTaste,
+    this.religion,
+    this.horoscope,
+    this.languages,
+    this.interests,
+    this.shape,
+    this.facialHair,
   });
 
   factory RegistrationDTO.fromJson(Map<String, dynamic> json) =>
@@ -291,16 +1306,64 @@ class RegistrationDTO {
   final String username;
   @JsonKey(name: 'password')
   final String password;
-  @JsonKey(name: 'firstName')
-  final String firstName;
-  @JsonKey(name: 'lastName')
-  final String lastName;
+  @JsonKey(name: 'name')
+  final String name;
   @JsonKey(name: 'email')
   final String email;
   @JsonKey(name: 'photo')
   final String photo;
   @JsonKey(name: 'birthDate', toJson: _dateToJson)
   final DateTime birthDate;
+  @JsonKey(name: 'height')
+  final int? height;
+  @JsonKey(name: 'gender')
+  final int? gender;
+  @JsonKey(name: 'tattoo')
+  final int? tattoo;
+  @JsonKey(name: 'eyeColour')
+  final int? eyeColour;
+  @JsonKey(name: 'hairColour')
+  final int? hairColour;
+  @JsonKey(name: 'piercing')
+  final int? piercing;
+  @JsonKey(name: 'glasses')
+  final int? glasses;
+  @JsonKey(name: 'sportiness')
+  final int? sportiness;
+  @JsonKey(name: 'breastSize')
+  final int? breastSize;
+  @JsonKey(name: 'bio')
+  final String? bio;
+  @JsonKey(name: 'city')
+  final String? city;
+  @JsonKey(name: 'jobType')
+  final int? jobType;
+  @JsonKey(name: 'eduLevel')
+  final int? eduLevel;
+  @JsonKey(name: 'cigarettes')
+  final int? cigarettes;
+  @JsonKey(name: 'alcohol')
+  final int? alcohol;
+  @JsonKey(name: 'childrenNumber')
+  final int? childrenNumber;
+  @JsonKey(name: 'maritalStatus')
+  final int? maritalStatus;
+  @JsonKey(name: 'musicalTaste')
+  final int? musicalTaste;
+  @JsonKey(name: 'filmTaste')
+  final int? filmTaste;
+  @JsonKey(name: 'religion')
+  final int? religion;
+  @JsonKey(name: 'horoscope')
+  final int? horoscope;
+  @JsonKey(name: 'languages')
+  final int? languages;
+  @JsonKey(name: 'interests')
+  final int? interests;
+  @JsonKey(name: 'shape')
+  final int? shape;
+  @JsonKey(name: 'facialHair')
+  final int? facialHair;
   static const fromJsonFactory = _$RegistrationDTOFromJson;
   static const toJsonFactory = _$RegistrationDTOToJson;
   Map<String, dynamic> toJson() => _$RegistrationDTOToJson(this);
@@ -315,19 +1378,74 @@ class RegistrationDTO {
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
                     .equals(other.password, password)) &&
-            (identical(other.firstName, firstName) ||
-                const DeepCollectionEquality()
-                    .equals(other.firstName, firstName)) &&
-            (identical(other.lastName, lastName) ||
-                const DeepCollectionEquality()
-                    .equals(other.lastName, lastName)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.email, email) ||
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.photo, photo) ||
                 const DeepCollectionEquality().equals(other.photo, photo)) &&
             (identical(other.birthDate, birthDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.birthDate, birthDate)));
+                    .equals(other.birthDate, birthDate)) &&
+            (identical(other.height, height) ||
+                const DeepCollectionEquality().equals(other.height, height)) &&
+            (identical(other.gender, gender) ||
+                const DeepCollectionEquality().equals(other.gender, gender)) &&
+            (identical(other.tattoo, tattoo) ||
+                const DeepCollectionEquality().equals(other.tattoo, tattoo)) &&
+            (identical(other.eyeColour, eyeColour) ||
+                const DeepCollectionEquality()
+                    .equals(other.eyeColour, eyeColour)) &&
+            (identical(other.hairColour, hairColour) ||
+                const DeepCollectionEquality()
+                    .equals(other.hairColour, hairColour)) &&
+            (identical(other.piercing, piercing) ||
+                const DeepCollectionEquality()
+                    .equals(other.piercing, piercing)) &&
+            (identical(other.glasses, glasses) ||
+                const DeepCollectionEquality()
+                    .equals(other.glasses, glasses)) &&
+            (identical(other.sportiness, sportiness) ||
+                const DeepCollectionEquality()
+                    .equals(other.sportiness, sportiness)) &&
+            (identical(other.breastSize, breastSize) ||
+                const DeepCollectionEquality()
+                    .equals(other.breastSize, breastSize)) &&
+            (identical(other.bio, bio) ||
+                const DeepCollectionEquality().equals(other.bio, bio)) &&
+            (identical(other.city, city) ||
+                const DeepCollectionEquality().equals(other.city, city)) &&
+            (identical(other.jobType, jobType) ||
+                const DeepCollectionEquality()
+                    .equals(other.jobType, jobType)) &&
+            (identical(other.eduLevel, eduLevel) ||
+                const DeepCollectionEquality()
+                    .equals(other.eduLevel, eduLevel)) &&
+            (identical(other.cigarettes, cigarettes) ||
+                const DeepCollectionEquality()
+                    .equals(other.cigarettes, cigarettes)) &&
+            (identical(other.alcohol, alcohol) ||
+                const DeepCollectionEquality()
+                    .equals(other.alcohol, alcohol)) &&
+            (identical(other.childrenNumber, childrenNumber) ||
+                const DeepCollectionEquality()
+                    .equals(other.childrenNumber, childrenNumber)) &&
+            (identical(other.maritalStatus, maritalStatus) ||
+                const DeepCollectionEquality()
+                    .equals(other.maritalStatus, maritalStatus)) &&
+            (identical(other.musicalTaste, musicalTaste) ||
+                const DeepCollectionEquality()
+                    .equals(other.musicalTaste, musicalTaste)) &&
+            (identical(other.filmTaste, filmTaste) ||
+                const DeepCollectionEquality()
+                    .equals(other.filmTaste, filmTaste)) &&
+            (identical(other.religion, religion) ||
+                const DeepCollectionEquality().equals(other.religion, religion)) &&
+            (identical(other.horoscope, horoscope) || const DeepCollectionEquality().equals(other.horoscope, horoscope)) &&
+            (identical(other.languages, languages) || const DeepCollectionEquality().equals(other.languages, languages)) &&
+            (identical(other.interests, interests) || const DeepCollectionEquality().equals(other.interests, interests)) &&
+            (identical(other.shape, shape) || const DeepCollectionEquality().equals(other.shape, shape)) &&
+            (identical(other.facialHair, facialHair) || const DeepCollectionEquality().equals(other.facialHair, facialHair)));
   }
 
   @override
@@ -337,11 +1455,35 @@ class RegistrationDTO {
   int get hashCode =>
       const DeepCollectionEquality().hash(username) ^
       const DeepCollectionEquality().hash(password) ^
-      const DeepCollectionEquality().hash(firstName) ^
-      const DeepCollectionEquality().hash(lastName) ^
+      const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(photo) ^
       const DeepCollectionEquality().hash(birthDate) ^
+      const DeepCollectionEquality().hash(height) ^
+      const DeepCollectionEquality().hash(gender) ^
+      const DeepCollectionEquality().hash(tattoo) ^
+      const DeepCollectionEquality().hash(eyeColour) ^
+      const DeepCollectionEquality().hash(hairColour) ^
+      const DeepCollectionEquality().hash(piercing) ^
+      const DeepCollectionEquality().hash(glasses) ^
+      const DeepCollectionEquality().hash(sportiness) ^
+      const DeepCollectionEquality().hash(breastSize) ^
+      const DeepCollectionEquality().hash(bio) ^
+      const DeepCollectionEquality().hash(city) ^
+      const DeepCollectionEquality().hash(jobType) ^
+      const DeepCollectionEquality().hash(eduLevel) ^
+      const DeepCollectionEquality().hash(cigarettes) ^
+      const DeepCollectionEquality().hash(alcohol) ^
+      const DeepCollectionEquality().hash(childrenNumber) ^
+      const DeepCollectionEquality().hash(maritalStatus) ^
+      const DeepCollectionEquality().hash(musicalTaste) ^
+      const DeepCollectionEquality().hash(filmTaste) ^
+      const DeepCollectionEquality().hash(religion) ^
+      const DeepCollectionEquality().hash(horoscope) ^
+      const DeepCollectionEquality().hash(languages) ^
+      const DeepCollectionEquality().hash(interests) ^
+      const DeepCollectionEquality().hash(shape) ^
+      const DeepCollectionEquality().hash(facialHair) ^
       runtimeType.hashCode;
 }
 
@@ -349,90 +1491,137 @@ extension $RegistrationDTOExtension on RegistrationDTO {
   RegistrationDTO copyWith(
       {String? username,
       String? password,
-      String? firstName,
-      String? lastName,
+      String? name,
       String? email,
       String? photo,
-      DateTime? birthDate}) {
+      DateTime? birthDate,
+      int? height,
+      int? gender,
+      int? tattoo,
+      int? eyeColour,
+      int? hairColour,
+      int? piercing,
+      int? glasses,
+      int? sportiness,
+      int? breastSize,
+      String? bio,
+      String? city,
+      int? jobType,
+      int? eduLevel,
+      int? cigarettes,
+      int? alcohol,
+      int? childrenNumber,
+      int? maritalStatus,
+      int? musicalTaste,
+      int? filmTaste,
+      int? religion,
+      int? horoscope,
+      int? languages,
+      int? interests,
+      int? shape,
+      int? facialHair}) {
     return RegistrationDTO(
         username: username ?? this.username,
         password: password ?? this.password,
-        firstName: firstName ?? this.firstName,
-        lastName: lastName ?? this.lastName,
+        name: name ?? this.name,
         email: email ?? this.email,
         photo: photo ?? this.photo,
-        birthDate: birthDate ?? this.birthDate);
+        birthDate: birthDate ?? this.birthDate,
+        height: height ?? this.height,
+        gender: gender ?? this.gender,
+        tattoo: tattoo ?? this.tattoo,
+        eyeColour: eyeColour ?? this.eyeColour,
+        hairColour: hairColour ?? this.hairColour,
+        piercing: piercing ?? this.piercing,
+        glasses: glasses ?? this.glasses,
+        sportiness: sportiness ?? this.sportiness,
+        breastSize: breastSize ?? this.breastSize,
+        bio: bio ?? this.bio,
+        city: city ?? this.city,
+        jobType: jobType ?? this.jobType,
+        eduLevel: eduLevel ?? this.eduLevel,
+        cigarettes: cigarettes ?? this.cigarettes,
+        alcohol: alcohol ?? this.alcohol,
+        childrenNumber: childrenNumber ?? this.childrenNumber,
+        maritalStatus: maritalStatus ?? this.maritalStatus,
+        musicalTaste: musicalTaste ?? this.musicalTaste,
+        filmTaste: filmTaste ?? this.filmTaste,
+        religion: religion ?? this.religion,
+        horoscope: horoscope ?? this.horoscope,
+        languages: languages ?? this.languages,
+        interests: interests ?? this.interests,
+        shape: shape ?? this.shape,
+        facialHair: facialHair ?? this.facialHair);
   }
 
   RegistrationDTO copyWithWrapped(
       {Wrapped<String>? username,
       Wrapped<String>? password,
-      Wrapped<String>? firstName,
-      Wrapped<String>? lastName,
+      Wrapped<String>? name,
       Wrapped<String>? email,
       Wrapped<String>? photo,
-      Wrapped<DateTime>? birthDate}) {
+      Wrapped<DateTime>? birthDate,
+      Wrapped<int?>? height,
+      Wrapped<int?>? gender,
+      Wrapped<int?>? tattoo,
+      Wrapped<int?>? eyeColour,
+      Wrapped<int?>? hairColour,
+      Wrapped<int?>? piercing,
+      Wrapped<int?>? glasses,
+      Wrapped<int?>? sportiness,
+      Wrapped<int?>? breastSize,
+      Wrapped<String?>? bio,
+      Wrapped<String?>? city,
+      Wrapped<int?>? jobType,
+      Wrapped<int?>? eduLevel,
+      Wrapped<int?>? cigarettes,
+      Wrapped<int?>? alcohol,
+      Wrapped<int?>? childrenNumber,
+      Wrapped<int?>? maritalStatus,
+      Wrapped<int?>? musicalTaste,
+      Wrapped<int?>? filmTaste,
+      Wrapped<int?>? religion,
+      Wrapped<int?>? horoscope,
+      Wrapped<int?>? languages,
+      Wrapped<int?>? interests,
+      Wrapped<int?>? shape,
+      Wrapped<int?>? facialHair}) {
     return RegistrationDTO(
         username: (username != null ? username.value : this.username),
         password: (password != null ? password.value : this.password),
-        firstName: (firstName != null ? firstName.value : this.firstName),
-        lastName: (lastName != null ? lastName.value : this.lastName),
+        name: (name != null ? name.value : this.name),
         email: (email != null ? email.value : this.email),
         photo: (photo != null ? photo.value : this.photo),
-        birthDate: (birthDate != null ? birthDate.value : this.birthDate));
-  }
-}
-
-@JsonSerializable(explicitToJson: true)
-class Role {
-  Role({
-    required this.id,
-    required this.role,
-  });
-
-  factory Role.fromJson(Map<String, dynamic> json) => _$RoleFromJson(json);
-
-  @JsonKey(name: 'id')
-  final num id;
-  @JsonKey(
-    name: 'role',
-    toJson: roleRoleToJson,
-    fromJson: roleRoleFromJson,
-  )
-  final enums.RoleRole role;
-  static const fromJsonFactory = _$RoleFromJson;
-  static const toJsonFactory = _$RoleToJson;
-  Map<String, dynamic> toJson() => _$RoleToJson(this);
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is Role &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.role, role) ||
-                const DeepCollectionEquality().equals(other.role, role)));
-  }
-
-  @override
-  String toString() => jsonEncode(this);
-
-  @override
-  int get hashCode =>
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(role) ^
-      runtimeType.hashCode;
-}
-
-extension $RoleExtension on Role {
-  Role copyWith({num? id, enums.RoleRole? role}) {
-    return Role(id: id ?? this.id, role: role ?? this.role);
-  }
-
-  Role copyWithWrapped({Wrapped<num>? id, Wrapped<enums.RoleRole>? role}) {
-    return Role(
-        id: (id != null ? id.value : this.id),
-        role: (role != null ? role.value : this.role));
+        birthDate: (birthDate != null ? birthDate.value : this.birthDate),
+        height: (height != null ? height.value : this.height),
+        gender: (gender != null ? gender.value : this.gender),
+        tattoo: (tattoo != null ? tattoo.value : this.tattoo),
+        eyeColour: (eyeColour != null ? eyeColour.value : this.eyeColour),
+        hairColour: (hairColour != null ? hairColour.value : this.hairColour),
+        piercing: (piercing != null ? piercing.value : this.piercing),
+        glasses: (glasses != null ? glasses.value : this.glasses),
+        sportiness: (sportiness != null ? sportiness.value : this.sportiness),
+        breastSize: (breastSize != null ? breastSize.value : this.breastSize),
+        bio: (bio != null ? bio.value : this.bio),
+        city: (city != null ? city.value : this.city),
+        jobType: (jobType != null ? jobType.value : this.jobType),
+        eduLevel: (eduLevel != null ? eduLevel.value : this.eduLevel),
+        cigarettes: (cigarettes != null ? cigarettes.value : this.cigarettes),
+        alcohol: (alcohol != null ? alcohol.value : this.alcohol),
+        childrenNumber: (childrenNumber != null
+            ? childrenNumber.value
+            : this.childrenNumber),
+        maritalStatus:
+            (maritalStatus != null ? maritalStatus.value : this.maritalStatus),
+        musicalTaste:
+            (musicalTaste != null ? musicalTaste.value : this.musicalTaste),
+        filmTaste: (filmTaste != null ? filmTaste.value : this.filmTaste),
+        religion: (religion != null ? religion.value : this.religion),
+        horoscope: (horoscope != null ? horoscope.value : this.horoscope),
+        languages: (languages != null ? languages.value : this.languages),
+        interests: (interests != null ? interests.value : this.interests),
+        shape: (shape != null ? shape.value : this.shape),
+        facialHair: (facialHair != null ? facialHair.value : this.facialHair));
   }
 }
 
@@ -492,60 +1681,134 @@ extension $TokensExtension on Tokens {
   }
 }
 
-String? roleRoleToJson(enums.RoleRole? roleRole) {
-  return enums.$RoleRoleMap[roleRole];
+String? messageEntityStateToJson(enums.MessageEntityState? messageEntityState) {
+  return enums.$MessageEntityStateMap[messageEntityState];
 }
 
-enums.RoleRole roleRoleFromJson(
-  Object? roleRole, [
-  enums.RoleRole? defaultValue,
+enums.MessageEntityState messageEntityStateFromJson(
+  Object? messageEntityState, [
+  enums.MessageEntityState? defaultValue,
 ]) {
-  if (roleRole is String) {
-    return enums.$RoleRoleMap.entries
+  if (messageEntityState is String) {
+    return enums.$MessageEntityStateMap.entries
         .firstWhere(
-            (element) => element.value.toLowerCase() == roleRole.toLowerCase(),
-            orElse: () =>
-                const MapEntry(enums.RoleRole.swaggerGeneratedUnknown, ''))
+            (element) =>
+                element.value.toLowerCase() == messageEntityState.toLowerCase(),
+            orElse: () => const MapEntry(
+                enums.MessageEntityState.swaggerGeneratedUnknown, ''))
         .key;
   }
 
   final parsedResult = defaultValue == null
       ? null
-      : enums.$RoleRoleMap.entries
+      : enums.$MessageEntityStateMap.entries
           .firstWhereOrNull((element) => element.value == defaultValue)
           ?.key;
 
-  return parsedResult ?? defaultValue ?? enums.RoleRole.swaggerGeneratedUnknown;
+  return parsedResult ??
+      defaultValue ??
+      enums.MessageEntityState.swaggerGeneratedUnknown;
 }
 
-List<String> roleRoleListToJson(List<enums.RoleRole>? roleRole) {
-  if (roleRole == null) {
+List<String> messageEntityStateListToJson(
+    List<enums.MessageEntityState>? messageEntityState) {
+  if (messageEntityState == null) {
     return [];
   }
 
-  return roleRole.map((e) => enums.$RoleRoleMap[e]!).toList();
+  return messageEntityState
+      .map((e) => enums.$MessageEntityStateMap[e]!)
+      .toList();
 }
 
-List<enums.RoleRole> roleRoleListFromJson(
-  List? roleRole, [
-  List<enums.RoleRole>? defaultValue,
+List<enums.MessageEntityState> messageEntityStateListFromJson(
+  List? messageEntityState, [
+  List<enums.MessageEntityState>? defaultValue,
 ]) {
-  if (roleRole == null) {
+  if (messageEntityState == null) {
     return defaultValue ?? [];
   }
 
-  return roleRole.map((e) => roleRoleFromJson(e.toString())).toList();
+  return messageEntityState
+      .map((e) => messageEntityStateFromJson(e.toString()))
+      .toList();
 }
 
-List<enums.RoleRole>? roleRoleNullableListFromJson(
-  List? roleRole, [
-  List<enums.RoleRole>? defaultValue,
+List<enums.MessageEntityState>? messageEntityStateNullableListFromJson(
+  List? messageEntityState, [
+  List<enums.MessageEntityState>? defaultValue,
 ]) {
-  if (roleRole == null) {
+  if (messageEntityState == null) {
     return defaultValue;
   }
 
-  return roleRole.map((e) => roleRoleFromJson(e.toString())).toList();
+  return messageEntityState
+      .map((e) => messageEntityStateFromJson(e.toString()))
+      .toList();
+}
+
+String? pairEntityStateToJson(enums.PairEntityState? pairEntityState) {
+  return enums.$PairEntityStateMap[pairEntityState];
+}
+
+enums.PairEntityState pairEntityStateFromJson(
+  Object? pairEntityState, [
+  enums.PairEntityState? defaultValue,
+]) {
+  if (pairEntityState is String) {
+    return enums.$PairEntityStateMap.entries
+        .firstWhere(
+            (element) =>
+                element.value.toLowerCase() == pairEntityState.toLowerCase(),
+            orElse: () => const MapEntry(
+                enums.PairEntityState.swaggerGeneratedUnknown, ''))
+        .key;
+  }
+
+  final parsedResult = defaultValue == null
+      ? null
+      : enums.$PairEntityStateMap.entries
+          .firstWhereOrNull((element) => element.value == defaultValue)
+          ?.key;
+
+  return parsedResult ??
+      defaultValue ??
+      enums.PairEntityState.swaggerGeneratedUnknown;
+}
+
+List<String> pairEntityStateListToJson(
+    List<enums.PairEntityState>? pairEntityState) {
+  if (pairEntityState == null) {
+    return [];
+  }
+
+  return pairEntityState.map((e) => enums.$PairEntityStateMap[e]!).toList();
+}
+
+List<enums.PairEntityState> pairEntityStateListFromJson(
+  List? pairEntityState, [
+  List<enums.PairEntityState>? defaultValue,
+]) {
+  if (pairEntityState == null) {
+    return defaultValue ?? [];
+  }
+
+  return pairEntityState
+      .map((e) => pairEntityStateFromJson(e.toString()))
+      .toList();
+}
+
+List<enums.PairEntityState>? pairEntityStateNullableListFromJson(
+  List? pairEntityState, [
+  List<enums.PairEntityState>? defaultValue,
+]) {
+  if (pairEntityState == null) {
+    return defaultValue;
+  }
+
+  return pairEntityState
+      .map((e) => pairEntityStateFromJson(e.toString()))
+      .toList();
 }
 
 typedef $JsonFactory<T> = T Function(Map<String, dynamic> json);

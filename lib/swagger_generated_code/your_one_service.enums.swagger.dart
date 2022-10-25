@@ -1,15 +1,35 @@
 import 'package:json_annotation/json_annotation.dart';
 
-enum RoleRole {
+enum MessageEntityState {
   @JsonValue('swaggerGeneratedUnknown')
   swaggerGeneratedUnknown,
-  @JsonValue('ROLE_USER')
-  roleUser,
-  @JsonValue('ROLE_ADMIN')
-  roleAdmin
+  @JsonValue('SENT')
+  sent,
+  @JsonValue('DELIVERED')
+  delivered,
+  @JsonValue('SEEN')
+  seen
 }
 
-const $RoleRoleMap = {
-  RoleRole.roleUser: 'ROLE_USER',
-  RoleRole.roleAdmin: 'ROLE_ADMIN'
+const $MessageEntityStateMap = {
+  MessageEntityState.sent: 'SENT',
+  MessageEntityState.delivered: 'DELIVERED',
+  MessageEntityState.seen: 'SEEN'
+};
+
+enum PairEntityState {
+  @JsonValue('swaggerGeneratedUnknown')
+  swaggerGeneratedUnknown,
+  @JsonValue('NOT_DECIDED')
+  notDecided,
+  @JsonValue('DENIED')
+  denied,
+  @JsonValue('MATCH')
+  match
+}
+
+const $PairEntityStateMap = {
+  PairEntityState.notDecided: 'NOT_DECIDED',
+  PairEntityState.denied: 'DENIED',
+  PairEntityState.match: 'MATCH'
 };

@@ -1,4 +1,4 @@
 abstract class AuthRepository {
-  Future<void> register();
+  Future<String> register();
   Future<String> login();
 }
