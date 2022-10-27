@@ -1,4 +1,6 @@
+import 'package:yourone/features/authentication/data/auth_store.dart';
+
 abstract class AuthRepository {
-  Future<String> register();
-  Future<String> login();
+  Future<CurrentUser> register(String email, String password);
+  Future<CurrentUser> login(String email, String password);
 }

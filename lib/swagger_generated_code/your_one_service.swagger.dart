@@ -50,9 +50,39 @@ abstract class YourOneService extends ChopperService {
 
   ///findAllChats
   ///@param Authorization Authorization
-  @Get(path: '/api/chat/')
+  @Get(path: '/api/chat')
   Future<chopper.Response<List<Person>>> _apiChatGet(
       {@Header('Authorization') String? authorization});
+
+  ///Gets all chat messages, only for debug
+  Future<chopper.Response<List<MessageEntity>>> apiChatAllGet() {
+    generatedMapping.putIfAbsent(
+        MessageEntity, () => MessageEntity.fromJsonFactory);
+
+    return _apiChatAllGet();
+  }
+
+  ///Gets all chat messages, only for debug
+  @Get(path: '/api/chat/all')
+  Future<chopper.Response<List<MessageEntity>>> _apiChatAllGet();
+
+  ///test
+  ///@param dto dto
+  Future<chopper.Response<ChatNotification>> apiChatPostTestPost(
+      {required SendMessageDTO? dto}) {
+    generatedMapping.putIfAbsent(
+        SendMessageDTO, () => SendMessageDTO.fromJsonFactory);
+    generatedMapping.putIfAbsent(
+        ChatNotification, () => ChatNotification.fromJsonFactory);
+
+    return _apiChatPostTestPost(dto: dto);
+  }
+
+  ///test
+  ///@param dto dto
+  @Post(path: '/api/chat/post-test')
+  Future<chopper.Response<ChatNotification>> _apiChatPostTestPost(
+      {@Body() required SendMessageDTO? dto});
 
   ///findChatMessages
   ///@param Authorization Authorization
@@ -254,6 +284,147 @@ abstract class YourOneService extends ChopperService {
 }
 
 @JsonSerializable(explicitToJson: true)
+class ChatNotification {
+  ChatNotification({
+    required this.id,
+    required this.senderId,
+    required this.senderName,
+    required this.text,
+    required this.timeStamp,
+  });
+
+  factory ChatNotification.fromJson(Map<String, dynamic> json) =>
+      _$ChatNotificationFromJson(json);
+
+  @JsonKey(name: 'id')
+  final num id;
+  @JsonKey(name: 'senderId')
+  final num senderId;
+  @JsonKey(name: 'senderName')
+  final String senderName;
+  @JsonKey(name: 'text')
+  final String text;
+  @JsonKey(name: 'timeStamp')
+  final num timeStamp;
+  static const fromJsonFactory = _$ChatNotificationFromJson;
+  static const toJsonFactory = _$ChatNotificationToJson;
+  Map<String, dynamic> toJson() => _$ChatNotificationToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ChatNotification &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.senderId, senderId) ||
+                const DeepCollectionEquality()
+                    .equals(other.senderId, senderId)) &&
+            (identical(other.senderName, senderName) ||
+                const DeepCollectionEquality()
+                    .equals(other.senderName, senderName)) &&
+            (identical(other.text, text) ||
+                const DeepCollectionEquality().equals(other.text, text)) &&
+            (identical(other.timeStamp, timeStamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.timeStamp, timeStamp)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(senderId) ^
+      const DeepCollectionEquality().hash(senderName) ^
+      const DeepCollectionEquality().hash(text) ^
+      const DeepCollectionEquality().hash(timeStamp) ^
+      runtimeType.hashCode;
+}
+
+extension $ChatNotificationExtension on ChatNotification {
+  ChatNotification copyWith(
+      {num? id,
+      num? senderId,
+      String? senderName,
+      String? text,
+      num? timeStamp}) {
+    return ChatNotification(
+        id: id ?? this.id,
+        senderId: senderId ?? this.senderId,
+        senderName: senderName ?? this.senderName,
+        text: text ?? this.text,
+        timeStamp: timeStamp ?? this.timeStamp);
+  }
+
+  ChatNotification copyWithWrapped(
+      {Wrapped<num>? id,
+      Wrapped<num>? senderId,
+      Wrapped<String>? senderName,
+      Wrapped<String>? text,
+      Wrapped<num>? timeStamp}) {
+    return ChatNotification(
+        id: (id != null ? id.value : this.id),
+        senderId: (senderId != null ? senderId.value : this.senderId),
+        senderName: (senderName != null ? senderName.value : this.senderName),
+        text: (text != null ? text.value : this.text),
+        timeStamp: (timeStamp != null ? timeStamp.value : this.timeStamp));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class CommonAttributes {
+  CommonAttributes({
+    required this.name,
+    required this.matches,
+  });
+
+  factory CommonAttributes.fromJson(Map<String, dynamic> json) =>
+      _$CommonAttributesFromJson(json);
+
+  @JsonKey(name: 'name')
+  final String name;
+  @JsonKey(name: 'matches')
+  final Map<String, dynamic> matches;
+  static const fromJsonFactory = _$CommonAttributesFromJson;
+  static const toJsonFactory = _$CommonAttributesToJson;
+  Map<String, dynamic> toJson() => _$CommonAttributesToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is CommonAttributes &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.matches, matches) ||
+                const DeepCollectionEquality().equals(other.matches, matches)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(matches) ^
+      runtimeType.hashCode;
+}
+
+extension $CommonAttributesExtension on CommonAttributes {
+  CommonAttributes copyWith({String? name, Map<String, dynamic>? matches}) {
+    return CommonAttributes(
+        name: name ?? this.name, matches: matches ?? this.matches);
+  }
+
+  CommonAttributes copyWithWrapped(
+      {Wrapped<String>? name, Wrapped<Map<String, dynamic>>? matches}) {
+    return CommonAttributes(
+        name: (name != null ? name.value : this.name),
+        matches: (matches != null ? matches.value : this.matches));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
 class LoginDTO {
   LoginDTO({
     required this.username,
@@ -305,6 +476,61 @@ extension $LoginDTOExtension on LoginDTO {
     return LoginDTO(
         username: (username != null ? username.value : this.username),
         password: (password != null ? password.value : this.password));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class Match {
+  Match({
+    this.pct,
+    required this.commonAttributes,
+  });
+
+  factory Match.fromJson(Map<String, dynamic> json) => _$MatchFromJson(json);
+
+  @JsonKey(name: 'pct')
+  final int? pct;
+  @JsonKey(name: 'commonAttributes', defaultValue: <CommonAttributes>[])
+  final List<CommonAttributes> commonAttributes;
+  static const fromJsonFactory = _$MatchFromJson;
+  static const toJsonFactory = _$MatchToJson;
+  Map<String, dynamic> toJson() => _$MatchToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is Match &&
+            (identical(other.pct, pct) ||
+                const DeepCollectionEquality().equals(other.pct, pct)) &&
+            (identical(other.commonAttributes, commonAttributes) ||
+                const DeepCollectionEquality()
+                    .equals(other.commonAttributes, commonAttributes)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(pct) ^
+      const DeepCollectionEquality().hash(commonAttributes) ^
+      runtimeType.hashCode;
+}
+
+extension $MatchExtension on Match {
+  Match copyWith({int? pct, List<CommonAttributes>? commonAttributes}) {
+    return Match(
+        pct: pct ?? this.pct,
+        commonAttributes: commonAttributes ?? this.commonAttributes);
+  }
+
+  Match copyWithWrapped(
+      {Wrapped<int?>? pct, Wrapped<List<CommonAttributes>>? commonAttributes}) {
+    return Match(
+        pct: (pct != null ? pct.value : this.pct),
+        commonAttributes: (commonAttributes != null
+            ? commonAttributes.value
+            : this.commonAttributes));
   }
 }
 
@@ -525,10 +751,16 @@ extension $PairEntityExtension on PairEntity {
 @JsonSerializable(explicitToJson: true)
 class Person {
   Person({
+    this.filmTaste,
+    this.interests,
+    this.languages,
+    this.musicalTaste,
+    required this.age,
     this.alcohol,
     this.bio,
     this.birthDate,
     this.breastSize,
+    this.chemistry,
     this.childrenNumber,
     this.cigarettes,
     this.city,
@@ -536,18 +768,20 @@ class Person {
     required this.email,
     this.eyeColour,
     this.facialHair,
-    this.filmTaste,
+    required this.$filmTaste,
     this.gender,
     this.glasses,
     this.hairColour,
     this.height,
     this.horoscope,
     required this.id,
-    this.interests,
+    required this.$interests,
     this.jobType,
-    this.languages,
+    required this.$languages,
     this.maritalStatus,
-    this.musicalTaste,
+    this.maxAge,
+    this.minAge,
+    required this.$musicalTaste,
     required this.name,
     this.photo,
     this.piercing,
@@ -560,6 +794,16 @@ class Person {
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
 
+  @JsonKey(name: '_filmTaste')
+  final String? filmTaste;
+  @JsonKey(name: '_interests')
+  final String? interests;
+  @JsonKey(name: '_languages')
+  final String? languages;
+  @JsonKey(name: '_musicalTaste')
+  final String? musicalTaste;
+  @JsonKey(name: 'age')
+  final int age;
   @JsonKey(name: 'alcohol')
   final int? alcohol;
   @JsonKey(name: 'bio')
@@ -568,6 +812,8 @@ class Person {
   final DateTime? birthDate;
   @JsonKey(name: 'breastSize')
   final int? breastSize;
+  @JsonKey(name: 'chemistry')
+  final int? chemistry;
   @JsonKey(name: 'childrenNumber')
   final int? childrenNumber;
   @JsonKey(name: 'cigarettes')
@@ -582,8 +828,8 @@ class Person {
   final int? eyeColour;
   @JsonKey(name: 'facialHair')
   final int? facialHair;
-  @JsonKey(name: 'filmTaste')
-  final int? filmTaste;
+  @JsonKey(name: 'filmTaste', defaultValue: <int>[])
+  final List<int> $filmTaste;
   @JsonKey(name: 'gender')
   final int? gender;
   @JsonKey(name: 'glasses')
@@ -596,16 +842,20 @@ class Person {
   final int? horoscope;
   @JsonKey(name: 'id')
   final num id;
-  @JsonKey(name: 'interests')
-  final int? interests;
+  @JsonKey(name: 'interests', defaultValue: <int>[])
+  final List<int> $interests;
   @JsonKey(name: 'jobType')
   final int? jobType;
-  @JsonKey(name: 'languages')
-  final int? languages;
+  @JsonKey(name: 'languages', defaultValue: <int>[])
+  final List<int> $languages;
   @JsonKey(name: 'maritalStatus')
   final int? maritalStatus;
-  @JsonKey(name: 'musicalTaste')
-  final int? musicalTaste;
+  @JsonKey(name: 'maxAge')
+  final int? maxAge;
+  @JsonKey(name: 'minAge')
+  final int? minAge;
+  @JsonKey(name: 'musicalTaste', defaultValue: <int>[])
+  final List<int> $musicalTaste;
   @JsonKey(name: 'name')
   final String name;
   @JsonKey(name: 'photo')
@@ -630,6 +880,20 @@ class Person {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is Person &&
+            (identical(other.filmTaste, filmTaste) ||
+                const DeepCollectionEquality()
+                    .equals(other.filmTaste, filmTaste)) &&
+            (identical(other.interests, interests) ||
+                const DeepCollectionEquality()
+                    .equals(other.interests, interests)) &&
+            (identical(other.languages, languages) ||
+                const DeepCollectionEquality()
+                    .equals(other.languages, languages)) &&
+            (identical(other.musicalTaste, musicalTaste) ||
+                const DeepCollectionEquality()
+                    .equals(other.musicalTaste, musicalTaste)) &&
+            (identical(other.age, age) ||
+                const DeepCollectionEquality().equals(other.age, age)) &&
             (identical(other.alcohol, alcohol) ||
                 const DeepCollectionEquality()
                     .equals(other.alcohol, alcohol)) &&
@@ -641,6 +905,9 @@ class Person {
             (identical(other.breastSize, breastSize) ||
                 const DeepCollectionEquality()
                     .equals(other.breastSize, breastSize)) &&
+            (identical(other.chemistry, chemistry) ||
+                const DeepCollectionEquality()
+                    .equals(other.chemistry, chemistry)) &&
             (identical(other.childrenNumber, childrenNumber) ||
                 const DeepCollectionEquality()
                     .equals(other.childrenNumber, childrenNumber)) &&
@@ -660,9 +927,9 @@ class Person {
             (identical(other.facialHair, facialHair) ||
                 const DeepCollectionEquality()
                     .equals(other.facialHair, facialHair)) &&
-            (identical(other.filmTaste, filmTaste) ||
+            (identical(other.$filmTaste, $filmTaste) ||
                 const DeepCollectionEquality()
-                    .equals(other.filmTaste, filmTaste)) &&
+                    .equals(other.$filmTaste, $filmTaste)) &&
             (identical(other.gender, gender) ||
                 const DeepCollectionEquality().equals(other.gender, gender)) &&
             (identical(other.glasses, glasses) ||
@@ -678,27 +945,18 @@ class Person {
                     .equals(other.horoscope, horoscope)) &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.interests, interests) ||
+            (identical(other.$interests, $interests) ||
                 const DeepCollectionEquality()
-                    .equals(other.interests, interests)) &&
-            (identical(other.jobType, jobType) ||
-                const DeepCollectionEquality()
-                    .equals(other.jobType, jobType)) &&
-            (identical(other.languages, languages) ||
-                const DeepCollectionEquality()
-                    .equals(other.languages, languages)) &&
-            (identical(other.maritalStatus, maritalStatus) ||
-                const DeepCollectionEquality()
-                    .equals(other.maritalStatus, maritalStatus)) &&
-            (identical(other.musicalTaste, musicalTaste) ||
-                const DeepCollectionEquality()
-                    .equals(other.musicalTaste, musicalTaste)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.photo, photo) ||
-                const DeepCollectionEquality().equals(other.photo, photo)) &&
-            (identical(other.piercing, piercing) ||
-                const DeepCollectionEquality().equals(other.piercing, piercing)) &&
+                    .equals(other.$interests, $interests)) &&
+            (identical(other.jobType, jobType) || const DeepCollectionEquality().equals(other.jobType, jobType)) &&
+            (identical(other.$languages, $languages) || const DeepCollectionEquality().equals(other.$languages, $languages)) &&
+            (identical(other.maritalStatus, maritalStatus) || const DeepCollectionEquality().equals(other.maritalStatus, maritalStatus)) &&
+            (identical(other.maxAge, maxAge) || const DeepCollectionEquality().equals(other.maxAge, maxAge)) &&
+            (identical(other.minAge, minAge) || const DeepCollectionEquality().equals(other.minAge, minAge)) &&
+            (identical(other.$musicalTaste, $musicalTaste) || const DeepCollectionEquality().equals(other.$musicalTaste, $musicalTaste)) &&
+            (identical(other.name, name) || const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.photo, photo) || const DeepCollectionEquality().equals(other.photo, photo)) &&
+            (identical(other.piercing, piercing) || const DeepCollectionEquality().equals(other.piercing, piercing)) &&
             (identical(other.religion, religion) || const DeepCollectionEquality().equals(other.religion, religion)) &&
             (identical(other.shape, shape) || const DeepCollectionEquality().equals(other.shape, shape)) &&
             (identical(other.sportiness, sportiness) || const DeepCollectionEquality().equals(other.sportiness, sportiness)) &&
@@ -711,10 +969,16 @@ class Person {
 
   @override
   int get hashCode =>
+      const DeepCollectionEquality().hash(filmTaste) ^
+      const DeepCollectionEquality().hash(interests) ^
+      const DeepCollectionEquality().hash(languages) ^
+      const DeepCollectionEquality().hash(musicalTaste) ^
+      const DeepCollectionEquality().hash(age) ^
       const DeepCollectionEquality().hash(alcohol) ^
       const DeepCollectionEquality().hash(bio) ^
       const DeepCollectionEquality().hash(birthDate) ^
       const DeepCollectionEquality().hash(breastSize) ^
+      const DeepCollectionEquality().hash(chemistry) ^
       const DeepCollectionEquality().hash(childrenNumber) ^
       const DeepCollectionEquality().hash(cigarettes) ^
       const DeepCollectionEquality().hash(city) ^
@@ -722,18 +986,20 @@ class Person {
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(eyeColour) ^
       const DeepCollectionEquality().hash(facialHair) ^
-      const DeepCollectionEquality().hash(filmTaste) ^
+      const DeepCollectionEquality().hash($filmTaste) ^
       const DeepCollectionEquality().hash(gender) ^
       const DeepCollectionEquality().hash(glasses) ^
       const DeepCollectionEquality().hash(hairColour) ^
       const DeepCollectionEquality().hash(height) ^
       const DeepCollectionEquality().hash(horoscope) ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(interests) ^
+      const DeepCollectionEquality().hash($interests) ^
       const DeepCollectionEquality().hash(jobType) ^
-      const DeepCollectionEquality().hash(languages) ^
+      const DeepCollectionEquality().hash($languages) ^
       const DeepCollectionEquality().hash(maritalStatus) ^
-      const DeepCollectionEquality().hash(musicalTaste) ^
+      const DeepCollectionEquality().hash(maxAge) ^
+      const DeepCollectionEquality().hash(minAge) ^
+      const DeepCollectionEquality().hash($musicalTaste) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(photo) ^
       const DeepCollectionEquality().hash(piercing) ^
@@ -747,10 +1013,16 @@ class Person {
 
 extension $PersonExtension on Person {
   Person copyWith(
-      {int? alcohol,
+      {String? filmTaste,
+      String? interests,
+      String? languages,
+      String? musicalTaste,
+      int? age,
+      int? alcohol,
       String? bio,
       DateTime? birthDate,
       int? breastSize,
+      int? chemistry,
       int? childrenNumber,
       int? cigarettes,
       String? city,
@@ -758,18 +1030,20 @@ extension $PersonExtension on Person {
       String? email,
       int? eyeColour,
       int? facialHair,
-      int? filmTaste,
+      List<int>? $filmTaste,
       int? gender,
       int? glasses,
       int? hairColour,
       int? height,
       int? horoscope,
       num? id,
-      int? interests,
+      List<int>? $interests,
       int? jobType,
-      int? languages,
+      List<int>? $languages,
       int? maritalStatus,
-      int? musicalTaste,
+      int? maxAge,
+      int? minAge,
+      List<int>? $musicalTaste,
       String? name,
       String? photo,
       int? piercing,
@@ -779,10 +1053,16 @@ extension $PersonExtension on Person {
       int? tattoo,
       String? username}) {
     return Person(
+        filmTaste: filmTaste ?? this.filmTaste,
+        interests: interests ?? this.interests,
+        languages: languages ?? this.languages,
+        musicalTaste: musicalTaste ?? this.musicalTaste,
+        age: age ?? this.age,
         alcohol: alcohol ?? this.alcohol,
         bio: bio ?? this.bio,
         birthDate: birthDate ?? this.birthDate,
         breastSize: breastSize ?? this.breastSize,
+        chemistry: chemistry ?? this.chemistry,
         childrenNumber: childrenNumber ?? this.childrenNumber,
         cigarettes: cigarettes ?? this.cigarettes,
         city: city ?? this.city,
@@ -790,18 +1070,20 @@ extension $PersonExtension on Person {
         email: email ?? this.email,
         eyeColour: eyeColour ?? this.eyeColour,
         facialHair: facialHair ?? this.facialHair,
-        filmTaste: filmTaste ?? this.filmTaste,
+        $filmTaste: $filmTaste ?? this.$filmTaste,
         gender: gender ?? this.gender,
         glasses: glasses ?? this.glasses,
         hairColour: hairColour ?? this.hairColour,
         height: height ?? this.height,
         horoscope: horoscope ?? this.horoscope,
         id: id ?? this.id,
-        interests: interests ?? this.interests,
+        $interests: $interests ?? this.$interests,
         jobType: jobType ?? this.jobType,
-        languages: languages ?? this.languages,
+        $languages: $languages ?? this.$languages,
         maritalStatus: maritalStatus ?? this.maritalStatus,
-        musicalTaste: musicalTaste ?? this.musicalTaste,
+        maxAge: maxAge ?? this.maxAge,
+        minAge: minAge ?? this.minAge,
+        $musicalTaste: $musicalTaste ?? this.$musicalTaste,
         name: name ?? this.name,
         photo: photo ?? this.photo,
         piercing: piercing ?? this.piercing,
@@ -813,10 +1095,16 @@ extension $PersonExtension on Person {
   }
 
   Person copyWithWrapped(
-      {Wrapped<int?>? alcohol,
+      {Wrapped<String?>? filmTaste,
+      Wrapped<String?>? interests,
+      Wrapped<String?>? languages,
+      Wrapped<String?>? musicalTaste,
+      Wrapped<int>? age,
+      Wrapped<int?>? alcohol,
       Wrapped<String?>? bio,
       Wrapped<DateTime?>? birthDate,
       Wrapped<int?>? breastSize,
+      Wrapped<int?>? chemistry,
       Wrapped<int?>? childrenNumber,
       Wrapped<int?>? cigarettes,
       Wrapped<String?>? city,
@@ -824,18 +1112,20 @@ extension $PersonExtension on Person {
       Wrapped<String>? email,
       Wrapped<int?>? eyeColour,
       Wrapped<int?>? facialHair,
-      Wrapped<int?>? filmTaste,
+      Wrapped<List<int>>? $filmTaste,
       Wrapped<int?>? gender,
       Wrapped<int?>? glasses,
       Wrapped<int?>? hairColour,
       Wrapped<int?>? height,
       Wrapped<int?>? horoscope,
       Wrapped<num>? id,
-      Wrapped<int?>? interests,
+      Wrapped<List<int>>? $interests,
       Wrapped<int?>? jobType,
-      Wrapped<int?>? languages,
+      Wrapped<List<int>>? $languages,
       Wrapped<int?>? maritalStatus,
-      Wrapped<int?>? musicalTaste,
+      Wrapped<int?>? maxAge,
+      Wrapped<int?>? minAge,
+      Wrapped<List<int>>? $musicalTaste,
       Wrapped<String>? name,
       Wrapped<String?>? photo,
       Wrapped<int?>? piercing,
@@ -845,10 +1135,17 @@ extension $PersonExtension on Person {
       Wrapped<int?>? tattoo,
       Wrapped<String?>? username}) {
     return Person(
+        filmTaste: (filmTaste != null ? filmTaste.value : this.filmTaste),
+        interests: (interests != null ? interests.value : this.interests),
+        languages: (languages != null ? languages.value : this.languages),
+        musicalTaste:
+            (musicalTaste != null ? musicalTaste.value : this.musicalTaste),
+        age: (age != null ? age.value : this.age),
         alcohol: (alcohol != null ? alcohol.value : this.alcohol),
         bio: (bio != null ? bio.value : this.bio),
         birthDate: (birthDate != null ? birthDate.value : this.birthDate),
         breastSize: (breastSize != null ? breastSize.value : this.breastSize),
+        chemistry: (chemistry != null ? chemistry.value : this.chemistry),
         childrenNumber: (childrenNumber != null
             ? childrenNumber.value
             : this.childrenNumber),
@@ -858,20 +1155,22 @@ extension $PersonExtension on Person {
         email: (email != null ? email.value : this.email),
         eyeColour: (eyeColour != null ? eyeColour.value : this.eyeColour),
         facialHair: (facialHair != null ? facialHair.value : this.facialHair),
-        filmTaste: (filmTaste != null ? filmTaste.value : this.filmTaste),
+        $filmTaste: ($filmTaste != null ? $filmTaste.value : this.$filmTaste),
         gender: (gender != null ? gender.value : this.gender),
         glasses: (glasses != null ? glasses.value : this.glasses),
         hairColour: (hairColour != null ? hairColour.value : this.hairColour),
         height: (height != null ? height.value : this.height),
         horoscope: (horoscope != null ? horoscope.value : this.horoscope),
         id: (id != null ? id.value : this.id),
-        interests: (interests != null ? interests.value : this.interests),
+        $interests: ($interests != null ? $interests.value : this.$interests),
         jobType: (jobType != null ? jobType.value : this.jobType),
-        languages: (languages != null ? languages.value : this.languages),
+        $languages: ($languages != null ? $languages.value : this.$languages),
         maritalStatus:
             (maritalStatus != null ? maritalStatus.value : this.maritalStatus),
-        musicalTaste:
-            (musicalTaste != null ? musicalTaste.value : this.musicalTaste),
+        maxAge: (maxAge != null ? maxAge.value : this.maxAge),
+        minAge: (minAge != null ? minAge.value : this.minAge),
+        $musicalTaste:
+            ($musicalTaste != null ? $musicalTaste.value : this.$musicalTaste),
         name: (name != null ? name.value : this.name),
         photo: (photo != null ? photo.value : this.photo),
         piercing: (piercing != null ? piercing.value : this.piercing),
@@ -918,7 +1217,10 @@ class PersonAllDTO {
     this.interests,
     this.shape,
     this.facialHair,
-    this.matchPct,
+    this.match,
+    this.minAge,
+    this.maxAge,
+    this.chemistry,
   });
 
   factory PersonAllDTO.fromJson(Map<String, dynamic> json) =>
@@ -972,24 +1274,30 @@ class PersonAllDTO {
   final int? childrenNumber;
   @JsonKey(name: 'maritalStatus')
   final int? maritalStatus;
-  @JsonKey(name: 'musicalTaste')
-  final int? musicalTaste;
-  @JsonKey(name: 'filmTaste')
-  final int? filmTaste;
+  @JsonKey(name: 'musicalTaste', defaultValue: <int>[])
+  final List<int>? musicalTaste;
+  @JsonKey(name: 'filmTaste', defaultValue: <int>[])
+  final List<int>? filmTaste;
   @JsonKey(name: 'religion')
   final int? religion;
   @JsonKey(name: 'horoscope')
   final int? horoscope;
-  @JsonKey(name: 'languages')
-  final int? languages;
-  @JsonKey(name: 'interests')
-  final int? interests;
+  @JsonKey(name: 'languages', defaultValue: <int>[])
+  final List<int>? languages;
+  @JsonKey(name: 'interests', defaultValue: <int>[])
+  final List<int>? interests;
   @JsonKey(name: 'shape')
   final int? shape;
   @JsonKey(name: 'facialHair')
   final int? facialHair;
-  @JsonKey(name: 'matchPct')
-  final int? matchPct;
+  @JsonKey(name: 'match')
+  final Match? match;
+  @JsonKey(name: 'minAge')
+  final int? minAge;
+  @JsonKey(name: 'maxAge')
+  final int? maxAge;
+  @JsonKey(name: 'chemistry')
+  final int? chemistry;
   static const fromJsonFactory = _$PersonAllDTOFromJson;
   static const toJsonFactory = _$PersonAllDTOToJson;
   Map<String, dynamic> toJson() => _$PersonAllDTOToJson(this);
@@ -1073,7 +1381,10 @@ class PersonAllDTO {
             (identical(other.interests, interests) || const DeepCollectionEquality().equals(other.interests, interests)) &&
             (identical(other.shape, shape) || const DeepCollectionEquality().equals(other.shape, shape)) &&
             (identical(other.facialHair, facialHair) || const DeepCollectionEquality().equals(other.facialHair, facialHair)) &&
-            (identical(other.matchPct, matchPct) || const DeepCollectionEquality().equals(other.matchPct, matchPct)));
+            (identical(other.match, match) || const DeepCollectionEquality().equals(other.match, match)) &&
+            (identical(other.minAge, minAge) || const DeepCollectionEquality().equals(other.minAge, minAge)) &&
+            (identical(other.maxAge, maxAge) || const DeepCollectionEquality().equals(other.maxAge, maxAge)) &&
+            (identical(other.chemistry, chemistry) || const DeepCollectionEquality().equals(other.chemistry, chemistry)));
   }
 
   @override
@@ -1113,7 +1424,10 @@ class PersonAllDTO {
       const DeepCollectionEquality().hash(interests) ^
       const DeepCollectionEquality().hash(shape) ^
       const DeepCollectionEquality().hash(facialHair) ^
-      const DeepCollectionEquality().hash(matchPct) ^
+      const DeepCollectionEquality().hash(match) ^
+      const DeepCollectionEquality().hash(minAge) ^
+      const DeepCollectionEquality().hash(maxAge) ^
+      const DeepCollectionEquality().hash(chemistry) ^
       runtimeType.hashCode;
 }
 
@@ -1143,15 +1457,18 @@ extension $PersonAllDTOExtension on PersonAllDTO {
       int? alcohol,
       int? childrenNumber,
       int? maritalStatus,
-      int? musicalTaste,
-      int? filmTaste,
+      List<int>? musicalTaste,
+      List<int>? filmTaste,
       int? religion,
       int? horoscope,
-      int? languages,
-      int? interests,
+      List<int>? languages,
+      List<int>? interests,
       int? shape,
       int? facialHair,
-      int? matchPct}) {
+      Match? match,
+      int? minAge,
+      int? maxAge,
+      int? chemistry}) {
     return PersonAllDTO(
         id: id ?? this.id,
         username: username ?? this.username,
@@ -1185,7 +1502,10 @@ extension $PersonAllDTOExtension on PersonAllDTO {
         interests: interests ?? this.interests,
         shape: shape ?? this.shape,
         facialHair: facialHair ?? this.facialHair,
-        matchPct: matchPct ?? this.matchPct);
+        match: match ?? this.match,
+        minAge: minAge ?? this.minAge,
+        maxAge: maxAge ?? this.maxAge,
+        chemistry: chemistry ?? this.chemistry);
   }
 
   PersonAllDTO copyWithWrapped(
@@ -1213,15 +1533,18 @@ extension $PersonAllDTOExtension on PersonAllDTO {
       Wrapped<int?>? alcohol,
       Wrapped<int?>? childrenNumber,
       Wrapped<int?>? maritalStatus,
-      Wrapped<int?>? musicalTaste,
-      Wrapped<int?>? filmTaste,
+      Wrapped<List<int>?>? musicalTaste,
+      Wrapped<List<int>?>? filmTaste,
       Wrapped<int?>? religion,
       Wrapped<int?>? horoscope,
-      Wrapped<int?>? languages,
-      Wrapped<int?>? interests,
+      Wrapped<List<int>?>? languages,
+      Wrapped<List<int>?>? interests,
       Wrapped<int?>? shape,
       Wrapped<int?>? facialHair,
-      Wrapped<int?>? matchPct}) {
+      Wrapped<Match?>? match,
+      Wrapped<int?>? minAge,
+      Wrapped<int?>? maxAge,
+      Wrapped<int?>? chemistry}) {
     return PersonAllDTO(
         id: (id != null ? id.value : this.id),
         username: (username != null ? username.value : this.username),
@@ -1259,7 +1582,10 @@ extension $PersonAllDTOExtension on PersonAllDTO {
         interests: (interests != null ? interests.value : this.interests),
         shape: (shape != null ? shape.value : this.shape),
         facialHair: (facialHair != null ? facialHair.value : this.facialHair),
-        matchPct: (matchPct != null ? matchPct.value : this.matchPct));
+        match: (match != null ? match.value : this.match),
+        minAge: (minAge != null ? minAge.value : this.minAge),
+        maxAge: (maxAge != null ? maxAge.value : this.maxAge),
+        chemistry: (chemistry != null ? chemistry.value : this.chemistry));
   }
 }
 
@@ -1297,6 +1623,9 @@ class RegistrationDTO {
     this.interests,
     this.shape,
     this.facialHair,
+    this.minAge,
+    this.maxAge,
+    this.chemistry,
   });
 
   factory RegistrationDTO.fromJson(Map<String, dynamic> json) =>
@@ -1348,22 +1677,28 @@ class RegistrationDTO {
   final int? childrenNumber;
   @JsonKey(name: 'maritalStatus')
   final int? maritalStatus;
-  @JsonKey(name: 'musicalTaste')
-  final int? musicalTaste;
-  @JsonKey(name: 'filmTaste')
-  final int? filmTaste;
+  @JsonKey(name: 'musicalTaste', defaultValue: <int>[])
+  final List<int>? musicalTaste;
+  @JsonKey(name: 'filmTaste', defaultValue: <int>[])
+  final List<int>? filmTaste;
   @JsonKey(name: 'religion')
   final int? religion;
   @JsonKey(name: 'horoscope')
   final int? horoscope;
-  @JsonKey(name: 'languages')
-  final int? languages;
-  @JsonKey(name: 'interests')
-  final int? interests;
+  @JsonKey(name: 'languages', defaultValue: <int>[])
+  final List<int>? languages;
+  @JsonKey(name: 'interests', defaultValue: <int>[])
+  final List<int>? interests;
   @JsonKey(name: 'shape')
   final int? shape;
   @JsonKey(name: 'facialHair')
   final int? facialHair;
+  @JsonKey(name: 'minAge')
+  final int? minAge;
+  @JsonKey(name: 'maxAge')
+  final int? maxAge;
+  @JsonKey(name: 'chemistry')
+  final int? chemistry;
   static const fromJsonFactory = _$RegistrationDTOFromJson;
   static const toJsonFactory = _$RegistrationDTOToJson;
   Map<String, dynamic> toJson() => _$RegistrationDTOToJson(this);
@@ -1445,7 +1780,10 @@ class RegistrationDTO {
             (identical(other.languages, languages) || const DeepCollectionEquality().equals(other.languages, languages)) &&
             (identical(other.interests, interests) || const DeepCollectionEquality().equals(other.interests, interests)) &&
             (identical(other.shape, shape) || const DeepCollectionEquality().equals(other.shape, shape)) &&
-            (identical(other.facialHair, facialHair) || const DeepCollectionEquality().equals(other.facialHair, facialHair)));
+            (identical(other.facialHair, facialHair) || const DeepCollectionEquality().equals(other.facialHair, facialHair)) &&
+            (identical(other.minAge, minAge) || const DeepCollectionEquality().equals(other.minAge, minAge)) &&
+            (identical(other.maxAge, maxAge) || const DeepCollectionEquality().equals(other.maxAge, maxAge)) &&
+            (identical(other.chemistry, chemistry) || const DeepCollectionEquality().equals(other.chemistry, chemistry)));
   }
 
   @override
@@ -1484,6 +1822,9 @@ class RegistrationDTO {
       const DeepCollectionEquality().hash(interests) ^
       const DeepCollectionEquality().hash(shape) ^
       const DeepCollectionEquality().hash(facialHair) ^
+      const DeepCollectionEquality().hash(minAge) ^
+      const DeepCollectionEquality().hash(maxAge) ^
+      const DeepCollectionEquality().hash(chemistry) ^
       runtimeType.hashCode;
 }
 
@@ -1512,14 +1853,17 @@ extension $RegistrationDTOExtension on RegistrationDTO {
       int? alcohol,
       int? childrenNumber,
       int? maritalStatus,
-      int? musicalTaste,
-      int? filmTaste,
+      List<int>? musicalTaste,
+      List<int>? filmTaste,
       int? religion,
       int? horoscope,
-      int? languages,
-      int? interests,
+      List<int>? languages,
+      List<int>? interests,
       int? shape,
-      int? facialHair}) {
+      int? facialHair,
+      int? minAge,
+      int? maxAge,
+      int? chemistry}) {
     return RegistrationDTO(
         username: username ?? this.username,
         password: password ?? this.password,
@@ -1551,7 +1895,10 @@ extension $RegistrationDTOExtension on RegistrationDTO {
         languages: languages ?? this.languages,
         interests: interests ?? this.interests,
         shape: shape ?? this.shape,
-        facialHair: facialHair ?? this.facialHair);
+        facialHair: facialHair ?? this.facialHair,
+        minAge: minAge ?? this.minAge,
+        maxAge: maxAge ?? this.maxAge,
+        chemistry: chemistry ?? this.chemistry);
   }
 
   RegistrationDTO copyWithWrapped(
@@ -1578,14 +1925,17 @@ extension $RegistrationDTOExtension on RegistrationDTO {
       Wrapped<int?>? alcohol,
       Wrapped<int?>? childrenNumber,
       Wrapped<int?>? maritalStatus,
-      Wrapped<int?>? musicalTaste,
-      Wrapped<int?>? filmTaste,
+      Wrapped<List<int>?>? musicalTaste,
+      Wrapped<List<int>?>? filmTaste,
       Wrapped<int?>? religion,
       Wrapped<int?>? horoscope,
-      Wrapped<int?>? languages,
-      Wrapped<int?>? interests,
+      Wrapped<List<int>?>? languages,
+      Wrapped<List<int>?>? interests,
       Wrapped<int?>? shape,
-      Wrapped<int?>? facialHair}) {
+      Wrapped<int?>? facialHair,
+      Wrapped<int?>? minAge,
+      Wrapped<int?>? maxAge,
+      Wrapped<int?>? chemistry}) {
     return RegistrationDTO(
         username: (username != null ? username.value : this.username),
         password: (password != null ? password.value : this.password),
@@ -1621,7 +1971,75 @@ extension $RegistrationDTOExtension on RegistrationDTO {
         languages: (languages != null ? languages.value : this.languages),
         interests: (interests != null ? interests.value : this.interests),
         shape: (shape != null ? shape.value : this.shape),
-        facialHair: (facialHair != null ? facialHair.value : this.facialHair));
+        facialHair: (facialHair != null ? facialHair.value : this.facialHair),
+        minAge: (minAge != null ? minAge.value : this.minAge),
+        maxAge: (maxAge != null ? maxAge.value : this.maxAge),
+        chemistry: (chemistry != null ? chemistry.value : this.chemistry));
+  }
+}
+
+@JsonSerializable(explicitToJson: true)
+class SendMessageDTO {
+  SendMessageDTO({
+    required this.addresseeId,
+    required this.jwt,
+    required this.text,
+  });
+
+  factory SendMessageDTO.fromJson(Map<String, dynamic> json) =>
+      _$SendMessageDTOFromJson(json);
+
+  @JsonKey(name: 'addresseeId')
+  final num addresseeId;
+  @JsonKey(name: 'jwt')
+  final String jwt;
+  @JsonKey(name: 'text')
+  final String text;
+  static const fromJsonFactory = _$SendMessageDTOFromJson;
+  static const toJsonFactory = _$SendMessageDTOToJson;
+  Map<String, dynamic> toJson() => _$SendMessageDTOToJson(this);
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is SendMessageDTO &&
+            (identical(other.addresseeId, addresseeId) ||
+                const DeepCollectionEquality()
+                    .equals(other.addresseeId, addresseeId)) &&
+            (identical(other.jwt, jwt) ||
+                const DeepCollectionEquality().equals(other.jwt, jwt)) &&
+            (identical(other.text, text) ||
+                const DeepCollectionEquality().equals(other.text, text)));
+  }
+
+  @override
+  String toString() => jsonEncode(this);
+
+  @override
+  int get hashCode =>
+      const DeepCollectionEquality().hash(addresseeId) ^
+      const DeepCollectionEquality().hash(jwt) ^
+      const DeepCollectionEquality().hash(text) ^
+      runtimeType.hashCode;
+}
+
+extension $SendMessageDTOExtension on SendMessageDTO {
+  SendMessageDTO copyWith({num? addresseeId, String? jwt, String? text}) {
+    return SendMessageDTO(
+        addresseeId: addresseeId ?? this.addresseeId,
+        jwt: jwt ?? this.jwt,
+        text: text ?? this.text);
+  }
+
+  SendMessageDTO copyWithWrapped(
+      {Wrapped<num>? addresseeId,
+      Wrapped<String>? jwt,
+      Wrapped<String>? text}) {
+    return SendMessageDTO(
+        addresseeId:
+            (addresseeId != null ? addresseeId.value : this.addresseeId),
+        jwt: (jwt != null ? jwt.value : this.jwt),
+        text: (text != null ? text.value : this.text));
   }
 }
 
@@ -1630,6 +2048,7 @@ class Tokens {
   Tokens({
     required this.accessToken,
     required this.refreshToken,
+    required this.userId,
   });
 
   factory Tokens.fromJson(Map<String, dynamic> json) => _$TokensFromJson(json);
@@ -1638,6 +2057,8 @@ class Tokens {
   final String accessToken;
   @JsonKey(name: 'refreshToken')
   final String refreshToken;
+  @JsonKey(name: 'userId')
+  final num userId;
   static const fromJsonFactory = _$TokensFromJson;
   static const toJsonFactory = _$TokensToJson;
   Map<String, dynamic> toJson() => _$TokensToJson(this);
@@ -1651,7 +2072,9 @@ class Tokens {
                     .equals(other.accessToken, accessToken)) &&
             (identical(other.refreshToken, refreshToken) ||
                 const DeepCollectionEquality()
-                    .equals(other.refreshToken, refreshToken)));
+                    .equals(other.refreshToken, refreshToken)) &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)));
   }
 
   @override
@@ -1661,23 +2084,28 @@ class Tokens {
   int get hashCode =>
       const DeepCollectionEquality().hash(accessToken) ^
       const DeepCollectionEquality().hash(refreshToken) ^
+      const DeepCollectionEquality().hash(userId) ^
       runtimeType.hashCode;
 }
 
 extension $TokensExtension on Tokens {
-  Tokens copyWith({String? accessToken, String? refreshToken}) {
+  Tokens copyWith({String? accessToken, String? refreshToken, num? userId}) {
     return Tokens(
         accessToken: accessToken ?? this.accessToken,
-        refreshToken: refreshToken ?? this.refreshToken);
+        refreshToken: refreshToken ?? this.refreshToken,
+        userId: userId ?? this.userId);
   }
 
   Tokens copyWithWrapped(
-      {Wrapped<String>? accessToken, Wrapped<String>? refreshToken}) {
+      {Wrapped<String>? accessToken,
+      Wrapped<String>? refreshToken,
+      Wrapped<num>? userId}) {
     return Tokens(
         accessToken:
             (accessToken != null ? accessToken.value : this.accessToken),
         refreshToken:
-            (refreshToken != null ? refreshToken.value : this.refreshToken));
+            (refreshToken != null ? refreshToken.value : this.refreshToken),
+        userId: (userId != null ? userId.value : this.userId));
   }
 }
 

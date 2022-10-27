@@ -12,6 +12,7 @@ import 'package:yourone/gen/assets.gen.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/app_dimen.dart';
 import 'package:yourone/util/util.dart';
+import 'package:yourone/extensions/extensions.dart';
 
 const _images = [
   "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg",
@@ -20,18 +21,9 @@ const _images = [
   "https://cdn.pixabay.com/photo/2014/09/14/18/04/dandelion-445228_960_720.jpg",
 ];
 
-enum Attribute1 { alma, banan, korte, eper, szilva }
-
-enum Attribute2 {
-  citrom,
-  narancs,
-  gorogdinncse,
-  sargadinnye,
-  mango,
-}
-
 class SwipeDetailPage extends StatelessWidget {
-  const SwipeDetailPage({Key? key}) : super(key: key);
+  const SwipeDetailPage({Key? key, required this.profile}) : super(key: key);
+  final UserProfile profile;
 
   @override
   Widget build(BuildContext context) {
@@ -109,41 +101,35 @@ class SwipeDetailPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ProfileDetailSectionAccount(
-                      name: 'Chickasz neve',
-                      age: 23,
-                      profession: 'Fényvisszaverő ohhdekiral',
-                      location: 'Hungary, Budapest',
+                      name: profile.name ?? '',
+                      age: profile.age ?? 0,
+                      profession: profile.jobType.toString(),
+                      location: profile.address ?? '',
                       latlng: LatLng(25, 45),
-                      matchRate: 10,
-                      allRate: 23,
+                      matchRate: profile.match?.pct ?? 0,
                     ),
                     ProfileDetailSection(
-                        title: 'Bio',
-                        subTitle:
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'),
-                    ProfileDetailSection(
-                      title: 'Alcohol1',
-                      personalAttributes: {
-                        Util.enumMapper("alcohol", 0).alcohol!: false,
-                        Util.enumMapper("alcohol", 1).alcohol!: true,
-                        Util.enumMapper("alcohol", 2).alcohol!: false,
+                      title: 'Bio',
+                      subTitle: profile.bio ?? '',
+                    ),
+                    ...List.generate(
+                      profile.match!.commonAttributes!.length,
+                      (index) {
+                        final match = profile.match!.commonAttributes![index];
+                        Map<Enum, bool>? matchMap = {};
 
-                        /*       Attribute1.alma: true,
-                        Attribute1.eper: false,
-                        Attribute1.korte: true,
-                        Attribute1.szilva: false,
-                        Attribute1.banan: false, */
+                        match.matches!.forEach((key, value) {
+                          matchMap.putIfAbsent(
+                              Util.enumMapper(key, 0).getProp(key),
+                              () => value);
+                        });
+
+                        return ProfileDetailSection(
+                          title: match.name?.capitalize() ?? '',
+                          personalAttributes: matchMap,
+                        );
                       },
-                    ),
-                    ProfileDetailSection<Attribute2>(
-                      title: 'Attribute2',
-                      personalAttributes: {
-                        Attribute2.citrom: false,
-                        Attribute2.gorogdinncse: false,
-                        Attribute2.mango: true,
-                        Attribute2.sargadinnye: true,
-                      },
-                    ),
+                    )
                   ],
                 ),
               ),

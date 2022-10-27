@@ -22,35 +22,66 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
 mixin _$UserProfile {
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'phototodo')
   List<FileOrUrl>? get images => throw _privateConstructorUsedError;
+  @JsonKey(name: 'minAge')
   int get minAge => throw _privateConstructorUsedError;
+  @JsonKey(name: 'maxAge')
   int get maxAge => throw _privateConstructorUsedError;
+  @JsonKey(name: 'bio')
   String? get bio => throw _privateConstructorUsedError;
+  @JsonKey(name: 'age')
   int? get age => throw _privateConstructorUsedError;
+  @JsonKey(name: 'city')
   String? get address => throw _privateConstructorUsedError;
+  @JsonKey(name: 'chemistry')
   int? get chemistry => throw _privateConstructorUsedError;
+  @JsonKey(name: 'gender')
   Gender? get gender => throw _privateConstructorUsedError;
+  @JsonKey(name: 'jobType')
   JobType? get jobType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'eduLevel')
   EducationLevel? get educationLevel => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cigarettes')
   Cigarettes? get cigarettes => throw _privateConstructorUsedError;
+  @JsonKey(name: 'alcohol')
   Alcohol? get alcohol => throw _privateConstructorUsedError;
+  @JsonKey(name: 'childrenNumber')
   Children? get children => throw _privateConstructorUsedError;
+  @JsonKey(name: 'maritalStatus')
   Marriage? get marriage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'musicalTaste')
   List<MusicTaste>? get musicTaste => throw _privateConstructorUsedError;
+  @JsonKey(name: 'filmTaste')
   List<MovieGenre>? get movieGenre => throw _privateConstructorUsedError;
+  @JsonKey(name: 'religion')
   Religion? get religion => throw _privateConstructorUsedError;
+  @JsonKey(name: 'horoscope')
   Horoscope? get horoscope => throw _privateConstructorUsedError;
+  @JsonKey(name: 'languages')
   List<Languages>? get languages => throw _privateConstructorUsedError;
+  @JsonKey(name: 'interests')
   List<Hobbies>? get hobbies => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tattoo')
   Tattoo? get tattoo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'piercing')
   Piercing? get piercing => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hairColour')
   HairColor? get hairColor => throw _privateConstructorUsedError;
+  @JsonKey(name: 'eyeColour')
   EyeColor? get eyeColor => throw _privateConstructorUsedError;
+  @JsonKey(name: 'glasses')
   Glasses? get glasses => throw _privateConstructorUsedError;
+  @JsonKey(name: 'sportiness')
   Sportiness? get sportiness => throw _privateConstructorUsedError;
+  @JsonKey(name: 'shape')
   Shape? get shape => throw _privateConstructorUsedError;
+  @JsonKey(name: 'facialHair')
   FacialHair? get facialHair => throw _privateConstructorUsedError;
+  @JsonKey(name: 'breastSize')
   BreastSize? get breastSize => throw _privateConstructorUsedError;
+  @JsonKey(name: 'match')
+  Match? get match => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -65,35 +96,38 @@ abstract class $UserProfileCopyWith<$Res> {
       _$UserProfileCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'name') String? name,
-      List<FileOrUrl>? images,
-      int minAge,
-      int maxAge,
-      String? bio,
-      int? age,
-      String? address,
-      int? chemistry,
-      Gender? gender,
-      JobType? jobType,
-      EducationLevel? educationLevel,
-      Cigarettes? cigarettes,
-      Alcohol? alcohol,
-      Children? children,
-      Marriage? marriage,
-      List<MusicTaste>? musicTaste,
-      List<MovieGenre>? movieGenre,
-      Religion? religion,
-      Horoscope? horoscope,
-      List<Languages>? languages,
-      List<Hobbies>? hobbies,
-      Tattoo? tattoo,
-      Piercing? piercing,
-      HairColor? hairColor,
-      EyeColor? eyeColor,
-      Glasses? glasses,
-      Sportiness? sportiness,
-      Shape? shape,
-      FacialHair? facialHair,
-      BreastSize? breastSize});
+      @JsonKey(name: 'phototodo') List<FileOrUrl>? images,
+      @JsonKey(name: 'minAge') int minAge,
+      @JsonKey(name: 'maxAge') int maxAge,
+      @JsonKey(name: 'bio') String? bio,
+      @JsonKey(name: 'age') int? age,
+      @JsonKey(name: 'city') String? address,
+      @JsonKey(name: 'chemistry') int? chemistry,
+      @JsonKey(name: 'gender') Gender? gender,
+      @JsonKey(name: 'jobType') JobType? jobType,
+      @JsonKey(name: 'eduLevel') EducationLevel? educationLevel,
+      @JsonKey(name: 'cigarettes') Cigarettes? cigarettes,
+      @JsonKey(name: 'alcohol') Alcohol? alcohol,
+      @JsonKey(name: 'childrenNumber') Children? children,
+      @JsonKey(name: 'maritalStatus') Marriage? marriage,
+      @JsonKey(name: 'musicalTaste') List<MusicTaste>? musicTaste,
+      @JsonKey(name: 'filmTaste') List<MovieGenre>? movieGenre,
+      @JsonKey(name: 'religion') Religion? religion,
+      @JsonKey(name: 'horoscope') Horoscope? horoscope,
+      @JsonKey(name: 'languages') List<Languages>? languages,
+      @JsonKey(name: 'interests') List<Hobbies>? hobbies,
+      @JsonKey(name: 'tattoo') Tattoo? tattoo,
+      @JsonKey(name: 'piercing') Piercing? piercing,
+      @JsonKey(name: 'hairColour') HairColor? hairColor,
+      @JsonKey(name: 'eyeColour') EyeColor? eyeColor,
+      @JsonKey(name: 'glasses') Glasses? glasses,
+      @JsonKey(name: 'sportiness') Sportiness? sportiness,
+      @JsonKey(name: 'shape') Shape? shape,
+      @JsonKey(name: 'facialHair') FacialHair? facialHair,
+      @JsonKey(name: 'breastSize') BreastSize? breastSize,
+      @JsonKey(name: 'match') Match? match});
+
+  $MatchCopyWith<$Res>? get match;
 }
 
 /// @nodoc
@@ -136,6 +170,7 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
     Object? shape = freezed,
     Object? facialHair = freezed,
     Object? breastSize = freezed,
+    Object? match = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -258,7 +293,22 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
           ? _value.breastSize
           : breastSize // ignore: cast_nullable_to_non_nullable
               as BreastSize?,
+      match: match == freezed
+          ? _value.match
+          : match // ignore: cast_nullable_to_non_nullable
+              as Match?,
     ));
+  }
+
+  @override
+  $MatchCopyWith<$Res>? get match {
+    if (_value.match == null) {
+      return null;
+    }
+
+    return $MatchCopyWith<$Res>(_value.match!, (value) {
+      return _then(_value.copyWith(match: value));
+    });
   }
 }
 
@@ -271,35 +321,39 @@ abstract class _$$_UserProfileCopyWith<$Res>
   @override
   $Res call(
       {@JsonKey(name: 'name') String? name,
-      List<FileOrUrl>? images,
-      int minAge,
-      int maxAge,
-      String? bio,
-      int? age,
-      String? address,
-      int? chemistry,
-      Gender? gender,
-      JobType? jobType,
-      EducationLevel? educationLevel,
-      Cigarettes? cigarettes,
-      Alcohol? alcohol,
-      Children? children,
-      Marriage? marriage,
-      List<MusicTaste>? musicTaste,
-      List<MovieGenre>? movieGenre,
-      Religion? religion,
-      Horoscope? horoscope,
-      List<Languages>? languages,
-      List<Hobbies>? hobbies,
-      Tattoo? tattoo,
-      Piercing? piercing,
-      HairColor? hairColor,
-      EyeColor? eyeColor,
-      Glasses? glasses,
-      Sportiness? sportiness,
-      Shape? shape,
-      FacialHair? facialHair,
-      BreastSize? breastSize});
+      @JsonKey(name: 'phototodo') List<FileOrUrl>? images,
+      @JsonKey(name: 'minAge') int minAge,
+      @JsonKey(name: 'maxAge') int maxAge,
+      @JsonKey(name: 'bio') String? bio,
+      @JsonKey(name: 'age') int? age,
+      @JsonKey(name: 'city') String? address,
+      @JsonKey(name: 'chemistry') int? chemistry,
+      @JsonKey(name: 'gender') Gender? gender,
+      @JsonKey(name: 'jobType') JobType? jobType,
+      @JsonKey(name: 'eduLevel') EducationLevel? educationLevel,
+      @JsonKey(name: 'cigarettes') Cigarettes? cigarettes,
+      @JsonKey(name: 'alcohol') Alcohol? alcohol,
+      @JsonKey(name: 'childrenNumber') Children? children,
+      @JsonKey(name: 'maritalStatus') Marriage? marriage,
+      @JsonKey(name: 'musicalTaste') List<MusicTaste>? musicTaste,
+      @JsonKey(name: 'filmTaste') List<MovieGenre>? movieGenre,
+      @JsonKey(name: 'religion') Religion? religion,
+      @JsonKey(name: 'horoscope') Horoscope? horoscope,
+      @JsonKey(name: 'languages') List<Languages>? languages,
+      @JsonKey(name: 'interests') List<Hobbies>? hobbies,
+      @JsonKey(name: 'tattoo') Tattoo? tattoo,
+      @JsonKey(name: 'piercing') Piercing? piercing,
+      @JsonKey(name: 'hairColour') HairColor? hairColor,
+      @JsonKey(name: 'eyeColour') EyeColor? eyeColor,
+      @JsonKey(name: 'glasses') Glasses? glasses,
+      @JsonKey(name: 'sportiness') Sportiness? sportiness,
+      @JsonKey(name: 'shape') Shape? shape,
+      @JsonKey(name: 'facialHair') FacialHair? facialHair,
+      @JsonKey(name: 'breastSize') BreastSize? breastSize,
+      @JsonKey(name: 'match') Match? match});
+
+  @override
+  $MatchCopyWith<$Res>? get match;
 }
 
 /// @nodoc
@@ -344,6 +398,7 @@ class __$$_UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
     Object? shape = freezed,
     Object? facialHair = freezed,
     Object? breastSize = freezed,
+    Object? match = freezed,
   }) {
     return _then(_$_UserProfile(
       name: name == freezed
@@ -466,6 +521,10 @@ class __$$_UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
           ? _value.breastSize
           : breastSize // ignore: cast_nullable_to_non_nullable
               as BreastSize?,
+      match: match == freezed
+          ? _value.match
+          : match // ignore: cast_nullable_to_non_nullable
+              as Match?,
     ));
   }
 }
@@ -475,35 +534,36 @@ class __$$_UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
 class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   const _$_UserProfile(
       {@JsonKey(name: 'name') this.name,
-      final List<FileOrUrl>? images,
-      this.minAge = 16,
-      this.maxAge = 100,
-      this.bio,
-      this.age,
-      this.address,
-      this.chemistry,
-      this.gender,
-      this.jobType,
-      this.educationLevel,
-      this.cigarettes,
-      this.alcohol,
-      this.children,
-      this.marriage,
-      final List<MusicTaste>? musicTaste,
-      final List<MovieGenre>? movieGenre,
-      this.religion,
-      this.horoscope,
-      final List<Languages>? languages,
-      final List<Hobbies>? hobbies,
-      this.tattoo,
-      this.piercing,
-      this.hairColor,
-      this.eyeColor,
-      this.glasses,
-      this.sportiness,
-      this.shape,
-      this.facialHair,
-      this.breastSize})
+      @JsonKey(name: 'phototodo') final List<FileOrUrl>? images,
+      @JsonKey(name: 'minAge') this.minAge = 16,
+      @JsonKey(name: 'maxAge') this.maxAge = 100,
+      @JsonKey(name: 'bio') this.bio,
+      @JsonKey(name: 'age') this.age,
+      @JsonKey(name: 'city') this.address,
+      @JsonKey(name: 'chemistry') this.chemistry,
+      @JsonKey(name: 'gender') this.gender,
+      @JsonKey(name: 'jobType') this.jobType,
+      @JsonKey(name: 'eduLevel') this.educationLevel,
+      @JsonKey(name: 'cigarettes') this.cigarettes,
+      @JsonKey(name: 'alcohol') this.alcohol,
+      @JsonKey(name: 'childrenNumber') this.children,
+      @JsonKey(name: 'maritalStatus') this.marriage,
+      @JsonKey(name: 'musicalTaste') final List<MusicTaste>? musicTaste,
+      @JsonKey(name: 'filmTaste') final List<MovieGenre>? movieGenre,
+      @JsonKey(name: 'religion') this.religion,
+      @JsonKey(name: 'horoscope') this.horoscope,
+      @JsonKey(name: 'languages') final List<Languages>? languages,
+      @JsonKey(name: 'interests') final List<Hobbies>? hobbies,
+      @JsonKey(name: 'tattoo') this.tattoo,
+      @JsonKey(name: 'piercing') this.piercing,
+      @JsonKey(name: 'hairColour') this.hairColor,
+      @JsonKey(name: 'eyeColour') this.eyeColor,
+      @JsonKey(name: 'glasses') this.glasses,
+      @JsonKey(name: 'sportiness') this.sportiness,
+      @JsonKey(name: 'shape') this.shape,
+      @JsonKey(name: 'facialHair') this.facialHair,
+      @JsonKey(name: 'breastSize') this.breastSize,
+      @JsonKey(name: 'match') this.match})
       : _images = images,
         _musicTaste = musicTaste,
         _movieGenre = movieGenre,
@@ -518,6 +578,7 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   final String? name;
   final List<FileOrUrl>? _images;
   @override
+  @JsonKey(name: 'phototodo')
   List<FileOrUrl>? get images {
     final value = _images;
     if (value == null) return null;
@@ -526,35 +587,47 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   }
 
   @override
-  @JsonKey()
+  @JsonKey(name: 'minAge')
   final int minAge;
   @override
-  @JsonKey()
+  @JsonKey(name: 'maxAge')
   final int maxAge;
   @override
+  @JsonKey(name: 'bio')
   final String? bio;
   @override
+  @JsonKey(name: 'age')
   final int? age;
   @override
+  @JsonKey(name: 'city')
   final String? address;
   @override
+  @JsonKey(name: 'chemistry')
   final int? chemistry;
   @override
+  @JsonKey(name: 'gender')
   final Gender? gender;
   @override
+  @JsonKey(name: 'jobType')
   final JobType? jobType;
   @override
+  @JsonKey(name: 'eduLevel')
   final EducationLevel? educationLevel;
   @override
+  @JsonKey(name: 'cigarettes')
   final Cigarettes? cigarettes;
   @override
+  @JsonKey(name: 'alcohol')
   final Alcohol? alcohol;
   @override
+  @JsonKey(name: 'childrenNumber')
   final Children? children;
   @override
+  @JsonKey(name: 'maritalStatus')
   final Marriage? marriage;
   final List<MusicTaste>? _musicTaste;
   @override
+  @JsonKey(name: 'musicalTaste')
   List<MusicTaste>? get musicTaste {
     final value = _musicTaste;
     if (value == null) return null;
@@ -564,6 +637,7 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
 
   final List<MovieGenre>? _movieGenre;
   @override
+  @JsonKey(name: 'filmTaste')
   List<MovieGenre>? get movieGenre {
     final value = _movieGenre;
     if (value == null) return null;
@@ -572,11 +646,14 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   }
 
   @override
+  @JsonKey(name: 'religion')
   final Religion? religion;
   @override
+  @JsonKey(name: 'horoscope')
   final Horoscope? horoscope;
   final List<Languages>? _languages;
   @override
+  @JsonKey(name: 'languages')
   List<Languages>? get languages {
     final value = _languages;
     if (value == null) return null;
@@ -586,6 +663,7 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
 
   final List<Hobbies>? _hobbies;
   @override
+  @JsonKey(name: 'interests')
   List<Hobbies>? get hobbies {
     final value = _hobbies;
     if (value == null) return null;
@@ -594,27 +672,39 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   }
 
   @override
+  @JsonKey(name: 'tattoo')
   final Tattoo? tattoo;
   @override
+  @JsonKey(name: 'piercing')
   final Piercing? piercing;
   @override
+  @JsonKey(name: 'hairColour')
   final HairColor? hairColor;
   @override
+  @JsonKey(name: 'eyeColour')
   final EyeColor? eyeColor;
   @override
+  @JsonKey(name: 'glasses')
   final Glasses? glasses;
   @override
+  @JsonKey(name: 'sportiness')
   final Sportiness? sportiness;
   @override
+  @JsonKey(name: 'shape')
   final Shape? shape;
   @override
+  @JsonKey(name: 'facialHair')
   final FacialHair? facialHair;
   @override
+  @JsonKey(name: 'breastSize')
   final BreastSize? breastSize;
+  @override
+  @JsonKey(name: 'match')
+  final Match? match;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserProfile(name: $name, images: $images, minAge: $minAge, maxAge: $maxAge, bio: $bio, age: $age, address: $address, chemistry: $chemistry, gender: $gender, jobType: $jobType, educationLevel: $educationLevel, cigarettes: $cigarettes, alcohol: $alcohol, children: $children, marriage: $marriage, musicTaste: $musicTaste, movieGenre: $movieGenre, religion: $religion, horoscope: $horoscope, languages: $languages, hobbies: $hobbies, tattoo: $tattoo, piercing: $piercing, hairColor: $hairColor, eyeColor: $eyeColor, glasses: $glasses, sportiness: $sportiness, shape: $shape, facialHair: $facialHair, breastSize: $breastSize)';
+    return 'UserProfile(name: $name, images: $images, minAge: $minAge, maxAge: $maxAge, bio: $bio, age: $age, address: $address, chemistry: $chemistry, gender: $gender, jobType: $jobType, educationLevel: $educationLevel, cigarettes: $cigarettes, alcohol: $alcohol, children: $children, marriage: $marriage, musicTaste: $musicTaste, movieGenre: $movieGenre, religion: $religion, horoscope: $horoscope, languages: $languages, hobbies: $hobbies, tattoo: $tattoo, piercing: $piercing, hairColor: $hairColor, eyeColor: $eyeColor, glasses: $glasses, sportiness: $sportiness, shape: $shape, facialHair: $facialHair, breastSize: $breastSize, match: $match)';
   }
 
   @override
@@ -651,7 +741,8 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
       ..add(DiagnosticsProperty('sportiness', sportiness))
       ..add(DiagnosticsProperty('shape', shape))
       ..add(DiagnosticsProperty('facialHair', facialHair))
-      ..add(DiagnosticsProperty('breastSize', breastSize));
+      ..add(DiagnosticsProperty('breastSize', breastSize))
+      ..add(DiagnosticsProperty('match', match));
   }
 
   @override
@@ -696,7 +787,8 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
             const DeepCollectionEquality()
                 .equals(other.facialHair, facialHair) &&
             const DeepCollectionEquality()
-                .equals(other.breastSize, breastSize));
+                .equals(other.breastSize, breastSize) &&
+            const DeepCollectionEquality().equals(other.match, match));
   }
 
   @JsonKey(ignore: true)
@@ -732,7 +824,8 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
         const DeepCollectionEquality().hash(sportiness),
         const DeepCollectionEquality().hash(shape),
         const DeepCollectionEquality().hash(facialHair),
-        const DeepCollectionEquality().hash(breastSize)
+        const DeepCollectionEquality().hash(breastSize),
+        const DeepCollectionEquality().hash(match)
       ]);
 
   @JsonKey(ignore: true)
@@ -749,35 +842,36 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
 abstract class _UserProfile implements UserProfile {
   const factory _UserProfile(
       {@JsonKey(name: 'name') final String? name,
-      final List<FileOrUrl>? images,
-      final int minAge,
-      final int maxAge,
-      final String? bio,
-      final int? age,
-      final String? address,
-      final int? chemistry,
-      final Gender? gender,
-      final JobType? jobType,
-      final EducationLevel? educationLevel,
-      final Cigarettes? cigarettes,
-      final Alcohol? alcohol,
-      final Children? children,
-      final Marriage? marriage,
-      final List<MusicTaste>? musicTaste,
-      final List<MovieGenre>? movieGenre,
-      final Religion? religion,
-      final Horoscope? horoscope,
-      final List<Languages>? languages,
-      final List<Hobbies>? hobbies,
-      final Tattoo? tattoo,
-      final Piercing? piercing,
-      final HairColor? hairColor,
-      final EyeColor? eyeColor,
-      final Glasses? glasses,
-      final Sportiness? sportiness,
-      final Shape? shape,
-      final FacialHair? facialHair,
-      final BreastSize? breastSize}) = _$_UserProfile;
+      @JsonKey(name: 'phototodo') final List<FileOrUrl>? images,
+      @JsonKey(name: 'minAge') final int minAge,
+      @JsonKey(name: 'maxAge') final int maxAge,
+      @JsonKey(name: 'bio') final String? bio,
+      @JsonKey(name: 'age') final int? age,
+      @JsonKey(name: 'city') final String? address,
+      @JsonKey(name: 'chemistry') final int? chemistry,
+      @JsonKey(name: 'gender') final Gender? gender,
+      @JsonKey(name: 'jobType') final JobType? jobType,
+      @JsonKey(name: 'eduLevel') final EducationLevel? educationLevel,
+      @JsonKey(name: 'cigarettes') final Cigarettes? cigarettes,
+      @JsonKey(name: 'alcohol') final Alcohol? alcohol,
+      @JsonKey(name: 'childrenNumber') final Children? children,
+      @JsonKey(name: 'maritalStatus') final Marriage? marriage,
+      @JsonKey(name: 'musicalTaste') final List<MusicTaste>? musicTaste,
+      @JsonKey(name: 'filmTaste') final List<MovieGenre>? movieGenre,
+      @JsonKey(name: 'religion') final Religion? religion,
+      @JsonKey(name: 'horoscope') final Horoscope? horoscope,
+      @JsonKey(name: 'languages') final List<Languages>? languages,
+      @JsonKey(name: 'interests') final List<Hobbies>? hobbies,
+      @JsonKey(name: 'tattoo') final Tattoo? tattoo,
+      @JsonKey(name: 'piercing') final Piercing? piercing,
+      @JsonKey(name: 'hairColour') final HairColor? hairColor,
+      @JsonKey(name: 'eyeColour') final EyeColor? eyeColor,
+      @JsonKey(name: 'glasses') final Glasses? glasses,
+      @JsonKey(name: 'sportiness') final Sportiness? sportiness,
+      @JsonKey(name: 'shape') final Shape? shape,
+      @JsonKey(name: 'facialHair') final FacialHair? facialHair,
+      @JsonKey(name: 'breastSize') final BreastSize? breastSize,
+      @JsonKey(name: 'match') final Match? match}) = _$_UserProfile;
 
   factory _UserProfile.fromJson(Map<String, dynamic> json) =
       _$_UserProfile.fromJson;
@@ -786,63 +880,95 @@ abstract class _UserProfile implements UserProfile {
   @JsonKey(name: 'name')
   String? get name;
   @override
+  @JsonKey(name: 'phototodo')
   List<FileOrUrl>? get images;
   @override
+  @JsonKey(name: 'minAge')
   int get minAge;
   @override
+  @JsonKey(name: 'maxAge')
   int get maxAge;
   @override
+  @JsonKey(name: 'bio')
   String? get bio;
   @override
+  @JsonKey(name: 'age')
   int? get age;
   @override
+  @JsonKey(name: 'city')
   String? get address;
   @override
+  @JsonKey(name: 'chemistry')
   int? get chemistry;
   @override
+  @JsonKey(name: 'gender')
   Gender? get gender;
   @override
+  @JsonKey(name: 'jobType')
   JobType? get jobType;
   @override
+  @JsonKey(name: 'eduLevel')
   EducationLevel? get educationLevel;
   @override
+  @JsonKey(name: 'cigarettes')
   Cigarettes? get cigarettes;
   @override
+  @JsonKey(name: 'alcohol')
   Alcohol? get alcohol;
   @override
+  @JsonKey(name: 'childrenNumber')
   Children? get children;
   @override
+  @JsonKey(name: 'maritalStatus')
   Marriage? get marriage;
   @override
+  @JsonKey(name: 'musicalTaste')
   List<MusicTaste>? get musicTaste;
   @override
+  @JsonKey(name: 'filmTaste')
   List<MovieGenre>? get movieGenre;
   @override
+  @JsonKey(name: 'religion')
   Religion? get religion;
   @override
+  @JsonKey(name: 'horoscope')
   Horoscope? get horoscope;
   @override
+  @JsonKey(name: 'languages')
   List<Languages>? get languages;
   @override
+  @JsonKey(name: 'interests')
   List<Hobbies>? get hobbies;
   @override
+  @JsonKey(name: 'tattoo')
   Tattoo? get tattoo;
   @override
+  @JsonKey(name: 'piercing')
   Piercing? get piercing;
   @override
+  @JsonKey(name: 'hairColour')
   HairColor? get hairColor;
   @override
+  @JsonKey(name: 'eyeColour')
   EyeColor? get eyeColor;
   @override
+  @JsonKey(name: 'glasses')
   Glasses? get glasses;
   @override
+  @JsonKey(name: 'sportiness')
   Sportiness? get sportiness;
   @override
+  @JsonKey(name: 'shape')
   Shape? get shape;
   @override
+  @JsonKey(name: 'facialHair')
   FacialHair? get facialHair;
   @override
+  @JsonKey(name: 'breastSize')
   BreastSize? get breastSize;
+  @override
+  @JsonKey(name: 'match')
+  Match? get match;
   @override
   @JsonKey(ignore: true)
   _$$_UserProfileCopyWith<_$_UserProfile> get copyWith =>

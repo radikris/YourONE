@@ -384,7 +384,7 @@ class __$$_EnumsCopyWithImpl<$Res> extends _$EnumsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Enums implements _Enums {
+class _$_Enums extends _Enums {
   const _$_Enums(
       {@JsonKey(name: 'gender') this.gender,
       @JsonKey(name: 'jobType') this.jobType,
@@ -407,7 +407,8 @@ class _$_Enums implements _Enums {
       @JsonKey(name: 'sportiness') this.sportiness,
       @JsonKey(name: 'shape') this.shape,
       @JsonKey(name: 'facialHair') this.facialHair,
-      @JsonKey(name: 'breastSize') this.breastSize});
+      @JsonKey(name: 'breastSize') this.breastSize})
+      : super._();
 
   factory _$_Enums.fromJson(Map<String, dynamic> json) =>
       _$$_EnumsFromJson(json);
@@ -559,7 +560,7 @@ class _$_Enums implements _Enums {
   }
 }
 
-abstract class _Enums implements Enums {
+abstract class _Enums extends Enums {
   const factory _Enums(
       {@JsonKey(name: 'gender') final Gender? gender,
       @JsonKey(name: 'jobType') final JobType? jobType,
@@ -583,6 +584,7 @@ abstract class _Enums implements Enums {
       @JsonKey(name: 'shape') final Shape? shape,
       @JsonKey(name: 'facialHair') final FacialHair? facialHair,
       @JsonKey(name: 'breastSize') final BreastSize? breastSize}) = _$_Enums;
+  const _Enums._() : super._();
 
   factory _Enums.fromJson(Map<String, dynamic> json) = _$_Enums.fromJson;
 

@@ -59,6 +59,8 @@ dependencies:
   json_annotation: ^4.4.0
   equatable: ^2.0.5
   logging: ^1.1.0
+  stomp_dart_client: ^0.4.4
+  rxdart: ^0.27.5
 
 dependency_overrides:
   analyzer: ">=4.2.0 <5.0.0"

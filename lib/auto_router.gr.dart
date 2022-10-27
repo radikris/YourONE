@@ -14,6 +14,7 @@
 import 'package:auto_route/auto_route.dart' as _i8;
 import 'package:flutter/material.dart' as _i9;
 
+import 'entities/user_profile.dart' as _i10;
 import 'features/authentication/presentation/sign_in_page.dart' as _i1;
 import 'features/authentication/presentation/sign_up_page.dart' as _i2;
 import 'features/chat/chat_detail_page.dart' as _i6;
@@ -49,9 +50,13 @@ class AppRouter extends _i8.RootStackRouter {
       );
     },
     SwipeDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<SwipeDetailRouteArgs>();
       return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i4.SwipeDetailPage(),
+        child: _i4.SwipeDetailPage(
+          key: args.key,
+          profile: args.profile,
+        ),
       );
     },
     ChatListRoute.name: (routeData) {
@@ -157,14 +162,36 @@ class HomeSwipeRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.SwipeDetailPage]
-class SwipeDetailRoute extends _i8.PageRouteInfo<void> {
-  const SwipeDetailRoute()
-      : super(
+class SwipeDetailRoute extends _i8.PageRouteInfo<SwipeDetailRouteArgs> {
+  SwipeDetailRoute({
+    _i9.Key? key,
+    required _i10.UserProfile profile,
+  }) : super(
           SwipeDetailRoute.name,
           path: '/swipe-detail-page',
+          args: SwipeDetailRouteArgs(
+            key: key,
+            profile: profile,
+          ),
         );
 
   static const String name = 'SwipeDetailRoute';
+}
+
+class SwipeDetailRouteArgs {
+  const SwipeDetailRouteArgs({
+    this.key,
+    required this.profile,
+  });
+
+  final _i9.Key? key;
+
+  final _i10.UserProfile profile;
+
+  @override
+  String toString() {
+    return 'SwipeDetailRouteArgs{key: $key, profile: $profile}';
+  }
 }
 
 /// generated route for

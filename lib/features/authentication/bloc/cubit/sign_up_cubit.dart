@@ -24,6 +24,8 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   SignUpCubit(this.authRepository, this.store)
       : super(SignUpState(
+            email: 'radi.kristof@gmail.com',
+            password: '123456',
             currentStep: 0,
             yourOne: UserProfile(),
             yourSelf: UserProfile(
@@ -35,9 +37,8 @@ class SignUpCubit extends Cubit<SignUpState> {
     String password,
   ) async {
     emit(state.copyWith(email: email, password: password));
-    final token = await authRepository.login();
-    print(token);
-    store.login(token);
+    final user = await authRepository.login(email, password);
+    store.login(user.token, user.id);
   }
 
   void handleRegister(
@@ -47,8 +48,8 @@ class SignUpCubit extends Cubit<SignUpState> {
   ) async {
     emit(state.copyWith(
         email: email, password: password, phoneNumber: phoneNumber));
-    final token = await authRepository.register();
-    store.login(token);
+    final user = await authRepository.register(email, password);
+    store.login(user.token, user.id);
   }
 
   void handleName(String name, {bool isAboutYourself = true}) {

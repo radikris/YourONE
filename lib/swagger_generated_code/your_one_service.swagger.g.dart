@@ -6,6 +6,36 @@ part of 'your_one_service.swagger.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+ChatNotification _$ChatNotificationFromJson(Map<String, dynamic> json) =>
+    ChatNotification(
+      id: json['id'] as num,
+      senderId: json['senderId'] as num,
+      senderName: json['senderName'] as String,
+      text: json['text'] as String,
+      timeStamp: json['timeStamp'] as num,
+    );
+
+Map<String, dynamic> _$ChatNotificationToJson(ChatNotification instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'senderId': instance.senderId,
+      'senderName': instance.senderName,
+      'text': instance.text,
+      'timeStamp': instance.timeStamp,
+    };
+
+CommonAttributes _$CommonAttributesFromJson(Map<String, dynamic> json) =>
+    CommonAttributes(
+      name: json['name'] as String,
+      matches: json['matches'] as Map<String, dynamic>,
+    );
+
+Map<String, dynamic> _$CommonAttributesToJson(CommonAttributes instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'matches': instance.matches,
+    };
+
 LoginDTO _$LoginDTOFromJson(Map<String, dynamic> json) => LoginDTO(
       username: json['username'] as String,
       password: json['password'] as String,
@@ -14,6 +44,20 @@ LoginDTO _$LoginDTOFromJson(Map<String, dynamic> json) => LoginDTO(
 Map<String, dynamic> _$LoginDTOToJson(LoginDTO instance) => <String, dynamic>{
       'username': instance.username,
       'password': instance.password,
+    };
+
+Match _$MatchFromJson(Map<String, dynamic> json) => Match(
+      pct: json['pct'] as int?,
+      commonAttributes: (json['commonAttributes'] as List<dynamic>?)
+              ?.map((e) => CommonAttributes.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
+
+Map<String, dynamic> _$MatchToJson(Match instance) => <String, dynamic>{
+      'pct': instance.pct,
+      'commonAttributes':
+          instance.commonAttributes.map((e) => e.toJson()).toList(),
     };
 
 MessageEntity _$MessageEntityFromJson(Map<String, dynamic> json) =>
@@ -58,12 +102,18 @@ Map<String, dynamic> _$PairEntityToJson(PairEntity instance) =>
     };
 
 Person _$PersonFromJson(Map<String, dynamic> json) => Person(
+      filmTaste: json['_filmTaste'] as String?,
+      interests: json['_interests'] as String?,
+      languages: json['_languages'] as String?,
+      musicalTaste: json['_musicalTaste'] as String?,
+      age: json['age'] as int,
       alcohol: json['alcohol'] as int?,
       bio: json['bio'] as String?,
       birthDate: json['birthDate'] == null
           ? null
           : DateTime.parse(json['birthDate'] as String),
       breastSize: json['breastSize'] as int?,
+      chemistry: json['chemistry'] as int?,
       childrenNumber: json['childrenNumber'] as int?,
       cigarettes: json['cigarettes'] as int?,
       city: json['city'] as String?,
@@ -71,18 +121,32 @@ Person _$PersonFromJson(Map<String, dynamic> json) => Person(
       email: json['email'] as String,
       eyeColour: json['eyeColour'] as int?,
       facialHair: json['facialHair'] as int?,
-      filmTaste: json['filmTaste'] as int?,
+      $filmTaste: (json['filmTaste'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
       gender: json['gender'] as int?,
       glasses: json['glasses'] as int?,
       hairColour: json['hairColour'] as int?,
       height: json['height'] as int?,
       horoscope: json['horoscope'] as int?,
       id: json['id'] as num,
-      interests: json['interests'] as int?,
+      $interests: (json['interests'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
       jobType: json['jobType'] as int?,
-      languages: json['languages'] as int?,
+      $languages: (json['languages'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
       maritalStatus: json['maritalStatus'] as int?,
-      musicalTaste: json['musicalTaste'] as int?,
+      maxAge: json['maxAge'] as int?,
+      minAge: json['minAge'] as int?,
+      $musicalTaste: (json['musicalTaste'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
       name: json['name'] as String,
       photo: json['photo'] as String?,
       piercing: json['piercing'] as int?,
@@ -94,10 +158,16 @@ Person _$PersonFromJson(Map<String, dynamic> json) => Person(
     );
 
 Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
+      '_filmTaste': instance.filmTaste,
+      '_interests': instance.interests,
+      '_languages': instance.languages,
+      '_musicalTaste': instance.musicalTaste,
+      'age': instance.age,
       'alcohol': instance.alcohol,
       'bio': instance.bio,
       'birthDate': _dateToJson(instance.birthDate),
       'breastSize': instance.breastSize,
+      'chemistry': instance.chemistry,
       'childrenNumber': instance.childrenNumber,
       'cigarettes': instance.cigarettes,
       'city': instance.city,
@@ -105,18 +175,20 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
       'email': instance.email,
       'eyeColour': instance.eyeColour,
       'facialHair': instance.facialHair,
-      'filmTaste': instance.filmTaste,
+      'filmTaste': instance.$filmTaste,
       'gender': instance.gender,
       'glasses': instance.glasses,
       'hairColour': instance.hairColour,
       'height': instance.height,
       'horoscope': instance.horoscope,
       'id': instance.id,
-      'interests': instance.interests,
+      'interests': instance.$interests,
       'jobType': instance.jobType,
-      'languages': instance.languages,
+      'languages': instance.$languages,
       'maritalStatus': instance.maritalStatus,
-      'musicalTaste': instance.musicalTaste,
+      'maxAge': instance.maxAge,
+      'minAge': instance.minAge,
+      'musicalTaste': instance.$musicalTaste,
       'name': instance.name,
       'photo': instance.photo,
       'piercing': instance.piercing,
@@ -152,15 +224,32 @@ PersonAllDTO _$PersonAllDTOFromJson(Map<String, dynamic> json) => PersonAllDTO(
       alcohol: json['alcohol'] as int?,
       childrenNumber: json['childrenNumber'] as int?,
       maritalStatus: json['maritalStatus'] as int?,
-      musicalTaste: json['musicalTaste'] as int?,
-      filmTaste: json['filmTaste'] as int?,
+      musicalTaste: (json['musicalTaste'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
+      filmTaste: (json['filmTaste'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
       religion: json['religion'] as int?,
       horoscope: json['horoscope'] as int?,
-      languages: json['languages'] as int?,
-      interests: json['interests'] as int?,
+      languages: (json['languages'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
+      interests: (json['interests'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
       shape: json['shape'] as int?,
       facialHair: json['facialHair'] as int?,
-      matchPct: json['matchPct'] as int?,
+      match: json['match'] == null
+          ? null
+          : Match.fromJson(json['match'] as Map<String, dynamic>),
+      minAge: json['minAge'] as int?,
+      maxAge: json['maxAge'] as int?,
+      chemistry: json['chemistry'] as int?,
     );
 
 Map<String, dynamic> _$PersonAllDTOToJson(PersonAllDTO instance) =>
@@ -197,7 +286,10 @@ Map<String, dynamic> _$PersonAllDTOToJson(PersonAllDTO instance) =>
       'interests': instance.interests,
       'shape': instance.shape,
       'facialHair': instance.facialHair,
-      'matchPct': instance.matchPct,
+      'match': instance.match?.toJson(),
+      'minAge': instance.minAge,
+      'maxAge': instance.maxAge,
+      'chemistry': instance.chemistry,
     };
 
 RegistrationDTO _$RegistrationDTOFromJson(Map<String, dynamic> json) =>
@@ -225,14 +317,29 @@ RegistrationDTO _$RegistrationDTOFromJson(Map<String, dynamic> json) =>
       alcohol: json['alcohol'] as int?,
       childrenNumber: json['childrenNumber'] as int?,
       maritalStatus: json['maritalStatus'] as int?,
-      musicalTaste: json['musicalTaste'] as int?,
-      filmTaste: json['filmTaste'] as int?,
+      musicalTaste: (json['musicalTaste'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
+      filmTaste: (json['filmTaste'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
       religion: json['religion'] as int?,
       horoscope: json['horoscope'] as int?,
-      languages: json['languages'] as int?,
-      interests: json['interests'] as int?,
+      languages: (json['languages'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
+      interests: (json['interests'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
       shape: json['shape'] as int?,
       facialHair: json['facialHair'] as int?,
+      minAge: json['minAge'] as int?,
+      maxAge: json['maxAge'] as int?,
+      chemistry: json['chemistry'] as int?,
     );
 
 Map<String, dynamic> _$RegistrationDTOToJson(RegistrationDTO instance) =>
@@ -268,14 +375,33 @@ Map<String, dynamic> _$RegistrationDTOToJson(RegistrationDTO instance) =>
       'interests': instance.interests,
       'shape': instance.shape,
       'facialHair': instance.facialHair,
+      'minAge': instance.minAge,
+      'maxAge': instance.maxAge,
+      'chemistry': instance.chemistry,
+    };
+
+SendMessageDTO _$SendMessageDTOFromJson(Map<String, dynamic> json) =>
+    SendMessageDTO(
+      addresseeId: json['addresseeId'] as num,
+      jwt: json['jwt'] as String,
+      text: json['text'] as String,
+    );
+
+Map<String, dynamic> _$SendMessageDTOToJson(SendMessageDTO instance) =>
+    <String, dynamic>{
+      'addresseeId': instance.addresseeId,
+      'jwt': instance.jwt,
+      'text': instance.text,
     };
 
 Tokens _$TokensFromJson(Map<String, dynamic> json) => Tokens(
       accessToken: json['accessToken'] as String,
       refreshToken: json['refreshToken'] as String,
+      userId: json['userId'] as num,
     );
 
 Map<String, dynamic> _$TokensToJson(Tokens instance) => <String, dynamic>{
       'accessToken': instance.accessToken,
       'refreshToken': instance.refreshToken,
+      'userId': instance.userId,
     };

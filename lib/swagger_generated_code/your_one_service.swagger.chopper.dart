@@ -18,7 +18,7 @@ class _$YourOneService extends YourOneService {
 
   @override
   Future<Response<List<Person>>> _apiChatGet({String? authorization}) {
-    final $url = '/api/chat/';
+    final $url = '/api/chat';
     final $headers = {
       if (authorization != null) 'Authorization': authorization,
     };
@@ -30,6 +30,31 @@ class _$YourOneService extends YourOneService {
       headers: $headers,
     );
     return client.send<List<Person>, Person>($request);
+  }
+
+  @override
+  Future<Response<List<MessageEntity>>> _apiChatAllGet() {
+    final $url = '/api/chat/all';
+    final $request = Request(
+      'GET',
+      $url,
+      client.baseUrl,
+    );
+    return client.send<List<MessageEntity>, MessageEntity>($request);
+  }
+
+  @override
+  Future<Response<ChatNotification>> _apiChatPostTestPost(
+      {required SendMessageDTO? dto}) {
+    final $url = '/api/chat/post-test';
+    final $body = dto;
+    final $request = Request(
+      'POST',
+      $url,
+      client.baseUrl,
+      body: $body,
+    );
+    return client.send<ChatNotification, ChatNotification>($request);
   }
 
   @override

@@ -5,6 +5,7 @@ import 'package:swipable_stack/swipable_stack.dart';
 import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_icon.dart';
+import 'package:yourone/entities/user_profile.dart';
 import 'package:yourone/features/profile/cubit/profile_cubit.dart';
 import 'package:yourone/features/search/cubit/search_cubit.dart';
 import 'package:yourone/features/search/presentation/widgets/bottom_buttons_row.dart';
@@ -36,7 +37,7 @@ class HomeSwipeView extends StatefulWidget {
 class _HomeSwipeViewState extends State<HomeSwipeView> {
   late final SwipableStackController _controller;
 
-  final _items = <PersonAllDTO>[];
+  final _items = <UserProfile>[];
 
   @override
   void initState() {
@@ -59,7 +60,7 @@ class _HomeSwipeViewState extends State<HomeSwipeView> {
     _controller.dispose();
   }
 
-  void receivedPartners(List<PersonAllDTO> list) {
+  void receivedPartners(List<UserProfile> list) {
     setState(() {
       _items.addAll(list);
     });
@@ -110,17 +111,18 @@ class _HomeSwipeViewState extends State<HomeSwipeView> {
                 builder: (context, properties) {
                   final itemIndex = properties.index;
                   final item = _items[itemIndex];
+                  print(item.toJson());
 
                   return Stack(
                     children: [
                       GestureDetector(
                         onTap: () {
-                          context.pushRoute(SwipeDetailRoute());
+                          context.pushRoute(SwipeDetailRoute(profile: item));
                         },
                         child: ProfileCard(
                           name: '${item.name}, ${item.age}',
                           image: "https://loremflickr.com/640/480/abstract",
-                          matchPercentage: item.matchPct ?? 0,
+                          matchPercentage: item.match?.pct ?? 0,
                         ),
                       ),
                       // more custom overlay possible than with overlayBuilder

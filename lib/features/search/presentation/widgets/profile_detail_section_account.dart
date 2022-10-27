@@ -7,16 +7,15 @@ import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/text_styles.dart';
 
 class ProfileDetailSectionAccount extends StatelessWidget {
-  const ProfileDetailSectionAccount(
-      {Key? key,
-      required this.name,
-      required this.age,
-      required this.profession,
-      required this.location,
-      required this.latlng,
-      required this.matchRate,
-      required this.allRate})
-      : super(key: key);
+  const ProfileDetailSectionAccount({
+    Key? key,
+    required this.name,
+    required this.age,
+    required this.profession,
+    required this.location,
+    required this.latlng,
+    required this.matchRate,
+  }) : super(key: key);
 
   final String name;
   final int age;
@@ -24,11 +23,9 @@ class ProfileDetailSectionAccount extends StatelessWidget {
   final String location;
   final LatLng latlng;
   final int matchRate;
-  final int allRate;
 
   @override
   Widget build(BuildContext context) {
-    double calculatedMatch = matchRate / allRate;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +37,7 @@ class ProfileDetailSectionAccount extends StatelessWidget {
               name + ", " + age.toString(),
               style: TextStyles.bold24,
             ),
-            MatchingRate(calculatedMatch: calculatedMatch)
+            MatchingRate(calculatedMatch: matchRate.toDouble())
           ],
         ),
         Text(

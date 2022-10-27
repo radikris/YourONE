@@ -9,27 +9,27 @@ part of 'user_profile.dart';
 _$_UserProfile _$$_UserProfileFromJson(Map<String, dynamic> json) =>
     _$_UserProfile(
       name: json['name'] as String?,
-      images: (json['images'] as List<dynamic>?)
+      images: (json['phototodo'] as List<dynamic>?)
           ?.map((e) => FileOrUrl.fromJson(e as String))
           .toList(),
       minAge: json['minAge'] as int? ?? 16,
       maxAge: json['maxAge'] as int? ?? 100,
       bio: json['bio'] as String?,
       age: json['age'] as int?,
-      address: json['address'] as String?,
+      address: json['city'] as String?,
       chemistry: json['chemistry'] as int?,
       gender: $enumDecodeNullable(_$GenderEnumMap, json['gender']),
       jobType: $enumDecodeNullable(_$JobTypeEnumMap, json['jobType']),
       educationLevel:
-          $enumDecodeNullable(_$EducationLevelEnumMap, json['educationLevel']),
+          $enumDecodeNullable(_$EducationLevelEnumMap, json['eduLevel']),
       cigarettes: $enumDecodeNullable(_$CigarettesEnumMap, json['cigarettes']),
       alcohol: $enumDecodeNullable(_$AlcoholEnumMap, json['alcohol']),
-      children: $enumDecodeNullable(_$ChildrenEnumMap, json['children']),
-      marriage: $enumDecodeNullable(_$MarriageEnumMap, json['marriage']),
-      musicTaste: (json['musicTaste'] as List<dynamic>?)
+      children: $enumDecodeNullable(_$ChildrenEnumMap, json['childrenNumber']),
+      marriage: $enumDecodeNullable(_$MarriageEnumMap, json['maritalStatus']),
+      musicTaste: (json['musicalTaste'] as List<dynamic>?)
           ?.map((e) => $enumDecode(_$MusicTasteEnumMap, e))
           .toList(),
-      movieGenre: (json['movieGenre'] as List<dynamic>?)
+      movieGenre: (json['filmTaste'] as List<dynamic>?)
           ?.map((e) => $enumDecode(_$MovieGenreEnumMap, e))
           .toList(),
       religion: $enumDecodeNullable(_$ReligionEnumMap, json['religion']),
@@ -37,55 +37,59 @@ _$_UserProfile _$$_UserProfileFromJson(Map<String, dynamic> json) =>
       languages: (json['languages'] as List<dynamic>?)
           ?.map((e) => $enumDecode(_$LanguagesEnumMap, e))
           .toList(),
-      hobbies: (json['hobbies'] as List<dynamic>?)
+      hobbies: (json['interests'] as List<dynamic>?)
           ?.map((e) => $enumDecode(_$HobbiesEnumMap, e))
           .toList(),
       tattoo: $enumDecodeNullable(_$TattooEnumMap, json['tattoo']),
       piercing: $enumDecodeNullable(_$PiercingEnumMap, json['piercing']),
-      hairColor: $enumDecodeNullable(_$HairColorEnumMap, json['hairColor']),
-      eyeColor: $enumDecodeNullable(_$EyeColorEnumMap, json['eyeColor']),
+      hairColor: $enumDecodeNullable(_$HairColorEnumMap, json['hairColour']),
+      eyeColor: $enumDecodeNullable(_$EyeColorEnumMap, json['eyeColour']),
       glasses: $enumDecodeNullable(_$GlassesEnumMap, json['glasses']),
       sportiness: $enumDecodeNullable(_$SportinessEnumMap, json['sportiness']),
       shape: $enumDecodeNullable(_$ShapeEnumMap, json['shape']),
       facialHair: $enumDecodeNullable(_$FacialHairEnumMap, json['facialHair']),
       breastSize: $enumDecodeNullable(_$BreastSizeEnumMap, json['breastSize']),
+      match: json['match'] == null
+          ? null
+          : Match.fromJson(json['match'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_UserProfileToJson(_$_UserProfile instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'images': instance.images,
+      'phototodo': instance.images,
       'minAge': instance.minAge,
       'maxAge': instance.maxAge,
       'bio': instance.bio,
       'age': instance.age,
-      'address': instance.address,
+      'city': instance.address,
       'chemistry': instance.chemistry,
       'gender': _$GenderEnumMap[instance.gender],
       'jobType': _$JobTypeEnumMap[instance.jobType],
-      'educationLevel': _$EducationLevelEnumMap[instance.educationLevel],
+      'eduLevel': _$EducationLevelEnumMap[instance.educationLevel],
       'cigarettes': _$CigarettesEnumMap[instance.cigarettes],
       'alcohol': _$AlcoholEnumMap[instance.alcohol],
-      'children': _$ChildrenEnumMap[instance.children],
-      'marriage': _$MarriageEnumMap[instance.marriage],
-      'musicTaste':
+      'childrenNumber': _$ChildrenEnumMap[instance.children],
+      'maritalStatus': _$MarriageEnumMap[instance.marriage],
+      'musicalTaste':
           instance.musicTaste?.map((e) => _$MusicTasteEnumMap[e]!).toList(),
-      'movieGenre':
+      'filmTaste':
           instance.movieGenre?.map((e) => _$MovieGenreEnumMap[e]!).toList(),
       'religion': _$ReligionEnumMap[instance.religion],
       'horoscope': _$HoroscopeEnumMap[instance.horoscope],
       'languages':
           instance.languages?.map((e) => _$LanguagesEnumMap[e]!).toList(),
-      'hobbies': instance.hobbies?.map((e) => _$HobbiesEnumMap[e]!).toList(),
+      'interests': instance.hobbies?.map((e) => _$HobbiesEnumMap[e]!).toList(),
       'tattoo': _$TattooEnumMap[instance.tattoo],
       'piercing': _$PiercingEnumMap[instance.piercing],
-      'hairColor': _$HairColorEnumMap[instance.hairColor],
-      'eyeColor': _$EyeColorEnumMap[instance.eyeColor],
+      'hairColour': _$HairColorEnumMap[instance.hairColor],
+      'eyeColour': _$EyeColorEnumMap[instance.eyeColor],
       'glasses': _$GlassesEnumMap[instance.glasses],
       'sportiness': _$SportinessEnumMap[instance.sportiness],
       'shape': _$ShapeEnumMap[instance.shape],
       'facialHair': _$FacialHairEnumMap[instance.facialHair],
       'breastSize': _$BreastSizeEnumMap[instance.breastSize],
+      'match': instance.match,
     };
 
 const _$GenderEnumMap = {

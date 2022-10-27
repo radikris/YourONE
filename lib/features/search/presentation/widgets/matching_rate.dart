@@ -13,7 +13,7 @@ class MatchingRate extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppIcon(
         icon: Text(
-      '${(calculatedMatch * 100).ceil()}%',
+      '${(calculatedMatch.ceil())}%',
       style: TextStyles.bold16.copyWith(
         color: calculatedMatch.toMatchingColor(),
       ),

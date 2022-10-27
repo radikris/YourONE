@@ -1,6 +1,8 @@
 //https://stackoverflow.com/questions/55465943/json-serializable-enum-values-in-dart
 //https://stackoverflow.com/a/70879873
 
+import 'dart:math';
+
 import 'package:json_annotation/json_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'enums.freezed.dart';
@@ -460,6 +462,8 @@ enum BreastSize {
 
 @freezed
 class Enums with _$Enums {
+  const Enums._(); // Added constructor
+
   const factory Enums(
       {@JsonKey(name: 'gender') Gender? gender,
       @JsonKey(name: 'jobType') JobType? jobType,
@@ -485,4 +489,29 @@ class Enums with _$Enums {
       @JsonKey(name: 'breastSize') BreastSize? breastSize}) = _Enums;
 
   factory Enums.fromJson(Map<String, dynamic> json) => _$EnumsFromJson(json);
+
+  dynamic getProp(String key) => <String, dynamic>{
+        'gender': gender,
+        'jobType': jobType,
+        'eduLevel': educationLevel,
+        'cigarettes': cigarettes,
+        'alcohol': alcohol,
+        'childrenNumber': children,
+        'maritalStatus': marriage,
+        'musicalTaste': musicTaste,
+        'filmTaste': movieGenre,
+        'religion': religion,
+        'horoscope': horoscope,
+        'languages': languages,
+        'interests': hobbies,
+        'tattoo': tattoo,
+        'piercing': piercing,
+        'hairColour': hairColor,
+        'eyeColour': eyeColor,
+        'glasses': glasses,
+        'sportiness': sportiness,
+        'shape': shape,
+        'facialHair': facialHair,
+        'breastSize': breastSize,
+      }[key];
 }
