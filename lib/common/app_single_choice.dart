@@ -30,7 +30,6 @@ class AppSingleChoice<T extends Enum> extends HookWidget {
   final String buttonText;
   final bool isRequired;
 
-  void _onChanged(dynamic val) => print(val.toString());
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
@@ -99,7 +98,6 @@ class AppSingleChoice<T extends Enum> extends HookWidget {
                         ),
                       )
                       .toList(),
-                  onChanged: _onChanged,
 
                   validator: FormBuilderValidators.compose(
                       [if (isRequired) FormBuilderValidators.required()]),

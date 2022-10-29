@@ -33,89 +33,86 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<SignUpCubit>().state;
-    print(state);
 
-    return WillPopScope(
-      onWillPop: () async {
-        context.read<SignUpCubit>().updateProfile();
-        return true;
-      },
-      child: Scaffold(
-        appBar:
-            AppAppBar(title: state.yourSelf.name ?? '', subTitle: 'Profile'),
-        body: Stack(
-          children: [
-            SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Padding(
-                padding: AppDimen.horizontal16Vertical24,
-                child: Container(
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 66,
-                        backgroundColor: AppColor.primary,
-                        child: CircleAvatar(
-                            radius: 64,
-                            backgroundImage: NetworkImage(
-                                'https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg')),
-                      ),
-                      SizedBox(
-                        height: 32,
-                      ),
-                      ProfileEditTile(
-                        title: 'Name',
-                        initialValue: state.yourSelf.name,
-                        child: SignUpStepName(),
-                      ),
-                      ProfileEditTile(
-                        title: 'YOUR BIO AND PHOTOS',
-                        initialValue: state.yourSelf.bio,
-                        child: SignUpStepBio(),
-                      ),
-                      ProfileEditTile(
-                        title: 'Age',
-                        initialValue: state.yourSelf.birthDate?.toString(),
-                        child: SignUpStepAge(),
-                      ),
-                      ProfileEditTile(
-                        title: 'Other age',
-                        initialValue:
-                            '${state.yourSelf.minAge} - ${state.yourSelf.maxAge}',
-                        child: SignUpStepOtherAge(),
-                      ),
-                      ProfileEditTile(
-                        title: 'Chemistry',
-                        initialValue:
-                            '${state.yourSelf.chemistry?.toString() ?? ''} %',
-                        child: SignUpStepOtherChemistry(),
-                      ),
-                      SizedBox(
-                        height: 16,
-                      ),
-                      YourSelfAndYourOneAttributes(),
-                      SizedBox(
-                        height: 64,
-                      ),
-                    ],
-                  ),
+    return Scaffold(
+      appBar: AppAppBar(
+          title: state.yourSelf.name ?? '',
+          subTitle: 'Profile',
+          backWithAction: () {
+            context.read<SignUpCubit>().updateProfile();
+          }),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Padding(
+              padding: AppDimen.horizontal16Vertical24,
+              child: Container(
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 66,
+                      backgroundColor: AppColor.primary,
+                      child: CircleAvatar(
+                          radius: 64,
+                          backgroundImage: NetworkImage(
+                              'https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg')),
+                    ),
+                    SizedBox(
+                      height: 32,
+                    ),
+                    ProfileEditTile(
+                      title: 'Name',
+                      initialValue: state.yourSelf.name,
+                      child: SignUpStepName(),
+                    ),
+                    ProfileEditTile(
+                      title: 'YOUR BIO AND PHOTOS',
+                      initialValue: state.yourSelf.bio,
+                      child: SignUpStepBio(),
+                    ),
+                    ProfileEditTile(
+                      title: 'Age',
+                      initialValue: state.yourSelf.birthDate?.toString(),
+                      child: SignUpStepAge(),
+                    ),
+                    ProfileEditTile(
+                      title: 'Other age',
+                      initialValue:
+                          '${state.yourSelf.minAge} - ${state.yourSelf.maxAge}',
+                      child: SignUpStepOtherAge(),
+                    ),
+                    ProfileEditTile(
+                      title: 'Chemistry',
+                      initialValue:
+                          '${state.yourSelf.chemistry?.toString() ?? ''} %',
+                      child: SignUpStepOtherChemistry(),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    YourSelfAndYourOneAttributes(),
+                    SizedBox(
+                      height: 64,
+                    ),
+                  ],
                 ),
               ),
             ),
-            Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Padding(
-                  padding: AppDimen.all16,
-                  child: AppButton.primary(
-                      text: 'SAVE',
-                      onTap: () {
-                        context.read<SignUpCubit>().updateProfile();
-                      }),
-                ))
-          ],
-        ),
+          ),
+          Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Padding(
+                padding: AppDimen.all16,
+                child: AppButton.primary(
+                    text: 'SAVE',
+                    onTap: () {
+                      context.read<SignUpCubit>().updateProfile();
+                    }),
+              ))
+        ],
       ),
     );
   }

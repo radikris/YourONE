@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:yourone/common/app_primary_button.dart';
+import 'package:yourone/entities/its_a_match.dart';
 import 'package:yourone/gen/assets.gen.dart';
 import 'package:yourone/theme/app_dimen.dart';
 
 class SuccessMatch {
-  static void showCustomDialog(BuildContext context) {
+  static void showCustomDialog(BuildContext context, ItsAMatch match) {
     showGeneralDialog(
       context: context,
       barrierLabel: "Barrier",

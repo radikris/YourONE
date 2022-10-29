@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:yourone/entities/its_a_match.dart';
 import 'package:yourone/entities/user_profile.dart';
 import 'package:yourone/features/search/cubit/search_cubit.dart';
 import 'package:yourone/features/search/data/search_repository.dart';
@@ -16,8 +17,15 @@ class SearchRepositoryImpl implements SearchRepository {
   }
 
   @override
-  Future<bool> postPartnerMatch(bool isRight) {
-    // TODO: implement postPartnerMatch
-    throw UnimplementedError();
+  Future<ItsAMatch?> postPartnerMatch(
+      {required int partnerId, required bool toRight}) {
+    //TODO itsamatch
+    return toRight
+        ? api
+            .apiPersonPartnerMatchYesPost(partnerId: partnerId)
+            .then((value) => null)
+        : api
+            .apiPersonPartnerMatchNoPost(partnerId: partnerId)
+            .then((value) => null);
   }
 }

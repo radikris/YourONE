@@ -13,6 +13,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
   final VoidCallback? rightAction;
   final VoidCallback? backAction;
+  final VoidCallback? backWithAction;
   String title;
   String subTitle;
 
@@ -24,6 +25,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.subTitle,
     this.rightAction,
     this.backAction,
+    this.backWithAction,
     this.left,
   });
 
@@ -68,7 +70,10 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
                             onTap: () {
                               backAction != null
                                   ? backAction?.call()
-                                  : context.router.navigateBack();
+                                  : {
+                                      backWithAction?.call(),
+                                      context.router.navigateBack(),
+                                    };
                             })
                     : const SizedBox(),
                 if (right != null && rightAction != null)

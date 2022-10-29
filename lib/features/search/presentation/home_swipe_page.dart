@@ -99,9 +99,21 @@ class _HomeSwipeViewState extends State<HomeSwipeView> {
                 },
                 controller: _controller,
                 stackClipBehaviour: Clip.none,
-                onSwipeCompleted: (index, direction) {
+                onSwipeCompleted: (index, direction) async {
+                  final partner = _items[index];
+
                   if (direction == SwipeDirection.right) {
-                    SuccessMatch.showCustomDialog(context);
+                    final match = await context
+                        .read<SearchCubit>()
+                        .swipePartner(partnerId: partner.id!, toRight: true);
+                    if (match != null) {
+                      SuccessMatch.showCustomDialog(context, match);
+                    }
+                  }
+                  if (direction == SwipeDirection.left) {
+                    context
+                        .read<SearchCubit>()
+                        .swipePartner(partnerId: partner.id!, toRight: false);
                   }
                   print('$index, $direction');
                 },
@@ -111,7 +123,6 @@ class _HomeSwipeViewState extends State<HomeSwipeView> {
                 builder: (context, properties) {
                   final itemIndex = properties.index;
                   final item = _items[itemIndex];
-                  print(item.toJson());
 
                   return Stack(
                     children: [

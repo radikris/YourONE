@@ -34,9 +34,9 @@ extension SwapIdFileOrUrlListX on List<FileOrUrl> {
 
 extension MatchRateDoubleX on double {
   Color toMatchingColor() {
-    return this > 0.8
+    return this > 80
         ? AppColor.matchRateHigh
-        : this > 0.5
+        : this > 50
             ? AppColor.matchRateMedium
             : AppColor.matchRateLow;
   }

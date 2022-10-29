@@ -12,8 +12,10 @@ class HeaderInterceptor implements RequestInterceptor {
   @override
   FutureOr<Request> onRequest(Request request) async {
     if (store.currentUserToken == null) return request;
-    Request newRequest =
-        request.copyWith(headers: {AUTH_HEADER: store.currentUserToken!});
+    Request newRequest = request.copyWith(headers: {
+      AUTH_HEADER: store.currentUserToken!,
+      contentTypeKey: 'application/json'
+    });
     return newRequest;
   }
 }

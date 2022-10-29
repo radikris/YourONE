@@ -334,11 +334,7 @@ class _SignUpPageState extends State<SignUpPage> {
             children: [
               if (kDebugMode)
                 GestureDetector(
-                    onTap: () => {
-                          print(Alcohol.values[0]),
-                          print(UserProfile.fromJson({"alcohol": 0}).alcohol),
-                          if (false) context.replaceRoute(HomeSwipeRoute())
-                        },
+                    onTap: () => {context.replaceRoute(HomeSwipeRoute())},
                     child: Text('Gotoswipe')),
               steps.length > step
                   ? Expanded(child: IndexedStack(index: step, children: steps))
