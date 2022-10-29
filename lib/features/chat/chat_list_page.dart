@@ -41,23 +41,35 @@ class _ChatListViewState extends State<ChatListView> {
       body: Column(
         children: [
           Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  borderRadius: BorderRadius.circular(16)),
-              child: Column(
-                children: <Widget>[
-                  AllContacts(),
-                  RecentChats()
-                  /*  FavouriteContacts(),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5.0),
+              child: Container(
+                height: 100.0,
+                margin: const EdgeInsets.only(top: 6.0),
+                decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(16.0)),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Theme.of(context).primaryColor,
+                      offset: Offset(0.0, 1.0), //(x,y)
+                      spreadRadius: 2,
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: <Widget>[
+                    AllContacts(),
+                    RecentChats()
+                    /*  FavouriteContacts(),
                   
                   RecentChats(), */
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
+          )
         ],
       ),
     );

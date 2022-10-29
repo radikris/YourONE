@@ -118,13 +118,14 @@ class SwipeDetailPage extends StatelessWidget {
                         final match = profile.match!.commonAttributes![index];
                         Map<Enum, bool>? matchMap = {};
 
-                        match.matches!.forEach((key, value) {
+                        match.matches?.forEach((key, value) {
                           matchMap.putIfAbsent(
-                              Util.enumMapper(key, 0).getProp(key),
+                              Util.enumMapper(match.name!, int.parse(key))
+                                  .getProp(match.name!),
                               () => value);
                         });
 
-                        return ProfileDetailSection(
+                        return ProfileDetailSection<Enum>(
                           title: match.name?.capitalize() ?? '',
                           personalAttributes: matchMap,
                         );

@@ -8,7 +8,11 @@ part of 'user_profile.dart';
 
 _$_UserProfile _$$_UserProfileFromJson(Map<String, dynamic> json) =>
     _$_UserProfile(
+      id: json['id'] as int?,
       name: json['name'] as String?,
+      email: json['email'] as String?,
+      birthDate: json['birthDate'] as String?,
+      image: json['photo'] as String? ?? 'fixeldedemsz',
       images: (json['phototodo'] as List<dynamic>?)
           ?.map((e) => FileOrUrl.fromJson(e as String))
           .toList(),
@@ -56,7 +60,11 @@ _$_UserProfile _$$_UserProfileFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_UserProfileToJson(_$_UserProfile instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
+      'email': instance.email,
+      'birthDate': instance.birthDate,
+      'photo': instance.image,
       'phototodo': instance.images,
       'minAge': instance.minAge,
       'maxAge': instance.maxAge,

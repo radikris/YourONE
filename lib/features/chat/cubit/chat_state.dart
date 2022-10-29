@@ -1,6 +1,14 @@
 part of 'chat_cubit.dart';
 
-@immutable
-abstract class ChatState {}
+@freezed
+class ChatState with _$ChatState {
+  const factory ChatState.initial() = _Initial;
+  const factory ChatState.loading() = _Loading;
+  const factory ChatState.error(String message) = _Error;
+  const factory ChatState.success({
+    List<UserProfile>? allChat,
+    List<UserProfile>? allMatches,
+  }) = _Success;
 
-class ChatInitial extends ChatState {}
+  const ChatState._();
+}

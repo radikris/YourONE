@@ -11,7 +11,11 @@ part 'user_profile.g.dart';
 @freezed
 class UserProfile with _$UserProfile {
   const factory UserProfile(
-      {@JsonKey(name: 'name') String? name,
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'email') String? email,
+      @JsonKey(name: 'birthDate') String? birthDate,
+      @JsonKey(name: 'photo') @Default('fixeldedemsz') String? image,
       @JsonKey(name: 'phototodo') List<FileOrUrl>? images,
       @JsonKey(name: 'minAge') @Default(16) int minAge,
       @JsonKey(name: 'maxAge') @Default(100) int maxAge,

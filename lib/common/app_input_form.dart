@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:intl/intl.dart';
 import 'package:yourone/common/app_primary_button.dart';
 import 'package:yourone/extensions/extensions.dart';
 import 'package:yourone/theme/text_styles.dart';
@@ -15,7 +16,8 @@ class AppInputForm extends StatelessWidget {
       required this.onSave,
       required this.maxValue,
       required this.isRequired,
-      this.initialValue})
+      this.initialValue,
+      this.isDatePicker})
       : super(key: key);
 
   final String buttonText;
@@ -23,6 +25,7 @@ class AppInputForm extends StatelessWidget {
   final String formLabel;
   final String? initialValue;
   final bool isNumeric;
+  final bool? isDatePicker;
   final bool isRequired;
   final int maxValue;
   final Function(String?) onSave;
@@ -44,6 +47,20 @@ class AppInputForm extends StatelessWidget {
         FormBuilder(
           key: _formKey,
           child: FormBuilderTextField(
+            onTap: (() async {
+              if (isDatePicker != null && isDatePicker == false) return;
+              final now = DateTime.parse(initialValue!);
+              final last = now.add(Duration(days: 100 * 365));
+              final first = now.subtract(Duration(days: 100 * 365));
+              final date = await showDatePicker(
+                  context: context,
+                  initialDate: now,
+                  firstDate: first,
+                  lastDate: last);
+              if (date == null) return;
+              String formattedDate = DateFormat('yyyy-MM-dd').format(date);
+              _formKey.currentState?.fields[formName]?.didChange(formattedDate);
+            }),
             initialValue: initialValue,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             name: formName,
@@ -59,6 +76,7 @@ class AppInputForm extends StatelessWidget {
                   : FormBuilderValidators.maxLength(maxValue)
             ]),
             // initialValue: '12',
+            readOnly: isDatePicker != null && isDatePicker == true,
             keyboardType: isNumeric ? TextInputType.number : TextInputType.text,
           ),
         ),

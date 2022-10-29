@@ -13,6 +13,7 @@ import 'package:yourone/entities/user_profile.dart';
 import 'package:yourone/features/authentication/data/auth_repository.dart';
 
 import 'package:yourone/features/authentication/data/auth_store.dart';
+import 'package:yourone/features/profile/data/profile_repository.dart';
 
 part 'sign_up_state.dart';
 part 'sign_up_cubit.freezed.dart';
@@ -20,9 +21,10 @@ part 'sign_up_cubit.freezed.dart';
 @injectable
 class SignUpCubit extends Cubit<SignUpState> {
   final AuthRepository authRepository;
+  final ProfileRepository profileRepository;
   final AuthStore store;
 
-  SignUpCubit(this.authRepository, this.store)
+  SignUpCubit(this.authRepository, this.profileRepository, this.store)
       : super(SignUpState(
             email: 'radi.kristof@gmail.com',
             password: '123456',
@@ -63,10 +65,12 @@ class SignUpCubit extends Cubit<SignUpState> {
         yourSelf: state.yourSelf.copyWith(minAge: min, maxAge: max)));
   }
 
-  void handleAge(int age, {bool isAboutYourself = true}) {
+  void handleAge(String birthDate, {bool isAboutYourself = true}) {
     isAboutYourself
-        ? emit(state.copyWith(yourSelf: state.yourSelf.copyWith(age: age)))
-        : emit(state.copyWith(yourOne: state.yourOne.copyWith(age: age)));
+        ? emit(state.copyWith(
+            yourSelf: state.yourSelf.copyWith(birthDate: birthDate)))
+        : emit(state.copyWith(
+            yourSelf: state.yourOne.copyWith(birthDate: birthDate)));
   }
 
   void handleGender(Gender? gender, {bool isAboutYourself = true}) {
@@ -277,5 +281,15 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void backStep() {
     emit(state.copyWith(currentStep: state.currentStep - 1));
+  }
+
+  void updateProfile() async {
+    final myProfile = await profileRepository.updateProfile(state.yourSelf);
+    emit(state.copyWith(yourSelf: myProfile));
+  }
+
+  void fetchProfile() async {
+    final myProfile = await profileRepository.getProfile();
+    emit(state.copyWith(yourSelf: myProfile));
   }
 }

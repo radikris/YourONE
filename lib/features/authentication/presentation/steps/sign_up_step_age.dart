@@ -13,11 +13,12 @@ class SignUpStepAge extends StatelessWidget implements StepIsRequired {
         buttonText: 'Next',
         formLabel: 'Please enter your age',
         formName: 'age',
-        isNumeric: true,
+        isNumeric: false,
+        isDatePicker: true,
         initialValue:
-            context.read<SignUpCubit>().state.yourSelf.age?.toString(),
+            context.read<SignUpCubit>().state.yourSelf.birthDate?.toString(),
         onSave: (String? value) {
-          context.read<SignUpCubit>().handleAge(int.parse(value!));
+          context.read<SignUpCubit>().handleAge(value!);
           context.read<SignUpCubit>().nextStep();
         },
         maxValue: 100,

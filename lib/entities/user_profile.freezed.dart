@@ -20,8 +20,16 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserProfile {
+  @JsonKey(name: 'id')
+  int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'email')
+  String? get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'birthDate')
+  String? get birthDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'photo')
+  String? get image => throw _privateConstructorUsedError;
   @JsonKey(name: 'phototodo')
   List<FileOrUrl>? get images => throw _privateConstructorUsedError;
   @JsonKey(name: 'minAge')
@@ -95,7 +103,11 @@ abstract class $UserProfileCopyWith<$Res> {
           UserProfile value, $Res Function(UserProfile) then) =
       _$UserProfileCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'name') String? name,
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'email') String? email,
+      @JsonKey(name: 'birthDate') String? birthDate,
+      @JsonKey(name: 'photo') String? image,
       @JsonKey(name: 'phototodo') List<FileOrUrl>? images,
       @JsonKey(name: 'minAge') int minAge,
       @JsonKey(name: 'maxAge') int maxAge,
@@ -140,7 +152,11 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
+    Object? email = freezed,
+    Object? birthDate = freezed,
+    Object? image = freezed,
     Object? images = freezed,
     Object? minAge = freezed,
     Object? maxAge = freezed,
@@ -173,9 +189,25 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
     Object? match = freezed,
   }) {
     return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birthDate: birthDate == freezed
+          ? _value.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String?,
       images: images == freezed
           ? _value.images
@@ -320,7 +352,11 @@ abstract class _$$_UserProfileCopyWith<$Res>
       __$$_UserProfileCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'name') String? name,
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'email') String? email,
+      @JsonKey(name: 'birthDate') String? birthDate,
+      @JsonKey(name: 'photo') String? image,
       @JsonKey(name: 'phototodo') List<FileOrUrl>? images,
       @JsonKey(name: 'minAge') int minAge,
       @JsonKey(name: 'maxAge') int maxAge,
@@ -368,7 +404,11 @@ class __$$_UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
+    Object? email = freezed,
+    Object? birthDate = freezed,
+    Object? image = freezed,
     Object? images = freezed,
     Object? minAge = freezed,
     Object? maxAge = freezed,
@@ -401,9 +441,25 @@ class __$$_UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
     Object? match = freezed,
   }) {
     return _then(_$_UserProfile(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      birthDate: birthDate == freezed
+          ? _value.birthDate
+          : birthDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String?,
       images: images == freezed
           ? _value._images
@@ -533,7 +589,11 @@ class __$$_UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   const _$_UserProfile(
-      {@JsonKey(name: 'name') this.name,
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'name') this.name,
+      @JsonKey(name: 'email') this.email,
+      @JsonKey(name: 'birthDate') this.birthDate,
+      @JsonKey(name: 'photo') this.image = 'fixeldedemsz',
       @JsonKey(name: 'phototodo') final List<FileOrUrl>? images,
       @JsonKey(name: 'minAge') this.minAge = 16,
       @JsonKey(name: 'maxAge') this.maxAge = 100,
@@ -574,8 +634,20 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
       _$$_UserProfileFromJson(json);
 
   @override
+  @JsonKey(name: 'id')
+  final int? id;
+  @override
   @JsonKey(name: 'name')
   final String? name;
+  @override
+  @JsonKey(name: 'email')
+  final String? email;
+  @override
+  @JsonKey(name: 'birthDate')
+  final String? birthDate;
+  @override
+  @JsonKey(name: 'photo')
+  final String? image;
   final List<FileOrUrl>? _images;
   @override
   @JsonKey(name: 'phototodo')
@@ -704,7 +776,7 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserProfile(name: $name, images: $images, minAge: $minAge, maxAge: $maxAge, bio: $bio, age: $age, address: $address, chemistry: $chemistry, gender: $gender, jobType: $jobType, educationLevel: $educationLevel, cigarettes: $cigarettes, alcohol: $alcohol, children: $children, marriage: $marriage, musicTaste: $musicTaste, movieGenre: $movieGenre, religion: $religion, horoscope: $horoscope, languages: $languages, hobbies: $hobbies, tattoo: $tattoo, piercing: $piercing, hairColor: $hairColor, eyeColor: $eyeColor, glasses: $glasses, sportiness: $sportiness, shape: $shape, facialHair: $facialHair, breastSize: $breastSize, match: $match)';
+    return 'UserProfile(id: $id, name: $name, email: $email, birthDate: $birthDate, image: $image, images: $images, minAge: $minAge, maxAge: $maxAge, bio: $bio, age: $age, address: $address, chemistry: $chemistry, gender: $gender, jobType: $jobType, educationLevel: $educationLevel, cigarettes: $cigarettes, alcohol: $alcohol, children: $children, marriage: $marriage, musicTaste: $musicTaste, movieGenre: $movieGenre, religion: $religion, horoscope: $horoscope, languages: $languages, hobbies: $hobbies, tattoo: $tattoo, piercing: $piercing, hairColor: $hairColor, eyeColor: $eyeColor, glasses: $glasses, sportiness: $sportiness, shape: $shape, facialHair: $facialHair, breastSize: $breastSize, match: $match)';
   }
 
   @override
@@ -712,7 +784,11 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'UserProfile'))
+      ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('birthDate', birthDate))
+      ..add(DiagnosticsProperty('image', image))
       ..add(DiagnosticsProperty('images', images))
       ..add(DiagnosticsProperty('minAge', minAge))
       ..add(DiagnosticsProperty('maxAge', maxAge))
@@ -750,7 +826,11 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserProfile &&
+            const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.birthDate, birthDate) &&
+            const DeepCollectionEquality().equals(other.image, image) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
             const DeepCollectionEquality().equals(other.minAge, minAge) &&
             const DeepCollectionEquality().equals(other.maxAge, maxAge) &&
@@ -795,7 +875,11 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        const DeepCollectionEquality().hash(id),
         const DeepCollectionEquality().hash(name),
+        const DeepCollectionEquality().hash(email),
+        const DeepCollectionEquality().hash(birthDate),
+        const DeepCollectionEquality().hash(image),
         const DeepCollectionEquality().hash(_images),
         const DeepCollectionEquality().hash(minAge),
         const DeepCollectionEquality().hash(maxAge),
@@ -841,7 +925,11 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
 
 abstract class _UserProfile implements UserProfile {
   const factory _UserProfile(
-      {@JsonKey(name: 'name') final String? name,
+      {@JsonKey(name: 'id') final int? id,
+      @JsonKey(name: 'name') final String? name,
+      @JsonKey(name: 'email') final String? email,
+      @JsonKey(name: 'birthDate') final String? birthDate,
+      @JsonKey(name: 'photo') final String? image,
       @JsonKey(name: 'phototodo') final List<FileOrUrl>? images,
       @JsonKey(name: 'minAge') final int minAge,
       @JsonKey(name: 'maxAge') final int maxAge,
@@ -877,8 +965,20 @@ abstract class _UserProfile implements UserProfile {
       _$_UserProfile.fromJson;
 
   @override
+  @JsonKey(name: 'id')
+  int? get id;
+  @override
   @JsonKey(name: 'name')
   String? get name;
+  @override
+  @JsonKey(name: 'email')
+  String? get email;
+  @override
+  @JsonKey(name: 'birthDate')
+  String? get birthDate;
+  @override
+  @JsonKey(name: 'photo')
+  String? get image;
   @override
   @JsonKey(name: 'phototodo')
   List<FileOrUrl>? get images;

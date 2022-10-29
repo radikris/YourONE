@@ -30,6 +30,7 @@ class AllContacts extends StatelessWidget {
         color: AppColor.primary10,
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(16),
+          top: Radius.circular(16),
         ),
       ),
       child: Column(

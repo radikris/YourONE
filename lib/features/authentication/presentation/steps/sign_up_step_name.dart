@@ -14,6 +14,7 @@ class SignUpStepName extends StatelessWidget implements StepIsRequired {
         formLabel: 'Please enter your name',
         formName: 'name',
         isNumeric: false,
+        isDatePicker: false,
         initialValue: context.read<SignUpCubit>().state.yourSelf.name,
         onSave: (String? value) {
           context.read<SignUpCubit>().handleName(value!);

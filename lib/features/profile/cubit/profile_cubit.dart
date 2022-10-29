@@ -18,16 +18,27 @@ class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit(this.profileRepository)
       : super(ProfileState(yourSelf: UserProfile(), yourOne: UserProfile()));
 
+  void updateProfile() async {
+    final myProfile = await profileRepository.updateProfile(state.yourSelf);
+  }
+
+  void fetchProfile() async {
+    final myProfile = await profileRepository.getProfile();
+    emit(state.copyWith(yourSelf: myProfile));
+  }
+
   void handleName(String name, {bool isAboutYourself = true}) {
     isAboutYourself
         ? emit(state.copyWith(yourSelf: state.yourSelf.copyWith(name: name)))
         : emit(state.copyWith(yourSelf: state.yourOne.copyWith(name: name)));
   }
 
-  void handleAge(int age, {bool isAboutYourself = true}) {
+  void handleAge(String birthDate, {bool isAboutYourself = true}) {
     isAboutYourself
-        ? emit(state.copyWith(yourSelf: state.yourSelf.copyWith(age: age)))
-        : emit(state.copyWith(yourSelf: state.yourOne.copyWith(age: age)));
+        ? emit(state.copyWith(
+            yourSelf: state.yourSelf.copyWith(birthDate: birthDate)))
+        : emit(state.copyWith(
+            yourSelf: state.yourOne.copyWith(birthDate: birthDate)));
   }
 
   void handleGender(Gender? gender, {bool isAboutYourself = true}) {

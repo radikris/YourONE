@@ -20,7 +20,7 @@ CommonAttributes _$CommonAttributesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CommonAttributes {
-  @JsonKey(name: 'pct')
+  @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'matches')
   Map<String, dynamic>? get matches => throw _privateConstructorUsedError;
@@ -37,7 +37,7 @@ abstract class $CommonAttributesCopyWith<$Res> {
           CommonAttributes value, $Res Function(CommonAttributes) then) =
       _$CommonAttributesCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'pct') String? name,
+      {@JsonKey(name: 'name') String? name,
       @JsonKey(name: 'matches') Map<String, dynamic>? matches});
 }
 
@@ -76,7 +76,7 @@ abstract class _$$_CommonAttributesCopyWith<$Res>
       __$$_CommonAttributesCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'pct') String? name,
+      {@JsonKey(name: 'name') String? name,
       @JsonKey(name: 'matches') Map<String, dynamic>? matches});
 }
 
@@ -115,7 +115,7 @@ class _$_CommonAttributes
     with DiagnosticableTreeMixin
     implements _CommonAttributes {
   const _$_CommonAttributes(
-      {@JsonKey(name: 'pct') this.name,
+      {@JsonKey(name: 'name') this.name,
       @JsonKey(name: 'matches') final Map<String, dynamic>? matches})
       : _matches = matches;
 
@@ -123,7 +123,7 @@ class _$_CommonAttributes
       _$$_CommonAttributesFromJson(json);
 
   @override
-  @JsonKey(name: 'pct')
+  @JsonKey(name: 'name')
   final String? name;
   final Map<String, dynamic>? _matches;
   @override
@@ -178,7 +178,7 @@ class _$_CommonAttributes
 
 abstract class _CommonAttributes implements CommonAttributes {
   const factory _CommonAttributes(
-          {@JsonKey(name: 'pct') final String? name,
+          {@JsonKey(name: 'name') final String? name,
           @JsonKey(name: 'matches') final Map<String, dynamic>? matches}) =
       _$_CommonAttributes;
 
@@ -186,7 +186,7 @@ abstract class _CommonAttributes implements CommonAttributes {
       _$_CommonAttributes.fromJson;
 
   @override
-  @JsonKey(name: 'pct')
+  @JsonKey(name: 'name')
   String? get name;
   @override
   @JsonKey(name: 'matches')

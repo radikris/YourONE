@@ -10,7 +10,7 @@ part 'common_attributes.freezed.dart';
 @freezed
 class CommonAttributes with _$CommonAttributes {
   const factory CommonAttributes(
-          {@JsonKey(name: 'pct') String? name,
+          {@JsonKey(name: 'name') String? name,
           @JsonKey(name: 'matches') Map<String, dynamic>? matches}) =
       _CommonAttributes;
 

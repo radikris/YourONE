@@ -330,8 +330,8 @@ class _YourSelfAndYourOneAttributesState
       itemBuilder: (BuildContext context, int index) {
         return ProfileEditTile(
           title: listAttributes[index].title,
-          child: listAttributes[index].child,
           initialValue: listAttributes[index].initialValue,
+          child: listAttributes[index].child,
         );
       },
     );
