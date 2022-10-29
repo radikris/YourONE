@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:yourone/auto_router.gr.dart';
+import 'package:yourone/entities/user_profile.dart';
 import 'package:yourone/features/chat/components/recent_chat_message.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/app_dimen.dart';
@@ -110,7 +111,9 @@ List<Message> messages = [
 ];
 
 class RecentChats extends StatelessWidget {
-  const RecentChats({Key? key}) : super(key: key);
+  const RecentChats({Key? key, required this.allChats}) : super(key: key);
+
+  final List<UserProfile> allChats;
 
   @override
   Widget build(BuildContext context) {

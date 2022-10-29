@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:yourone/auto_router.gr.dart';
+import 'package:yourone/entities/user_profile.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/app_dimen.dart';
 import 'package:yourone/theme/text_styles.dart';
@@ -18,7 +19,9 @@ const _images = [
 ];
 
 class AllContacts extends StatelessWidget {
-  const AllContacts({Key? key}) : super(key: key);
+  const AllContacts({Key? key, required this.allMatches}) : super(key: key);
+
+  final List<UserProfile> allMatches;
 
   @override
   Widget build(BuildContext context) {

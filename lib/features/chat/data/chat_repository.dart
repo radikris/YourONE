@@ -5,7 +5,7 @@ import 'package:yourone/entities/user_profile.dart';
 
 abstract class ChatRepository {
   Future<List<UserProfile>> getAllMatches();
-  Stream<List<UserProfile>> getAllChats();
+  Future<List<UserProfile>> getAllChats();
   Stream<List<ChatMessage>> getChat(String userId);
   Future<void> sendMessage(String message);
 }

@@ -14,7 +14,9 @@ class ChatCubit extends Cubit<ChatState> {
 
   ChatCubit(this.repository) : super(ChatState.initial());
 
-  void fetchAllPartners() {}
-
-  void fetchAllMatches() {}
+  void fetchPartnersAndChats() async {
+    final allChat = await repository.getAllChats();
+    final allMatches = await repository.getAllMatches();
+    emit(ChatState.success(allChat: allChat, allMatches: allMatches));
+  }
 }
