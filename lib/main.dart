@@ -7,6 +7,7 @@ import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/common/network/header_interceptor.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
 import 'package:yourone/features/authentication/data/auth_store.dart';
+import 'package:yourone/features/chat/cubit/chat_cubit.dart';
 import 'package:yourone/injection.dart';
 import 'package:yourone/swagger_generated_code/client_index.dart';
 import 'package:yourone/theme/app_color.dart';
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<SignUpCubit>(
           create: (BuildContext context) => getIt<SignUpCubit>(),
+        ),
+        BlocProvider<ChatCubit>(
+          create: (BuildContext context) => getIt<ChatCubit>(),
         ),
       ],
       child: MaterialApp.router(

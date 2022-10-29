@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:yourone/entities/file_or_url.dart';
 import 'package:yourone/theme/app_color.dart';
 
@@ -39,5 +40,15 @@ extension MatchRateDoubleX on double {
         : this > 50
             ? AppColor.matchRateMedium
             : AppColor.matchRateLow;
+  }
+}
+
+extension DateTimeX on DateTime {
+  String get formatToYYYYMMDD => DateFormat('yyyy-MM-dd, hh:mm a').format(this);
+  String get formatToHHMM => DateFormat('hh:mm a').format(this);
+  int daysBetween(DateTime to) {
+    final from = DateTime(this.year, this.month, this.day);
+    to = DateTime(to.year, to.month, to.day);
+    return (to.difference(from).inHours / 24).round();
   }
 }

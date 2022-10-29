@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:yourone/auto_router.gr.dart';
+import 'package:yourone/entities/recent_chat.dart';
+import 'package:yourone/entities/user_profile.dart';
 import 'package:yourone/features/chat/components/recent_chats.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/text_styles.dart';
+import 'package:yourone/extensions/extensions.dart';
 
 class RecentChatMessage extends StatelessWidget {
   const RecentChatMessage({
@@ -11,12 +14,13 @@ class RecentChatMessage extends StatelessWidget {
     required this.chat,
   }) : super(key: key);
 
-  final Message chat;
+  final RecentChat chat;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => context.pushRoute(ChatDetailRoute()),
+        onTap: () =>
+            context.pushRoute(ChatDetailRoute(partner: UserProfile(id: 41))),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -51,7 +55,7 @@ class RecentChatMessage extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width * 0.45,
                         child: Text(
-                          chat.text,
+                          chat.lastMessage.message,
                           style: TextStyles.normal14
                               .copyWith(color: AppColor.black70),
                           overflow: TextOverflow.ellipsis,
@@ -66,7 +70,7 @@ class RecentChatMessage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    chat.time,
+                    chat.lastMessage.timeStamp.formatToHHMM,
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 15.0,
@@ -74,13 +78,18 @@ class RecentChatMessage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 5.0),
-                  if (chat.unread)
+                  if (chat.newMessagesCount > 0)
                     Container(
                       width: 16.0,
                       height: 16.0,
                       decoration: BoxDecoration(
                         color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(100.0),
+                      ),
+                      child: Text(
+                        chat.newMessagesCount.toString(),
+                        style:
+                            TextStyles.normal12.copyWith(color: AppColor.white),
                       ),
                     )
                 ],

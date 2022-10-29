@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/common/app_primary_button.dart';
 import 'package:yourone/entities/its_a_match.dart';
 import 'package:yourone/gen/assets.gen.dart';
@@ -130,11 +132,20 @@ class SuccessMatch {
                     ],
                   ),
                 ),
-                AppButton.primary(text: 'Say hello', onTap: () {}),
+                AppButton.primary(
+                    text: 'Say hello',
+                    onTap: () {
+                      context
+                          .pushRoute(SwipeDetailRoute(profile: match.partner));
+                    }),
                 SizedBox(
                   height: 8,
                 ),
-                AppButton.secondary(text: 'Keep swiping', onTap: () {}),
+                AppButton.secondary(
+                    text: 'Keep swiping',
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    }),
               ],
             ),
           ),

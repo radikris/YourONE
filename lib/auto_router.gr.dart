@@ -66,9 +66,13 @@ class AppRouter extends _i8.RootStackRouter {
       );
     },
     ChatDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<ChatDetailRouteArgs>();
       return _i8.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i6.ChatDetailPage(),
+        child: _i6.ChatDetailPage(
+          key: args.key,
+          partner: args.partner,
+        ),
       );
     },
     ProfileRoute.name: (routeData) {
@@ -208,14 +212,36 @@ class ChatListRoute extends _i8.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i6.ChatDetailPage]
-class ChatDetailRoute extends _i8.PageRouteInfo<void> {
-  const ChatDetailRoute()
-      : super(
+class ChatDetailRoute extends _i8.PageRouteInfo<ChatDetailRouteArgs> {
+  ChatDetailRoute({
+    _i9.Key? key,
+    required _i10.UserProfile partner,
+  }) : super(
           ChatDetailRoute.name,
           path: '/chat-detail-page',
+          args: ChatDetailRouteArgs(
+            key: key,
+            partner: partner,
+          ),
         );
 
   static const String name = 'ChatDetailRoute';
+}
+
+class ChatDetailRouteArgs {
+  const ChatDetailRouteArgs({
+    this.key,
+    required this.partner,
+  });
+
+  final _i9.Key? key;
+
+  final _i10.UserProfile partner;
+
+  @override
+  String toString() {
+    return 'ChatDetailRouteArgs{key: $key, partner: $partner}';
+  }
 }
 
 /// generated route for

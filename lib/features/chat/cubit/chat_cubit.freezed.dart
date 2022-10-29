@@ -22,8 +22,9 @@ mixin _$ChatState {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(
-            List<UserProfile>? allChat, List<UserProfile>? allMatches)
+            List<RecentChat>? allChat, List<UserProfile>? allMatches)
         success,
+    required TResult Function(List<dynamic>? chatHistory) successPartnerChat,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,8 +32,9 @@ mixin _$ChatState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(List<UserProfile>? allChat, List<UserProfile>? allMatches)?
+    TResult Function(List<RecentChat>? allChat, List<UserProfile>? allMatches)?
         success,
+    TResult Function(List<dynamic>? chatHistory)? successPartnerChat,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,8 +42,9 @@ mixin _$ChatState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(List<UserProfile>? allChat, List<UserProfile>? allMatches)?
+    TResult Function(List<RecentChat>? allChat, List<UserProfile>? allMatches)?
         success,
+    TResult Function(List<dynamic>? chatHistory)? successPartnerChat,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +54,8 @@ mixin _$ChatState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessPartnerChatHistory value)
+        successPartnerChat,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,6 +64,7 @@ mixin _$ChatState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessPartnerChatHistory value)? successPartnerChat,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,6 +73,7 @@ mixin _$ChatState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessPartnerChatHistory value)? successPartnerChat,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -130,8 +137,9 @@ class _$_Initial extends _Initial {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(
-            List<UserProfile>? allChat, List<UserProfile>? allMatches)
+            List<RecentChat>? allChat, List<UserProfile>? allMatches)
         success,
+    required TResult Function(List<dynamic>? chatHistory) successPartnerChat,
   }) {
     return initial();
   }
@@ -142,8 +150,9 @@ class _$_Initial extends _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(List<UserProfile>? allChat, List<UserProfile>? allMatches)?
+    TResult Function(List<RecentChat>? allChat, List<UserProfile>? allMatches)?
         success,
+    TResult Function(List<dynamic>? chatHistory)? successPartnerChat,
   }) {
     return initial?.call();
   }
@@ -154,8 +163,9 @@ class _$_Initial extends _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(List<UserProfile>? allChat, List<UserProfile>? allMatches)?
+    TResult Function(List<RecentChat>? allChat, List<UserProfile>? allMatches)?
         success,
+    TResult Function(List<dynamic>? chatHistory)? successPartnerChat,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -171,6 +181,8 @@ class _$_Initial extends _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessPartnerChatHistory value)
+        successPartnerChat,
   }) {
     return initial(this);
   }
@@ -182,6 +194,7 @@ class _$_Initial extends _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessPartnerChatHistory value)? successPartnerChat,
   }) {
     return initial?.call(this);
   }
@@ -193,6 +206,7 @@ class _$_Initial extends _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessPartnerChatHistory value)? successPartnerChat,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -250,8 +264,9 @@ class _$_Loading extends _Loading {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(
-            List<UserProfile>? allChat, List<UserProfile>? allMatches)
+            List<RecentChat>? allChat, List<UserProfile>? allMatches)
         success,
+    required TResult Function(List<dynamic>? chatHistory) successPartnerChat,
   }) {
     return loading();
   }
@@ -262,8 +277,9 @@ class _$_Loading extends _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(List<UserProfile>? allChat, List<UserProfile>? allMatches)?
+    TResult Function(List<RecentChat>? allChat, List<UserProfile>? allMatches)?
         success,
+    TResult Function(List<dynamic>? chatHistory)? successPartnerChat,
   }) {
     return loading?.call();
   }
@@ -274,8 +290,9 @@ class _$_Loading extends _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(List<UserProfile>? allChat, List<UserProfile>? allMatches)?
+    TResult Function(List<RecentChat>? allChat, List<UserProfile>? allMatches)?
         success,
+    TResult Function(List<dynamic>? chatHistory)? successPartnerChat,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -291,6 +308,8 @@ class _$_Loading extends _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessPartnerChatHistory value)
+        successPartnerChat,
   }) {
     return loading(this);
   }
@@ -302,6 +321,7 @@ class _$_Loading extends _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessPartnerChatHistory value)? successPartnerChat,
   }) {
     return loading?.call(this);
   }
@@ -313,6 +333,7 @@ class _$_Loading extends _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessPartnerChatHistory value)? successPartnerChat,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -393,8 +414,9 @@ class _$_Error extends _Error {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(
-            List<UserProfile>? allChat, List<UserProfile>? allMatches)
+            List<RecentChat>? allChat, List<UserProfile>? allMatches)
         success,
+    required TResult Function(List<dynamic>? chatHistory) successPartnerChat,
   }) {
     return error(message);
   }
@@ -405,8 +427,9 @@ class _$_Error extends _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(List<UserProfile>? allChat, List<UserProfile>? allMatches)?
+    TResult Function(List<RecentChat>? allChat, List<UserProfile>? allMatches)?
         success,
+    TResult Function(List<dynamic>? chatHistory)? successPartnerChat,
   }) {
     return error?.call(message);
   }
@@ -417,8 +440,9 @@ class _$_Error extends _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(List<UserProfile>? allChat, List<UserProfile>? allMatches)?
+    TResult Function(List<RecentChat>? allChat, List<UserProfile>? allMatches)?
         success,
+    TResult Function(List<dynamic>? chatHistory)? successPartnerChat,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -434,6 +458,8 @@ class _$_Error extends _Error {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessPartnerChatHistory value)
+        successPartnerChat,
   }) {
     return error(this);
   }
@@ -445,6 +471,7 @@ class _$_Error extends _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessPartnerChatHistory value)? successPartnerChat,
   }) {
     return error?.call(this);
   }
@@ -456,6 +483,7 @@ class _$_Error extends _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessPartnerChatHistory value)? successPartnerChat,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -480,7 +508,7 @@ abstract class _$$_SuccessCopyWith<$Res> {
   factory _$$_SuccessCopyWith(
           _$_Success value, $Res Function(_$_Success) then) =
       __$$_SuccessCopyWithImpl<$Res>;
-  $Res call({List<UserProfile>? allChat, List<UserProfile>? allMatches});
+  $Res call({List<RecentChat>? allChat, List<UserProfile>? allMatches});
 }
 
 /// @nodoc
@@ -501,7 +529,7 @@ class __$$_SuccessCopyWithImpl<$Res> extends _$ChatStateCopyWithImpl<$Res>
       allChat: allChat == freezed
           ? _value._allChat
           : allChat // ignore: cast_nullable_to_non_nullable
-              as List<UserProfile>?,
+              as List<RecentChat>?,
       allMatches: allMatches == freezed
           ? _value._allMatches
           : allMatches // ignore: cast_nullable_to_non_nullable
@@ -514,14 +542,14 @@ class __$$_SuccessCopyWithImpl<$Res> extends _$ChatStateCopyWithImpl<$Res>
 
 class _$_Success extends _Success {
   const _$_Success(
-      {final List<UserProfile>? allChat, final List<UserProfile>? allMatches})
+      {final List<RecentChat>? allChat, final List<UserProfile>? allMatches})
       : _allChat = allChat,
         _allMatches = allMatches,
         super._();
 
-  final List<UserProfile>? _allChat;
+  final List<RecentChat>? _allChat;
   @override
-  List<UserProfile>? get allChat {
+  List<RecentChat>? get allChat {
     final value = _allChat;
     if (value == null) return null;
     // ignore: implicit_dynamic_type
@@ -570,8 +598,9 @@ class _$_Success extends _Success {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(
-            List<UserProfile>? allChat, List<UserProfile>? allMatches)
+            List<RecentChat>? allChat, List<UserProfile>? allMatches)
         success,
+    required TResult Function(List<dynamic>? chatHistory) successPartnerChat,
   }) {
     return success(allChat, allMatches);
   }
@@ -582,8 +611,9 @@ class _$_Success extends _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(List<UserProfile>? allChat, List<UserProfile>? allMatches)?
+    TResult Function(List<RecentChat>? allChat, List<UserProfile>? allMatches)?
         success,
+    TResult Function(List<dynamic>? chatHistory)? successPartnerChat,
   }) {
     return success?.call(allChat, allMatches);
   }
@@ -594,8 +624,9 @@ class _$_Success extends _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String message)? error,
-    TResult Function(List<UserProfile>? allChat, List<UserProfile>? allMatches)?
+    TResult Function(List<RecentChat>? allChat, List<UserProfile>? allMatches)?
         success,
+    TResult Function(List<dynamic>? chatHistory)? successPartnerChat,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -611,6 +642,8 @@ class _$_Success extends _Success {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessPartnerChatHistory value)
+        successPartnerChat,
   }) {
     return success(this);
   }
@@ -622,6 +655,7 @@ class _$_Success extends _Success {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessPartnerChatHistory value)? successPartnerChat,
   }) {
     return success?.call(this);
   }
@@ -633,6 +667,7 @@ class _$_Success extends _Success {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessPartnerChatHistory value)? successPartnerChat,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -644,13 +679,185 @@ class _$_Success extends _Success {
 
 abstract class _Success extends ChatState {
   const factory _Success(
-      {final List<UserProfile>? allChat,
+      {final List<RecentChat>? allChat,
       final List<UserProfile>? allMatches}) = _$_Success;
   const _Success._() : super._();
 
-  List<UserProfile>? get allChat;
+  List<RecentChat>? get allChat;
   List<UserProfile>? get allMatches;
   @JsonKey(ignore: true)
   _$$_SuccessCopyWith<_$_Success> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_SuccessPartnerChatHistoryCopyWith<$Res> {
+  factory _$$_SuccessPartnerChatHistoryCopyWith(
+          _$_SuccessPartnerChatHistory value,
+          $Res Function(_$_SuccessPartnerChatHistory) then) =
+      __$$_SuccessPartnerChatHistoryCopyWithImpl<$Res>;
+  $Res call({List<dynamic>? chatHistory});
+}
+
+/// @nodoc
+class __$$_SuccessPartnerChatHistoryCopyWithImpl<$Res>
+    extends _$ChatStateCopyWithImpl<$Res>
+    implements _$$_SuccessPartnerChatHistoryCopyWith<$Res> {
+  __$$_SuccessPartnerChatHistoryCopyWithImpl(
+      _$_SuccessPartnerChatHistory _value,
+      $Res Function(_$_SuccessPartnerChatHistory) _then)
+      : super(_value, (v) => _then(v as _$_SuccessPartnerChatHistory));
+
+  @override
+  _$_SuccessPartnerChatHistory get _value =>
+      super._value as _$_SuccessPartnerChatHistory;
+
+  @override
+  $Res call({
+    Object? chatHistory = freezed,
+  }) {
+    return _then(_$_SuccessPartnerChatHistory(
+      chatHistory: chatHistory == freezed
+          ? _value._chatHistory
+          : chatHistory // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SuccessPartnerChatHistory extends _SuccessPartnerChatHistory {
+  const _$_SuccessPartnerChatHistory({final List<dynamic>? chatHistory})
+      : _chatHistory = chatHistory,
+        super._();
+
+  final List<dynamic>? _chatHistory;
+  @override
+  List<dynamic>? get chatHistory {
+    final value = _chatHistory;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'ChatState.successPartnerChat(chatHistory: $chatHistory)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SuccessPartnerChatHistory &&
+            const DeepCollectionEquality()
+                .equals(other._chatHistory, _chatHistory));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_chatHistory));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_SuccessPartnerChatHistoryCopyWith<_$_SuccessPartnerChatHistory>
+      get copyWith => __$$_SuccessPartnerChatHistoryCopyWithImpl<
+          _$_SuccessPartnerChatHistory>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String message) error,
+    required TResult Function(
+            List<RecentChat>? allChat, List<UserProfile>? allMatches)
+        success,
+    required TResult Function(List<dynamic>? chatHistory) successPartnerChat,
+  }) {
+    return successPartnerChat(chatHistory);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? error,
+    TResult Function(List<RecentChat>? allChat, List<UserProfile>? allMatches)?
+        success,
+    TResult Function(List<dynamic>? chatHistory)? successPartnerChat,
+  }) {
+    return successPartnerChat?.call(chatHistory);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? error,
+    TResult Function(List<RecentChat>? allChat, List<UserProfile>? allMatches)?
+        success,
+    TResult Function(List<dynamic>? chatHistory)? successPartnerChat,
+    required TResult orElse(),
+  }) {
+    if (successPartnerChat != null) {
+      return successPartnerChat(chatHistory);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Error value) error,
+    required TResult Function(_Success value) success,
+    required TResult Function(_SuccessPartnerChatHistory value)
+        successPartnerChat,
+  }) {
+    return successPartnerChat(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
+    TResult Function(_Success value)? success,
+    TResult Function(_SuccessPartnerChatHistory value)? successPartnerChat,
+  }) {
+    return successPartnerChat?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
+    TResult Function(_Success value)? success,
+    TResult Function(_SuccessPartnerChatHistory value)? successPartnerChat,
+    required TResult orElse(),
+  }) {
+    if (successPartnerChat != null) {
+      return successPartnerChat(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SuccessPartnerChatHistory extends ChatState {
+  const factory _SuccessPartnerChatHistory({final List<dynamic>? chatHistory}) =
+      _$_SuccessPartnerChatHistory;
+  const _SuccessPartnerChatHistory._() : super._();
+
+  List<dynamic>? get chatHistory;
+  @JsonKey(ignore: true)
+  _$$_SuccessPartnerChatHistoryCopyWith<_$_SuccessPartnerChatHistory>
+      get copyWith => throw _privateConstructorUsedError;
 }

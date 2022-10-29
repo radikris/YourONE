@@ -58,7 +58,7 @@ class AppInputForm extends StatelessWidget {
                   firstDate: first,
                   lastDate: last);
               if (date == null) return;
-              String formattedDate = DateFormat('yyyy-MM-dd').format(date);
+              String formattedDate = date.formatToYYYYMMDD;
               _formKey.currentState?.fields[formName]?.didChange(formattedDate);
             }),
             initialValue: initialValue,

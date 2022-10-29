@@ -6,7 +6,7 @@ class ChatState with _$ChatState {
   const factory ChatState.loading() = _Loading;
   const factory ChatState.error(String message) = _Error;
   const factory ChatState.success({
-    List<UserProfile>? allChat,
+    List<RecentChat>? allChat,
     List<UserProfile>? allMatches,
   }) = _Success;
 

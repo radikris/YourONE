@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:yourone/entities/recent_chat.dart';
 import 'package:yourone/entities/user_profile.dart';
 import 'package:yourone/entities/chat_message.dart';
 import 'package:yourone/features/chat/data/chat_repository.dart';
@@ -10,9 +11,10 @@ class ChatRepositoryImpl implements ChatRepository {
   ChatRepositoryImpl(this.api);
 
   @override
-  Future<List<UserProfile>> getAllChats() async {
-    return await api.apiChatGet().then((value) =>
-        value.body!.map((e) => UserProfile.fromJson(e.toJson())).toList());
+  Future<List<RecentChat>> getAllChats() async {
+    return await api.apiChatGet().then((value) => value.body!
+        .map((e) => RecentChat.fromJson(e.toJson().toString()))
+        .toList());
   }
 
   @override
@@ -22,9 +24,9 @@ class ChatRepositoryImpl implements ChatRepository {
   }
 
   @override
-  Stream<List<ChatMessage>> getChat(String userId) {
-    // TODO: implement getChat
-    throw UnimplementedError();
+  Future<List<ChatMessage>> getChat(int partnerId) async {
+    //return await api.apiChatAllGet()
+    return [];
   }
 
   @override

@@ -19,10 +19,8 @@ class ChatListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ChatCubit>(
-      create: (context) => getIt<ChatCubit>()..fetchPartnersAndChats(),
-      child: const ChatListView(),
-    );
+    context.read<ChatCubit>().fetchPartnersAndChats();
+    return const ChatListView();
   }
 }
 
@@ -39,7 +37,8 @@ class _ChatListViewState extends State<ChatListView> {
     final state = context.watch<ChatCubit>().state;
     return Scaffold(
         appBar: AppAppBar.withSkip(title: 'Chats'),
-        body: state.when(
+        body: state.maybeWhen(
+            orElse: () => SizedBox(),
             error: (_) => SizedBox(),
             initial: () => SizedBox(),
             loading: () => CircularProgressIndicator(),

@@ -59,7 +59,8 @@ class AllContacts extends StatelessWidget {
               },
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: () => context.pushRoute(ChatDetailRoute()),
+                  onTap: () => context
+                      .pushRoute(ChatDetailRoute(partner: UserProfile(id: 41))),
                   child: SizedBox(
                     width: 80,
                     child: Column(
