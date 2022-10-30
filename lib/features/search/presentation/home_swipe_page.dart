@@ -6,7 +6,6 @@ import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_icon.dart';
 import 'package:yourone/entities/user_profile.dart';
-import 'package:yourone/features/profile/cubit/profile_cubit.dart';
 import 'package:yourone/features/search/cubit/search_cubit.dart';
 import 'package:yourone/features/search/presentation/widgets/bottom_buttons_row.dart';
 import 'package:yourone/features/search/presentation/widgets/card_overlay.dart';

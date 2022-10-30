@@ -35,6 +35,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/film.svg
   SvgGenImage get film => const SvgGenImage('assets/icons/film.svg');
+
+  /// File path: assets/icons/warning.svg
+  SvgGenImage get warning => const SvgGenImage('assets/icons/warning.svg');
 }
 
 class $AssetsIllustrationsGen {

@@ -4,7 +4,6 @@ import 'package:yourone/entities/enum_types/enums.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_multi_step.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_single_step.dart';
-import 'package:yourone/features/profile/cubit/profile_cubit.dart';
 import 'package:yourone/features/profile/presentation/widgets/profile_edit_tile.dart';
 
 import '../../../../theme/text_styles.dart';

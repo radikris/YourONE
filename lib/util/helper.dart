@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:yourone/gen/assets.gen.dart';
 
 typedef WidgetChild<T> = Widget Function(T e);
 
@@ -21,4 +22,9 @@ SizedBox addPaddingWhenKeyboardAppears() {
   final isNeedPadding = bottomOffset != hiddenKeyboard;
 
   return SizedBox(height: isNeedPadding ? bottomOffset : hiddenKeyboard);
+}
+
+Widget imageNetworkError(
+    BuildContext context, Object exception, StackTrace? stackTrace) {
+  return Assets.icons.warning.svg();
 }

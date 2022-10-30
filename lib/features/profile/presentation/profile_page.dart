@@ -10,7 +10,6 @@ import 'package:yourone/features/authentication/presentation/steps/sign_up_step_
 import 'package:yourone/features/authentication/presentation/steps/sign_up_step_name.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_step_other_age.dart';
 import 'package:yourone/features/authentication/presentation/steps/sign_up_step_other_chemistry.dart';
-import 'package:yourone/features/profile/cubit/profile_cubit.dart';
 import 'package:yourone/features/profile/presentation/widgets/profile_edit_tile.dart';
 import 'package:yourone/features/profile/presentation/widgets/yourself_and_yourone_attributes.dart';
 import 'package:yourone/injection.dart';

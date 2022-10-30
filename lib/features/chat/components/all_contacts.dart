@@ -6,6 +6,8 @@ import 'package:yourone/entities/user_profile.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/app_dimen.dart';
 import 'package:yourone/theme/text_styles.dart';
+import 'package:yourone/util/helper.dart';
+import 'package:yourone/util/util.dart';
 
 const _images = [
   "https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg",
@@ -73,6 +75,7 @@ class AllContacts extends StatelessWidget {
                             radius: 30.0,
                             child: ClipOval(
                                 child: Image.network(
+                              errorBuilder: imageNetworkError,
                               width: 60,
                               height: 60,
                               _images[index],

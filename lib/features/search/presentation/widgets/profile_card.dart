@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:yourone/features/search/presentation/widgets/bottom_buttons_row.dart';
 import 'package:yourone/features/search/presentation/widgets/matching_rate.dart';
 import 'package:yourone/theme/app_color.dart';
+import 'package:yourone/util/helper.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({
@@ -37,7 +38,8 @@ class ProfileCard extends StatelessWidget {
                       color: Colors.black.withOpacity(0.08),
                     ),
                   ]),
-              child: Image.network(image, fit: BoxFit.fill),
+              child: Image.network(
+                  errorBuilder: imageNetworkError, image, fit: BoxFit.fill),
             ),
           ),
           Align(

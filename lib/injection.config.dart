@@ -8,7 +8,7 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'common/network/api.dart' as _i17;
+import 'common/network/api.dart' as _i16;
 import 'features/authentication/bloc/cubit/sign_up_cubit.dart' as _i13;
 import 'features/authentication/data/auth_repository.dart' as _i5;
 import 'features/authentication/data/auth_repository_impl.dart' as _i6;
@@ -16,10 +16,9 @@ import 'features/authentication/data/auth_store.dart' as _i3;
 import 'features/chat/cubit/chat_cubit.dart' as _i14;
 import 'features/chat/data/chat_repository.dart' as _i7;
 import 'features/chat/data/chat_repository_impl.dart' as _i8;
-import 'features/profile/cubit/profile_cubit.dart' as _i15;
 import 'features/profile/data/profile_repository.dart' as _i9;
 import 'features/profile/data/profile_repository_impl.dart' as _i10;
-import 'features/search/cubit/search_cubit.dart' as _i16;
+import 'features/search/cubit/search_cubit.dart' as _i15;
 import 'features/search/data/search_repository.dart' as _i11;
 import 'features/search/data/search_repository_impl.dart' as _i12;
 import 'swagger_generated_code/your_one_service.swagger.dart'
@@ -55,11 +54,9 @@ _i1.GetIt $initGetIt(
         get<_i3.AuthStore>(),
       ));
   gh.factory<_i14.ChatCubit>(() => _i14.ChatCubit(get<_i7.ChatRepository>()));
-  gh.factory<_i15.ProfileCubit>(
-      () => _i15.ProfileCubit(get<_i9.ProfileRepository>()));
-  gh.factory<_i16.SearchCubit>(
-      () => _i16.SearchCubit(get<_i11.SearchRepository>()));
+  gh.factory<_i15.SearchCubit>(
+      () => _i15.SearchCubit(get<_i11.SearchRepository>()));
   return get;
 }
 
-class _$ApiInjectableModule extends _i17.ApiInjectableModule {}
+class _$ApiInjectableModule extends _i16.ApiInjectableModule {}

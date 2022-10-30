@@ -7,6 +7,7 @@ import 'package:yourone/features/chat/components/recent_chats.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/text_styles.dart';
 import 'package:yourone/extensions/extensions.dart';
+import 'package:yourone/util/helper.dart';
 
 class RecentChatMessage extends StatelessWidget {
   const RecentChatMessage({
@@ -38,6 +39,7 @@ class RecentChatMessage extends StatelessWidget {
                     radius: 35.0,
                     child: ClipOval(
                         child: Image.network(
+                      errorBuilder: imageNetworkError,
                       width: 60,
                       height: 60,
                       "https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg",

@@ -1,6 +1,9 @@
 targets:
   $default:
     sources:
+      - "pubspec.yaml"
+      - $package$
+      - assets/**
       - lib/**
       - swaggers/**
       - swaggers2/**

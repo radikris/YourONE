@@ -6,6 +6,7 @@ import 'package:yourone/common/app_primary_button.dart';
 import 'package:yourone/entities/its_a_match.dart';
 import 'package:yourone/gen/assets.gen.dart';
 import 'package:yourone/theme/app_dimen.dart';
+import 'package:yourone/util/helper.dart';
 
 class SuccessMatch {
   static void showCustomDialog(BuildContext context, ItsAMatch match) {
@@ -63,6 +64,7 @@ class SuccessMatch {
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(20),
                                       child: Image.network(
+                                          errorBuilder: imageNetworkError,
                                           'https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg'),
                                     ),
                                     Positioned(
@@ -111,6 +113,7 @@ class SuccessMatch {
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(20),
                                       child: Image.network(
+                                          errorBuilder: imageNetworkError,
                                           'https://i.insider.com/57db03588a4565a36039483b?width=750&format=jpeg'),
                                     ),
                                     Positioned(

@@ -11,6 +11,7 @@ import 'package:yourone/features/search/presentation/widgets/profile_detail_sect
 import 'package:yourone/gen/assets.gen.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/app_dimen.dart';
+import 'package:yourone/util/helper.dart';
 import 'package:yourone/util/util.dart';
 import 'package:yourone/extensions/extensions.dart';
 
@@ -47,6 +48,7 @@ class SwipeDetailPage extends StatelessWidget {
                         itemCount: _images.length,
                         itemBuilder: (BuildContext context, int index) =>
                             Image.network(
+                          errorBuilder: imageNetworkError,
                           _images[index],
                           fit: BoxFit.cover,
                         ),
