@@ -26,7 +26,7 @@ class AuthRepositoryImpl implements AuthRepository {
                 password: '12345678',
                 name: 'kriszi',
                 email: 'radi.kristof@gmail.com',
-                photo: '',
+                //photo: '',
                 birthDate: DateTime.now()))
         .then((value) => CurrentUser(
             token: value.body!.accessToken, id: value.body!.userId.toInt()));

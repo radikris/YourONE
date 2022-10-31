@@ -9,7 +9,7 @@ import 'package:yourone/theme/app_dimen.dart';
 import 'package:yourone/util/helper.dart';
 
 class SuccessMatch {
-  static void showCustomDialog(BuildContext context, ItsAMatch match) {
+  static void showCustomDialog(BuildContext context, ItsAMatchEntity match) {
     showGeneralDialog(
       context: context,
       barrierLabel: "Barrier",

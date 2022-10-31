@@ -12,9 +12,8 @@ class ChatRepositoryImpl implements ChatRepository {
 
   @override
   Future<List<RecentChat>> getAllChats() async {
-    return await api.apiChatGet().then((value) => value.body!
-        .map((e) => RecentChat.fromJson(e.toJson().toString()))
-        .toList());
+    return await api.apiChatGet().then((value) =>
+        value.body!.map((e) => RecentChat.fromMap(e.toJson())).toList());
   }
 
   @override
@@ -25,13 +24,10 @@ class ChatRepositoryImpl implements ChatRepository {
 
   @override
   Future<List<ChatMessage>> getChat(int partnerId) async {
-    //return await api.apiChatAllGet()
-    return [];
-  }
-
-  @override
-  Future<void> sendMessage(String message) {
-    // TODO: implement sendMessage
-    throw UnimplementedError();
+    return await api
+        .apiChatAddresseeIdGet(addresseeId: partnerId)
+        .then((value) => value.body!.map((e) {
+              return ChatMessage.fromMap(e.toJson());
+            }).toList());
   }
 }

@@ -15,15 +15,19 @@ class SearchCubit extends Cubit<SearchState> {
   final SearchRepository repository;
   SearchCubit(this.repository) : super(SearchState.initial());
 
-  void fetchPartners(Function(List<UserProfile> list) callBack) async {
+  final items = <UserProfile>[];
+
+  void fetchPartners() async {
     final result = await repository.getPotentialPartners();
     emit(SearchState.success(result));
-    callBack(result);
+    items.addAll(result);
   }
 
-  Future<ItsAMatch?> swipePartner(
+  Future<ItsAMatchEntity?> swipePartner(
       {required int partnerId, required bool toRight}) async {
-    return await repository.postPartnerMatch(
-        partnerId: partnerId, toRight: toRight);
+    return await repository
+        .postPartnerMatch(partnerId: partnerId, toRight: toRight)
+        .then((value) =>
+            value != null ? ItsAMatchEntity.fromMap(value.toJson()) : null);
   }
 }

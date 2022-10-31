@@ -53,6 +53,9 @@ _$_UserProfile _$$_UserProfileFromJson(Map<String, dynamic> json) =>
       shape: $enumDecodeNullable(_$ShapeEnumMap, json['shape']),
       facialHair: $enumDecodeNullable(_$FacialHairEnumMap, json['facialHair']),
       breastSize: $enumDecodeNullable(_$BreastSizeEnumMap, json['breastSize']),
+      yourOne: json['theirOne'] == null
+          ? null
+          : UserProfile.fromJson(json['theirOne'] as Map<String, dynamic>),
       match: json['match'] == null
           ? null
           : Match.fromJson(json['match'] as Map<String, dynamic>),
@@ -65,7 +68,7 @@ Map<String, dynamic> _$$_UserProfileToJson(_$_UserProfile instance) =>
       'email': instance.email,
       'birthDate': instance.birthDate,
       'photo': instance.image,
-      'phototodo': instance.images,
+      'phototodo': instance.images?.map((e) => e.toJson()).toList(),
       'minAge': instance.minAge,
       'maxAge': instance.maxAge,
       'bio': instance.bio,
@@ -97,7 +100,8 @@ Map<String, dynamic> _$$_UserProfileToJson(_$_UserProfile instance) =>
       'shape': _$ShapeEnumMap[instance.shape],
       'facialHair': _$FacialHairEnumMap[instance.facialHair],
       'breastSize': _$BreastSizeEnumMap[instance.breastSize],
-      'match': instance.match,
+      'theirOne': instance.yourOne?.toJson(),
+      'match': instance.match?.toJson(),
     };
 
 const _$GenderEnumMap = {

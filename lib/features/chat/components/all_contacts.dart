@@ -53,16 +53,17 @@ class AllContacts extends StatelessWidget {
             child: ListView.separated(
               physics: BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              itemCount: _images.length,
+              itemCount: allMatches.length,
               separatorBuilder: (BuildContext context, int index) {
                 return SizedBox(
                   width: 8,
                 );
               },
               itemBuilder: (BuildContext context, int index) {
+                final partner = allMatches[index];
                 return GestureDetector(
-                  onTap: () => context
-                      .pushRoute(ChatDetailRoute(partner: UserProfile(id: 41))),
+                  onTap: () => context.pushRoute(
+                      ChatDetailRoute(partner: UserProfile(id: partner.id))),
                   child: SizedBox(
                     width: 80,
                     child: Column(
@@ -78,14 +79,14 @@ class AllContacts extends StatelessWidget {
                               errorBuilder: imageNetworkError,
                               width: 60,
                               height: 60,
-                              _images[index],
+                              partner.image ?? '',
                               fit: BoxFit.fill,
                             )),
                             backgroundColor: Colors.transparent,
                           ),
                         ),
                         Text(
-                          'Nikolettaaasdd',
+                          partner.name ?? '',
                           style: TextStyles.normal14,
                           overflow: TextOverflow.fade,
                           softWrap: false,

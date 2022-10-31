@@ -31,6 +31,7 @@ class ChatCubit extends Cubit<ChatState> {
   late StompClient stompClient;
 
   void fetchPartnersAndChats() async {
+    //if (!streamController.isClosed) streamController = BehaviorSubject();
     final allChat = await repository.getAllChats();
     final allMatches = await repository.getAllMatches();
     emit(ChatState.success(allChat: allChat, allMatches: allMatches));
@@ -38,30 +39,32 @@ class ChatCubit extends Cubit<ChatState> {
 
   Future<List<ChatMessage>> fetchAllChatHistoryByPartnerId(
       int partnerId) async {
-    //return  await repository.getChat(partnerId);
-    return [
-      ChatMessage(message: 'asd', senderId: 4, timeStamp: 12345),
-      ChatMessage(message: 'as2asdasasd', senderId: 4, timeStamp: 13345),
+    return await repository.getChat(partnerId);
+    /*    return [
+      ChatMessage(text: 'asd', senderId: 4, timeStamp: 12345),
+      ChatMessage(text: 'as2asdasasd', senderId: 4, timeStamp: 13345),
       ChatMessage(
-          message: 'szia tesomsz ez mar a masik user historyjabul kexeli ide',
+          text: 'szia tesomsz ez mar a masik user historyjabul kexeli ide',
           senderId: 41,
           timeStamp: 221982345),
       ChatMessage(
-          message:
+          text:
               'ja ertem hogy most fogok valaszolni hosszut nagyon hosszu iod utan mit sozlsz te ehhez ❤️❤️',
           senderId: 4,
           timeStamp: 98221982345),
-    ];
+    ]; */
   }
 
   void connectMessageStream(
       {required int currentUserId, required int partnerId}) async {
     var listMessage = <ChatMessage>[];
+
     final history = await fetchAllChatHistoryByPartnerId(partnerId);
     listMessage.addAll(history);
 
     void onConnect(StompFrame frame) {
       print('onconnected');
+
       stompClient.subscribe(
         destination: destination.replaceAll(
           'id',
@@ -71,7 +74,7 @@ class ChatCubit extends Cubit<ChatState> {
           Map<String, dynamic> result = json.decode(frame.body!);
           //receive Message from topic
           listMessage.add(ChatMessage(
-              message: result['text'],
+              text: result['text'],
               senderId: result['senderId'],
               timeStamp: result['timeStamp']));
 

@@ -88,6 +88,8 @@ mixin _$UserProfile {
   FacialHair? get facialHair => throw _privateConstructorUsedError;
   @JsonKey(name: 'breastSize')
   BreastSize? get breastSize => throw _privateConstructorUsedError;
+  @JsonKey(name: 'theirOne')
+  UserProfile? get yourOne => throw _privateConstructorUsedError;
   @JsonKey(name: 'match')
   Match? get match => throw _privateConstructorUsedError;
 
@@ -137,8 +139,10 @@ abstract class $UserProfileCopyWith<$Res> {
       @JsonKey(name: 'shape') Shape? shape,
       @JsonKey(name: 'facialHair') FacialHair? facialHair,
       @JsonKey(name: 'breastSize') BreastSize? breastSize,
+      @JsonKey(name: 'theirOne') UserProfile? yourOne,
       @JsonKey(name: 'match') Match? match});
 
+  $UserProfileCopyWith<$Res>? get yourOne;
   $MatchCopyWith<$Res>? get match;
 }
 
@@ -186,6 +190,7 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
     Object? shape = freezed,
     Object? facialHair = freezed,
     Object? breastSize = freezed,
+    Object? yourOne = freezed,
     Object? match = freezed,
   }) {
     return _then(_value.copyWith(
@@ -325,11 +330,26 @@ class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
           ? _value.breastSize
           : breastSize // ignore: cast_nullable_to_non_nullable
               as BreastSize?,
+      yourOne: yourOne == freezed
+          ? _value.yourOne
+          : yourOne // ignore: cast_nullable_to_non_nullable
+              as UserProfile?,
       match: match == freezed
           ? _value.match
           : match // ignore: cast_nullable_to_non_nullable
               as Match?,
     ));
+  }
+
+  @override
+  $UserProfileCopyWith<$Res>? get yourOne {
+    if (_value.yourOne == null) {
+      return null;
+    }
+
+    return $UserProfileCopyWith<$Res>(_value.yourOne!, (value) {
+      return _then(_value.copyWith(yourOne: value));
+    });
   }
 
   @override
@@ -386,8 +406,11 @@ abstract class _$$_UserProfileCopyWith<$Res>
       @JsonKey(name: 'shape') Shape? shape,
       @JsonKey(name: 'facialHair') FacialHair? facialHair,
       @JsonKey(name: 'breastSize') BreastSize? breastSize,
+      @JsonKey(name: 'theirOne') UserProfile? yourOne,
       @JsonKey(name: 'match') Match? match});
 
+  @override
+  $UserProfileCopyWith<$Res>? get yourOne;
   @override
   $MatchCopyWith<$Res>? get match;
 }
@@ -438,6 +461,7 @@ class __$$_UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
     Object? shape = freezed,
     Object? facialHair = freezed,
     Object? breastSize = freezed,
+    Object? yourOne = freezed,
     Object? match = freezed,
   }) {
     return _then(_$_UserProfile(
@@ -577,6 +601,10 @@ class __$$_UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
           ? _value.breastSize
           : breastSize // ignore: cast_nullable_to_non_nullable
               as BreastSize?,
+      yourOne: yourOne == freezed
+          ? _value.yourOne
+          : yourOne // ignore: cast_nullable_to_non_nullable
+              as UserProfile?,
       match: match == freezed
           ? _value.match
           : match // ignore: cast_nullable_to_non_nullable
@@ -623,6 +651,7 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
       @JsonKey(name: 'shape') this.shape,
       @JsonKey(name: 'facialHair') this.facialHair,
       @JsonKey(name: 'breastSize') this.breastSize,
+      @JsonKey(name: 'theirOne') this.yourOne,
       @JsonKey(name: 'match') this.match})
       : _images = images,
         _musicTaste = musicTaste,
@@ -771,12 +800,15 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   @JsonKey(name: 'breastSize')
   final BreastSize? breastSize;
   @override
+  @JsonKey(name: 'theirOne')
+  final UserProfile? yourOne;
+  @override
   @JsonKey(name: 'match')
   final Match? match;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserProfile(id: $id, name: $name, email: $email, birthDate: $birthDate, image: $image, images: $images, minAge: $minAge, maxAge: $maxAge, bio: $bio, age: $age, address: $address, chemistry: $chemistry, gender: $gender, jobType: $jobType, educationLevel: $educationLevel, cigarettes: $cigarettes, alcohol: $alcohol, children: $children, marriage: $marriage, musicTaste: $musicTaste, movieGenre: $movieGenre, religion: $religion, horoscope: $horoscope, languages: $languages, hobbies: $hobbies, tattoo: $tattoo, piercing: $piercing, hairColor: $hairColor, eyeColor: $eyeColor, glasses: $glasses, sportiness: $sportiness, shape: $shape, facialHair: $facialHair, breastSize: $breastSize, match: $match)';
+    return 'UserProfile(id: $id, name: $name, email: $email, birthDate: $birthDate, image: $image, images: $images, minAge: $minAge, maxAge: $maxAge, bio: $bio, age: $age, address: $address, chemistry: $chemistry, gender: $gender, jobType: $jobType, educationLevel: $educationLevel, cigarettes: $cigarettes, alcohol: $alcohol, children: $children, marriage: $marriage, musicTaste: $musicTaste, movieGenre: $movieGenre, religion: $religion, horoscope: $horoscope, languages: $languages, hobbies: $hobbies, tattoo: $tattoo, piercing: $piercing, hairColor: $hairColor, eyeColor: $eyeColor, glasses: $glasses, sportiness: $sportiness, shape: $shape, facialHair: $facialHair, breastSize: $breastSize, yourOne: $yourOne, match: $match)';
   }
 
   @override
@@ -818,6 +850,7 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
       ..add(DiagnosticsProperty('shape', shape))
       ..add(DiagnosticsProperty('facialHair', facialHair))
       ..add(DiagnosticsProperty('breastSize', breastSize))
+      ..add(DiagnosticsProperty('yourOne', yourOne))
       ..add(DiagnosticsProperty('match', match));
   }
 
@@ -868,6 +901,7 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
                 .equals(other.facialHair, facialHair) &&
             const DeepCollectionEquality()
                 .equals(other.breastSize, breastSize) &&
+            const DeepCollectionEquality().equals(other.yourOne, yourOne) &&
             const DeepCollectionEquality().equals(other.match, match));
   }
 
@@ -909,6 +943,7 @@ class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
         const DeepCollectionEquality().hash(shape),
         const DeepCollectionEquality().hash(facialHair),
         const DeepCollectionEquality().hash(breastSize),
+        const DeepCollectionEquality().hash(yourOne),
         const DeepCollectionEquality().hash(match)
       ]);
 
@@ -959,6 +994,7 @@ abstract class _UserProfile implements UserProfile {
       @JsonKey(name: 'shape') final Shape? shape,
       @JsonKey(name: 'facialHair') final FacialHair? facialHair,
       @JsonKey(name: 'breastSize') final BreastSize? breastSize,
+      @JsonKey(name: 'theirOne') final UserProfile? yourOne,
       @JsonKey(name: 'match') final Match? match}) = _$_UserProfile;
 
   factory _UserProfile.fromJson(Map<String, dynamic> json) =
@@ -1066,6 +1102,9 @@ abstract class _UserProfile implements UserProfile {
   @override
   @JsonKey(name: 'breastSize')
   BreastSize? get breastSize;
+  @override
+  @JsonKey(name: 'theirOne')
+  UserProfile? get yourOne;
   @override
   @JsonKey(name: 'match')
   Match? get match;

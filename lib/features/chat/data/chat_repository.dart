@@ -8,5 +8,4 @@ abstract class ChatRepository {
   Future<List<UserProfile>> getAllMatches();
   Future<List<RecentChat>> getAllChats();
   Future<List<ChatMessage>> getChat(int partnerId);
-  Future<void> sendMessage(String message);
 }

@@ -10,6 +10,9 @@ targets:
       - input_folder/**
       - swagger_examples/**
     builders:
+      json_serializable:
+        options:
+          explicit_to_json: true
       chopper_generator:
         options:
           header: "//Generated code"

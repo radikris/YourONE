@@ -24,7 +24,6 @@ class ChatDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(partner.toJson());
     context.read<ChatCubit>().connectMessageStream(
         currentUserId: getIt<AuthStore>().currentUserId!,
         partnerId: partner.id!);
@@ -96,7 +95,7 @@ class _ChatDetailViewState extends State<ChatDetailView> {
             ),
             SizedBox(height: 8.0),
             Text(
-              message.message,
+              message.text,
               style: TextStyles.normal14
                   .copyWith(color: isMe ? AppColor.white : AppColor.black70),
             ),
@@ -226,7 +225,8 @@ class _ChatDetailViewState extends State<ChatDetailView> {
                                             ),
                                           ),
                                           Text(
-                                            nextMsg.timeStamp.formatToYYYYMMDD,
+                                            nextMsg
+                                                .timeStamp.formatToYYYYMMDDhhmm,
                                             style: TextStyles.normal14.copyWith(
                                                 color: AppColor.black70),
                                           ),

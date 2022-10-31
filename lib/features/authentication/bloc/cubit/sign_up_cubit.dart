@@ -290,6 +290,10 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void fetchProfile() async {
     final myProfile = await profileRepository.getProfile();
-    emit(state.copyWith(yourSelf: myProfile));
+    emit(state.copyWith(yourSelf: myProfile, yourOne: myProfile.yourOne!));
+  }
+
+  void uploadImage() async {
+    final myProfile = await profileRepository.uploadImage(null);
   }
 }

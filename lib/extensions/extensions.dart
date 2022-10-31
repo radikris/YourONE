@@ -44,7 +44,9 @@ extension MatchRateDoubleX on double {
 }
 
 extension DateTimeX on DateTime {
-  String get formatToYYYYMMDD => DateFormat('yyyy-MM-dd, hh:mm a').format(this);
+  String get formatToYYYYMMDD => DateFormat('yyyy-MM-dd').format(this);
+  String get formatToYYYYMMDDhhmm =>
+      DateFormat('yyyy-MM-dd, hh:mm a').format(this);
   String get formatToHHMM => DateFormat('hh:mm a').format(this);
   int daysBetween(DateTime to) {
     final from = DateTime(this.year, this.month, this.day);

@@ -20,8 +20,8 @@ class RecentChatMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () =>
-            context.pushRoute(ChatDetailRoute(partner: UserProfile(id: 41))),
+        onTap: () => context.pushRoute(
+            ChatDetailRoute(partner: UserProfile(id: chat.partner.id))),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -57,7 +57,7 @@ class RecentChatMessage extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width * 0.45,
                         child: Text(
-                          chat.lastMessage.message,
+                          chat.lastMessage.text,
                           style: TextStyles.normal14
                               .copyWith(color: AppColor.black70),
                           overflow: TextOverflow.ellipsis,
@@ -88,10 +88,12 @@ class RecentChatMessage extends StatelessWidget {
                         color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(100.0),
                       ),
-                      child: Text(
-                        chat.newMessagesCount.toString(),
-                        style:
-                            TextStyles.normal12.copyWith(color: AppColor.white),
+                      child: Center(
+                        child: Text(
+                          chat.newMessagesCount.toString(),
+                          style: TextStyles.normal12
+                              .copyWith(color: AppColor.white),
+                        ),
                       ),
                     )
                 ],

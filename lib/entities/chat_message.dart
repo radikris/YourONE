@@ -2,17 +2,17 @@
 import 'dart:convert';
 
 class ChatMessage {
-  final String message;
+  final String text;
   final int senderId;
   late final DateTime timeStamp;
   ChatMessage(
-      {required this.message, required this.senderId, required int timeStamp}) {
+      {required this.text, required this.senderId, required int timeStamp}) {
     this.timeStamp = DateTime.fromMillisecondsSinceEpoch(timeStamp);
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'message': message,
+      'text': text,
       'senderId': senderId,
       'timeStamp': timeStamp.millisecondsSinceEpoch,
     };
@@ -20,7 +20,7 @@ class ChatMessage {
 
   factory ChatMessage.fromMap(Map<String, dynamic> map) {
     return ChatMessage(
-      message: map['message'] as String,
+      text: map['text'] as String,
       senderId: map['senderId'] as int,
       timeStamp: map['timeStamp'] as int,
     );
@@ -33,17 +33,17 @@ class ChatMessage {
 
   @override
   String toString() =>
-      'ChatMessage(message: $message, senderId: $senderId, timeStamp: $timeStamp)';
+      'ChatMessage(text: $text, senderId: $senderId, timeStamp: $timeStamp)';
 
   @override
   bool operator ==(covariant ChatMessage other) {
     if (identical(this, other)) return true;
 
-    return other.message == message &&
+    return other.text == text &&
         other.senderId == senderId &&
         other.timeStamp == timeStamp;
   }
 
   @override
-  int get hashCode => message.hashCode ^ senderId.hashCode ^ timeStamp.hashCode;
+  int get hashCode => text.hashCode ^ senderId.hashCode ^ timeStamp.hashCode;
 }

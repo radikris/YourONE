@@ -16,5 +16,6 @@ _$_Match _$$_MatchFromJson(Map<String, dynamic> json) => _$_Match(
 
 Map<String, dynamic> _$$_MatchToJson(_$_Match instance) => <String, dynamic>{
       'pct': instance.pct,
-      'commonAttributes': instance.commonAttributes,
+      'commonAttributes':
+          instance.commonAttributes?.map((e) => e.toJson()).toList(),
     };

@@ -45,6 +45,7 @@ class UserProfile with _$UserProfile {
       @JsonKey(name: 'shape') Shape? shape,
       @JsonKey(name: 'facialHair') FacialHair? facialHair,
       @JsonKey(name: 'breastSize') BreastSize? breastSize,
+      @JsonKey(name: 'theirOne') UserProfile? yourOne,
       @JsonKey(name: 'match') final Match? match}) = _UserProfile;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) =>

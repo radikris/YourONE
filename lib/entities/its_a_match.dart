@@ -3,19 +3,19 @@ import 'dart:convert';
 
 import 'package:yourone/entities/user_profile.dart';
 
-class ItsAMatch {
+class ItsAMatchEntity {
   final UserProfile partner;
   final UserProfile me;
-  ItsAMatch({
+  ItsAMatchEntity({
     required this.partner,
     required this.me,
   });
 
-  ItsAMatch copyWith({
+  ItsAMatchEntity copyWith({
     UserProfile? partner,
     UserProfile? me,
   }) {
-    return ItsAMatch(
+    return ItsAMatchEntity(
       partner: partner ?? this.partner,
       me: me ?? this.me,
     );
@@ -28,8 +28,8 @@ class ItsAMatch {
     };
   }
 
-  factory ItsAMatch.fromMap(Map<String, dynamic> map) {
-    return ItsAMatch(
+  factory ItsAMatchEntity.fromMap(Map<String, dynamic> map) {
+    return ItsAMatchEntity(
       partner: UserProfile.fromJson(map['partner'] as Map<String, dynamic>),
       me: UserProfile.fromJson(map['me'] as Map<String, dynamic>),
     );
@@ -37,14 +37,14 @@ class ItsAMatch {
 
   String toJson() => json.encode(toMap());
 
-  factory ItsAMatch.fromJson(String source) =>
-      ItsAMatch.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ItsAMatchEntity.fromJson(String source) =>
+      ItsAMatchEntity.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'ItsAMatch(partner: $partner, me: $me)';
+  String toString() => 'ItsAMatchEntity(partner: $partner, me: $me)';
 
   @override
-  bool operator ==(covariant ItsAMatch other) {
+  bool operator ==(covariant ItsAMatchEntity other) {
     if (identical(this, other)) return true;
 
     return other.partner == partner && other.me == me;

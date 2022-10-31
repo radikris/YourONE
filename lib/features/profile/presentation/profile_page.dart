@@ -1,7 +1,9 @@
 import 'dart:math';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yourone/auto_router.gr.dart';
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/common/app_primary_button.dart';
 import 'package:yourone/features/authentication/bloc/cubit/sign_up_cubit.dart';
@@ -35,11 +37,13 @@ class ProfileView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppAppBar(
-          title: state.yourSelf.name ?? '',
-          subTitle: 'Profile',
-          backWithAction: () {
-            context.read<SignUpCubit>().updateProfile();
-          }),
+        title: state.yourSelf.name ?? '',
+        subTitle: 'Profile',
+        backAction: () async {
+          context.read<SignUpCubit>().updateProfile();
+          context.pushRoute(HomeSwipeRoute());
+        },
+      ),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -49,13 +53,18 @@ class ProfileView extends StatelessWidget {
               child: Container(
                 child: Column(
                   children: [
-                    CircleAvatar(
-                      radius: 66,
-                      backgroundColor: AppColor.primary,
+                    GestureDetector(
+                      onTap: () {
+                        context.read<SignUpCubit>().uploadImage();
+                      },
                       child: CircleAvatar(
-                          radius: 64,
-                          backgroundImage: NetworkImage(
-                              'https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg')),
+                        radius: 66,
+                        backgroundColor: AppColor.primary,
+                        child: CircleAvatar(
+                            radius: 64,
+                            backgroundImage: NetworkImage(
+                                'https://i.insider.com/5c48ef432bdd7f659443dc94?width=600&format=jpeg')),
+                      ),
                     ),
                     SizedBox(
                       height: 32,

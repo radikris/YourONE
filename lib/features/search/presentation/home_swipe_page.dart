@@ -20,7 +20,7 @@ class HomeSwipePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SearchCubit>(
-      create: (context) => getIt<SearchCubit>(),
+      create: (context) => getIt<SearchCubit>()..fetchPartners(),
       child: const HomeSwipeView(),
     );
   }
@@ -36,18 +36,17 @@ class HomeSwipeView extends StatefulWidget {
 class _HomeSwipeViewState extends State<HomeSwipeView> {
   late final SwipableStackController _controller;
 
-  final _items = <UserProfile>[];
-
   @override
   void initState() {
     super.initState();
-    context.read<SearchCubit>().fetchPartners(receivedPartners);
+    context.read<SearchCubit>().fetchPartners();
     _controller = SwipableStackController()
       ..addListener(() {
-        if (_items.length - 5 <= _controller.currentIndex) {
+        if (context.read<SearchCubit>().items.length - 5 <=
+            _controller.currentIndex) {
           //_items.addAll(_images);
           print('load again'); //TODO CALL REPOSITORY
-          context.read<SearchCubit>().fetchPartners(receivedPartners);
+          context.read<SearchCubit>().fetchPartners();
         }
         setState(() {});
       });
@@ -57,12 +56,6 @@ class _HomeSwipeViewState extends State<HomeSwipeView> {
   void dispose() {
     super.dispose();
     _controller.dispose();
-  }
-
-  void receivedPartners(List<UserProfile> list) {
-    setState(() {
-      _items.addAll(list);
-    });
   }
 
   @override
@@ -99,7 +92,7 @@ class _HomeSwipeViewState extends State<HomeSwipeView> {
                 controller: _controller,
                 stackClipBehaviour: Clip.none,
                 onSwipeCompleted: (index, direction) async {
-                  final partner = _items[index];
+                  final partner = context.read<SearchCubit>().items[index];
 
                   if (direction == SwipeDirection.right) {
                     final match = await context
@@ -118,10 +111,10 @@ class _HomeSwipeViewState extends State<HomeSwipeView> {
                 },
                 horizontalSwipeThreshold: 0.8,
                 verticalSwipeThreshold: 0.8,
-                itemCount: _items.length,
+                itemCount: context.read<SearchCubit>().items.length,
                 builder: (context, properties) {
                   final itemIndex = properties.index;
-                  final item = _items[itemIndex];
+                  final item = context.read<SearchCubit>().items[itemIndex];
 
                   return Stack(
                     children: [
