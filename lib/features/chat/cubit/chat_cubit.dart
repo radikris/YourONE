@@ -27,11 +27,12 @@ class ChatCubit extends Cubit<ChatState> {
 
   ChatCubit(this.repository) : super(ChatState.initial());
 
-  StreamController<List<ChatMessage>> streamController = BehaviorSubject();
+  late StreamController<List<ChatMessage>> streamController;
   late StompClient stompClient;
 
   void fetchPartnersAndChats() async {
     //if (!streamController.isClosed) streamController = BehaviorSubject();
+    streamController = BehaviorSubject();
     final allChat = await repository.getAllChats();
     final allMatches = await repository.getAllMatches();
     emit(ChatState.success(allChat: allChat, allMatches: allMatches));

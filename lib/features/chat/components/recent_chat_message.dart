@@ -20,8 +20,7 @@ class RecentChatMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => context.pushRoute(
-            ChatDetailRoute(partner: UserProfile(id: chat.partner.id))),
+        onTap: () => context.pushRoute(ChatDetailRoute(partner: chat.partner)),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,

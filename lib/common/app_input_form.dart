@@ -49,7 +49,9 @@ class AppInputForm extends StatelessWidget {
           child: FormBuilderTextField(
             onTap: (() async {
               if (isDatePicker != null && isDatePicker == false) return;
-              final now = DateTime.parse(initialValue!);
+              final now = initialValue != null
+                  ? DateTime.parse(initialValue!)
+                  : DateTime.now();
               final last = now.add(Duration(days: 100 * 365));
               final first = now.subtract(Duration(days: 100 * 365));
               final date = await showDatePicker(

@@ -26,8 +26,8 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   SignUpCubit(this.authRepository, this.profileRepository, this.store)
       : super(SignUpState(
-            email: 'radi.kristof@gmail.com',
-            password: '123456',
+            email: 'random@gmail.com',
+            password: 'sziaocsike',
             currentStep: 0,
             yourOne: UserProfile(),
             yourSelf: UserProfile(

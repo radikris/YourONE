@@ -53,7 +53,7 @@ class RecentChats extends StatelessWidget {
           Expanded(
             child: Container(
               padding: AppDimen.horizontal24Vertical16,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30.0),

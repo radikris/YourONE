@@ -271,15 +271,13 @@ class _SignUpPageState extends State<SignUpPage> {
       SignUpStepAccount(),
       SignUpStepName(),
       SignUpStepAge(),
-
-/*       SignUpStepBio(),
-      SignUpStepAge(),
+      SignUpStepBio(),
       SignUpStepPlace(),
       ...generateEnumForm(true),
       SignUpStepOtherAge(),
       SignUpSwitchRoleStep(),
       SignUpStepOtherChemistry(),
-      ...generateEnumForm(false), */
+      ...generateEnumForm(false),
     ];
   }
 

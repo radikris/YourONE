@@ -14,6 +14,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback? rightAction;
   final VoidCallback? backAction;
   final VoidCallback? backWithAction;
+  final VoidCallback? titleAction;
   String title;
   String subTitle;
 
@@ -27,6 +28,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.backAction,
     this.backWithAction,
     this.left,
+    this.titleAction,
   });
 
   factory AppAppBar.withSkip(
@@ -90,9 +92,12 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    title,
-                    style: TextStyles.bold24,
+                  GestureDetector(
+                    onTap: titleAction,
+                    child: Text(
+                      title,
+                      style: TextStyles.bold24,
+                    ),
                   ),
                   Text(
                     subTitle,

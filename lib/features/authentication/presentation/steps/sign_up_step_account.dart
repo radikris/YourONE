@@ -14,26 +14,6 @@ import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/app_dimen.dart';
 import 'package:yourone/theme/text_styles.dart';
 
-enum TestEnum {
-  first,
-  second,
-  third,
-  forth,
-  a,
-  b,
-  c,
-  d,
-  e,
-  f,
-  g,
-  h,
-  i,
-  j,
-  k,
-  l,
-  m
-}
-
 class SignUpStepAccount extends StatelessWidget implements StepIsRequired {
   SignUpStepAccount({Key? key}) : super(key: key);
 

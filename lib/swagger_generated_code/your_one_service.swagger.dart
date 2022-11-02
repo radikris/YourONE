@@ -565,7 +565,6 @@ class CreatePersonDTO {
     this.interests,
     this.shape,
     this.facialHair,
-    this.match,
     this.minAge,
     this.maxAge,
     this.chemistry,
@@ -635,8 +634,6 @@ class CreatePersonDTO {
   final int? shape;
   @JsonKey(name: 'facialHair')
   final int? facialHair;
-  @JsonKey(name: 'match')
-  final Match? match;
   @JsonKey(name: 'minAge')
   final int? minAge;
   @JsonKey(name: 'maxAge')
@@ -726,7 +723,6 @@ class CreatePersonDTO {
             (identical(other.interests, interests) || const DeepCollectionEquality().equals(other.interests, interests)) &&
             (identical(other.shape, shape) || const DeepCollectionEquality().equals(other.shape, shape)) &&
             (identical(other.facialHair, facialHair) || const DeepCollectionEquality().equals(other.facialHair, facialHair)) &&
-            (identical(other.match, match) || const DeepCollectionEquality().equals(other.match, match)) &&
             (identical(other.minAge, minAge) || const DeepCollectionEquality().equals(other.minAge, minAge)) &&
             (identical(other.maxAge, maxAge) || const DeepCollectionEquality().equals(other.maxAge, maxAge)) &&
             (identical(other.chemistry, chemistry) || const DeepCollectionEquality().equals(other.chemistry, chemistry)) &&
@@ -768,7 +764,6 @@ class CreatePersonDTO {
       const DeepCollectionEquality().hash(interests) ^
       const DeepCollectionEquality().hash(shape) ^
       const DeepCollectionEquality().hash(facialHair) ^
-      const DeepCollectionEquality().hash(match) ^
       const DeepCollectionEquality().hash(minAge) ^
       const DeepCollectionEquality().hash(maxAge) ^
       const DeepCollectionEquality().hash(chemistry) ^
@@ -808,7 +803,6 @@ extension $CreatePersonDTOExtension on CreatePersonDTO {
       List<int>? interests,
       int? shape,
       int? facialHair,
-      Match? match,
       int? minAge,
       int? maxAge,
       int? chemistry,
@@ -844,7 +838,6 @@ extension $CreatePersonDTOExtension on CreatePersonDTO {
         interests: interests ?? this.interests,
         shape: shape ?? this.shape,
         facialHair: facialHair ?? this.facialHair,
-        match: match ?? this.match,
         minAge: minAge ?? this.minAge,
         maxAge: maxAge ?? this.maxAge,
         chemistry: chemistry ?? this.chemistry,
@@ -882,7 +875,6 @@ extension $CreatePersonDTOExtension on CreatePersonDTO {
       Wrapped<List<int>?>? interests,
       Wrapped<int?>? shape,
       Wrapped<int?>? facialHair,
-      Wrapped<Match?>? match,
       Wrapped<int?>? minAge,
       Wrapped<int?>? maxAge,
       Wrapped<int?>? chemistry,
@@ -922,7 +914,6 @@ extension $CreatePersonDTOExtension on CreatePersonDTO {
         interests: (interests != null ? interests.value : this.interests),
         shape: (shape != null ? shape.value : this.shape),
         facialHair: (facialHair != null ? facialHair.value : this.facialHair),
-        match: (match != null ? match.value : this.match),
         minAge: (minAge != null ? minAge.value : this.minAge),
         maxAge: (maxAge != null ? maxAge.value : this.maxAge),
         chemistry: (chemistry != null ? chemistry.value : this.chemistry),

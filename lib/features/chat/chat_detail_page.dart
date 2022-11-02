@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:yourone/auto_router.gr.dart';
 
 import 'package:yourone/common/app_app_bar.dart';
 import 'package:yourone/entities/chat_message.dart';
@@ -11,6 +14,7 @@ import 'package:yourone/entities/user_profile.dart';
 import 'package:yourone/features/authentication/data/auth_store.dart';
 import 'package:yourone/features/chat/components/recent_chats.dart';
 import 'package:yourone/features/chat/cubit/chat_cubit.dart';
+import 'package:yourone/features/search/presentation/widgets/matching_rate.dart';
 import 'package:yourone/injection.dart';
 import 'package:yourone/theme/app_color.dart';
 import 'package:yourone/theme/app_dimen.dart';
@@ -57,6 +61,7 @@ class _ChatDetailViewState extends State<ChatDetailView> {
   }
 
   final textEditingController = TextEditingController();
+  final scrollController = ScrollController();
 
   _buildMessage(ChatMessage message, bool isMe) {
     final msg = ConstrainedBox(
@@ -147,6 +152,7 @@ class _ChatDetailViewState extends State<ChatDetailView> {
                   message: textEditingController.text,
                   addresseeId: widget.partner.id!,
                   token: getIt<AuthStore>().currentUserToken!);
+              textEditingController.text = '';
             },
           ),
         ],
@@ -159,12 +165,19 @@ class _ChatDetailViewState extends State<ChatDetailView> {
     return Material(
       child: Scaffold(
         appBar: AppAppBar(
-            title: 'Person neve',
-            subTitle: 'Mainleiras, 24',
-            backWithAction: () {
-              context.read<ChatCubit>().disconnectMessageStream();
-              context.read<ChatCubit>().fetchPartnersAndChats();
-            }),
+          title: widget.partner.name ?? '',
+          subTitle: '${widget.partner.jobType}, ${widget.partner.age}',
+          backWithAction: () {
+            context.read<ChatCubit>().disconnectMessageStream();
+            context.read<ChatCubit>().fetchPartnersAndChats();
+          },
+          titleAction: () {
+            context.pushRoute(SwipeDetailRoute(profile: widget.partner));
+          },
+          rightAction: () {},
+          right: MatchingRate(
+              calculatedMatch: widget.partner.match?.pct?.toDouble() ?? 0),
+        ),
         backgroundColor: AppColor.primary10,
         body: Column(
           children: [
@@ -190,9 +203,16 @@ class _ChatDetailViewState extends State<ChatDetailView> {
                                 .stream,
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
+                                SchedulerBinding.instance
+                                    .addPostFrameCallback((_) {
+                                  scrollController.jumpTo(
+                                    scrollController.position.maxScrollExtent,
+                                  );
+                                });
                                 var listMessage =
                                     snapshot.data as List<ChatMessage>;
                                 return ListView.separated(
+                                    controller: scrollController,
                                     shrinkWrap: true,
                                     primary: false,
                                     itemBuilder: (context, index) {

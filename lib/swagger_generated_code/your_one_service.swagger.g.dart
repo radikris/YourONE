@@ -80,9 +80,6 @@ CreatePersonDTO _$CreatePersonDTOFromJson(Map<String, dynamic> json) =>
           [],
       shape: json['shape'] as int?,
       facialHair: json['facialHair'] as int?,
-      match: json['match'] == null
-          ? null
-          : Match.fromJson(json['match'] as Map<String, dynamic>),
       minAge: json['minAge'] as int?,
       maxAge: json['maxAge'] as int?,
       chemistry: json['chemistry'] as int?,
@@ -123,7 +120,6 @@ Map<String, dynamic> _$CreatePersonDTOToJson(CreatePersonDTO instance) =>
       'interests': instance.interests,
       'shape': instance.shape,
       'facialHair': instance.facialHair,
-      'match': instance.match?.toJson(),
       'minAge': instance.minAge,
       'maxAge': instance.maxAge,
       'chemistry': instance.chemistry,

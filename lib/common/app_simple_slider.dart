@@ -44,7 +44,7 @@ class AppSimpleSlider extends StatelessWidget {
               name: formName,
               min: 0.0,
               max: 100.0,
-              initialValue: initialValue!,
+              initialValue: initialValue ?? 50,
               divisions: 100,
               activeColor: AppColor.primary,
               inactiveColor: AppColor.primary10,

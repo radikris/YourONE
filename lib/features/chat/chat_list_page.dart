@@ -42,38 +42,49 @@ class _ChatListViewState extends State<ChatListView> {
             error: (_) => SizedBox(),
             initial: () => SizedBox(),
             loading: () => CircularProgressIndicator(),
-            success: ((allChat, allMatches) => Column(
-                  children: [
-                    Expanded(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5.0),
-                        child: Container(
-                          height: 100.0,
-                          margin: const EdgeInsets.only(top: 6.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(16.0)),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Theme.of(context).primaryColor,
-                                offset: Offset(0.0, 1.0), //(x,y)
-                                spreadRadius: 2,
+            success: ((allChat, allMatches) => RefreshIndicator(
+                  triggerMode: RefreshIndicatorTriggerMode.anywhere,
+                  onRefresh: () async {
+                    context.read<ChatCubit>().fetchPartnersAndChats();
+                  },
+                  child: SingleChildScrollView(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5.0),
+                              child: Container(
+                                height: 100.0,
+                                margin: const EdgeInsets.only(top: 6.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(16.0)),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Theme.of(context).primaryColor,
+                                      offset: Offset(0.0, 1.0), //(x,y)
+                                      spreadRadius: 2,
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  children: <Widget>[
+                                    AllContacts(allMatches: allMatches ?? []),
+                                    RecentChats(
+                                      allChats: allChat ?? [],
+                                    )
+                                  ],
+                                ),
                               ),
-                            ],
-                          ),
-                          child: Column(
-                            children: <Widget>[
-                              AllContacts(allMatches: allMatches ?? []),
-                              RecentChats(
-                                allChats: allChat ?? [],
-                              )
-                            ],
-                          ),
-                        ),
+                            ),
+                          )
+                        ],
                       ),
-                    )
-                  ],
+                    ),
+                  ),
                 ))));
   }
 }
